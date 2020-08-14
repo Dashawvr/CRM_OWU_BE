@@ -1,9 +1,11 @@
-import {RATE_LIMIT_CONSTANTS} from '../constants';
+import {RateLimitEnum} from '../constants';
 
 export const config = {
   PORT: process.env.PORT || '3000',
   HOST: process.env.HOST || 'http://localhost',
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:4200',
+
+  MORGAN_FORMAT: process.env.MORGAN_FORMAT || 'dev',
 
   ALLOW_ORIGIN: process.env.ALLOW_ORIGIN || 'http://localhost:4200',
   CRON_JOB_PERIOD: process.env.CRON_JOB_PERIOD || '0 0 * * *',
@@ -18,13 +20,16 @@ export const config = {
 
   DATABASE_USER: process.env.DATABASE_USER || 'root',
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'root',
-  DATABASE_NAME: process.env.DATABASE_NAME || 'CRM',
+  DATABASE_NAME: process.env.DATABASE_NAME || 'crm',
   DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
   DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql',
 
   SERVER_RATE_LIMIT: {
-    windowMs: RATE_LIMIT_CONSTANTS.MINUTES * RATE_LIMIT_CONSTANTS.SECONDS * RATE_LIMIT_CONSTANTS.MILLISECONDS,
+    windowMs: RateLimitEnum.MINUTES * RateLimitEnum.SECONDS * RateLimitEnum.MILLISECONDS,
     max: 1000
+  },
+  SEQUELIZE_SYNC_OPTIONS: {
+    alter: true
   }
 };
 

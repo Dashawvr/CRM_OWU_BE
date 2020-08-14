@@ -7,23 +7,19 @@ import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as dotEnv from 'dotenv';
 import * as path from 'path';
+import {config} from './configs';
 
 dotEnv.config();
-
-const serverRequestLimit = rateLimit({
-  windowMs: 10000,
-  max: 100 // TODO
-});
 
 class App {
   public readonly app: express.Application = express();
 
   constructor() {
     global.appRoot = path.resolve(process.cwd(), '../');
-    this.app.use(morgan('dev')); // TODO
+    this.app.use(morgan(config.MORGAN_FORMAT));
     this.app.use(cors()); // TODO CORS OPTIONS
     this.app.use(helmet());
-    this.app.use(serverRequestLimit);
+    this.app.use(rateLimit(config.SERVER_RATE_LIMIT));
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
     this.app.use(express.static(path.resolve(global.appRoot, 'public')));
