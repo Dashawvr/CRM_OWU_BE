@@ -1,52 +1,20 @@
-import {ApolloServer, gql} from 'apollo-server';
+import * as http from 'http';
+import {app} from './app';
+import {config, sequelize} from './configs';
 
-const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+const server = http.createServer(app);
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
-  }
+sequelize.sync(config.SEQUELIZE_SYNC_OPTIONS)
+  .then(() => server.listen(config.PORT, () => console.log(`(☞ﾟヮﾟ)☞ Server ready at http://localhost:${config.PORT}/ ☜(ﾟヮﾟ☜)`)))
+  .catch(error => {
+    //TODO LOGGER
+    server.close(() => process.exit(0));
+  });
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
-  }
-`;
+// TODO LOGGER
+process.on('SIGTERM', () => server.close(() => process.exit(0)));
 
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling'
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton'
-  }
-];
+process.on('uncaughtException', () => server.close(() => process.exit(0)));
 
-const resolvers = {
-  Query: {
-    books: () => books
-  }
-};
+process.on('unhandledRejection', () => server.close(() => process.exit(0)));
 
-const server = new ApolloServer({typeDefs, resolvers});
-// The `listen` method launches a web server.
-server.listen(3000).then(({url}) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
-
-process.on('SIGTERM', () => {
-});
-
-process.on('uncaughtException', error => {
-  console.log(error);
-});
-
-process.on('unhandledRejection', error => {
-  console.log(error);
-});
