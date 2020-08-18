@@ -4,7 +4,6 @@ import {config, sequelize} from './configs';
 
 const server = http.createServer(app);
 
-//TODO sequelize create database if not exist???
 sequelize.sync(config.SEQUELIZE_SYNC_OPTIONS)
   .then(() => server.listen(config.PORT, () => console.log(`(☞ﾟヮﾟ)☞ Server ready at http://localhost:${config.PORT}/ ☜(ﾟヮﾟ☜)`)))
   .catch(error => {

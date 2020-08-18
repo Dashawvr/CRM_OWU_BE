@@ -1,0 +1,18 @@
+import {ModelAttributeColumnOptions, WhereValue} from 'sequelize';
+
+export type KeysOf<T> = { [P in keyof T]: string };
+export type DBModelFieldInit<T> = { [P in keyof T]: ModelAttributeColumnOptions; };
+export type DBModelFindObject<T> = { [P in keyof T]?: WhereValue; };
+
+export interface IDBResponse<T> {
+  dataValues: T;
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  [index: string]: any; // error Member index should be declared before all field definitions.(@typescript-eslint/member-ordering)
+}
+
+export type PropType<T, K extends keyof T> = T[K];
+
+export interface IDictionary<T> {
+  [index: string]: T;
+}

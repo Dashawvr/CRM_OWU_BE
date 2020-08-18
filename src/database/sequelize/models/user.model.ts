@@ -1,63 +1,75 @@
-import {DataTypes, Model} from 'sequelize';
+import {DataTypes, Model, ModelAttributes} from 'sequelize';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum, UserRoleEnum} from '../../../constants';
-import {HASH_PASSWORD} from '../../../helpers';
+import {UserRoleEnum} from '../../../constants';
+import {HASH_PASSWORD_SYNC} from '../../../helpers';
+import {DBModelFieldInit} from './dbStructure.model';
+import {DatabaseModelEnum} from '../constants';
 
-export class User extends Model {}
+export interface IUserModel {
+  id: number
+  login: string
+  password: string
+  name: string
+  surname: string
+  role: UserRoleEnum
+  createdAt?: Date;
+  updateAt?: Date;
+}
 
-User.init({
+export interface IUser {
+  id: number
+  login: string
+  password: string
+  name: string
+  surname: string
+  role: UserRoleEnum
+  createdAt?: Date;
+  updateAt?: Date;
+}
+
+const modelAttributes: DBModelFieldInit<IUserModel> = {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  login:{
-    type: new DataTypes.STRING(20),
-    unique:true,
-    allowNull: false,
-    validate:{
-      notEmpty: true,
-      len: [8,20],
-      isAlphanumeric: true
-    }
+  login: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false
   },
-  password:{
-    type: new DataTypes.STRING(20),
+  password: {
+    type: DataTypes.TEXT,
     allowNull: false,
-    validate:{
-      notEmpty: true,
-      len: [8,20]
-    },
     set(password: string) {
-      HASH_PASSWORD(password).then(hash => this.setDataValue('password', hash ));
+      this.setDataValue('password', HASH_PASSWORD_SYNC(password));
     }
   },
-  name:{
-    type: new DataTypes.STRING(300),
-    allowNull: false,
-    validate:{
-      notEmpty: true,
-      len: [3,20]
-    }
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  surname:{
-    type: new DataTypes.STRING(300),
-    allowNull: false,
-    validate:{
-      notEmpty: true,
-      len: [3,20]
-    }
+  surname: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  role:{
+  role: {
     type: DataTypes.ENUM({
-      values:[
+      values: [
         UserRoleEnum.ROLE_USER,
-        UserRoleEnum.ROLE_ADMIN
+        UserRoleEnum.ROLE_ADMIN,
+        UserRoleEnum.ROLE_SUPER_ADMIN
       ]
-    })
+    }),
+    defaultValue: UserRoleEnum.ROLE_USER
   }
-},
-{
+};
+
+export class User extends Model {
+}
+
+User.init(modelAttributes as ModelAttributes, {
   sequelize,
   modelName: DatabaseModelEnum.USER_MODEL_NAME
 });
+
