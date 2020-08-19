@@ -15,7 +15,7 @@ class AuthService {
   }
 
   updateAuthTokenByUserId(user_id: number, tokens: IOAuthToken): Promise<[number, IOAuthToken[]]> {
-    return OAuthToken.update(tokens, {where: {user_id}}) as unknown as Promise<[number, IOAuthToken[]]>; // TODO type error
+    return OAuthToken.update(tokens, {where: {user_id}}) as unknown as Promise<[number, IOAuthToken[]]>;
   }
 }
 

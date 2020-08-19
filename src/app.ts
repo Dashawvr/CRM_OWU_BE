@@ -8,7 +8,9 @@ import * as morgan from 'morgan';
 import * as dotEnv from 'dotenv';
 import * as path from 'path';
 
+import {ResponseStatusCodesEnum} from './constants';
 import {config, corsOptions} from './configs';
+import {errors} from './errors';
 import {apiRouter, notFoundRouter} from './routes';
 
 dotEnv.config();
@@ -30,10 +32,10 @@ class App {
 
   private customErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
     res
-      .status(err.status || 500) //TODO error
+      .status(err.status || ResponseStatusCodesEnum.SERVER_ERROR)
       .json({
-        message: err.message || 'Unknown error',
-        code: err.code || 400
+        message: err.message || errors.SERVER_UNKNOWN_ERROR.message,
+        code: err.code || errors.SERVER_UNKNOWN_ERROR.code
       });
 
   }

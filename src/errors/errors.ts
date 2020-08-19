@@ -9,7 +9,7 @@ export const errors = {
     code: 4001
   },
 
-  BAD_REQUEST_INVALID_FILE_MIMETYPE: {
+  BAD_REQUEST_INVALID_FILE_MIME_TYPE: {
     code: 4003
   },
 
@@ -72,5 +72,15 @@ export const errors = {
   NOT_FOUND_CITY_NOT_PRESENT: {
     message: 'City not found',
     code: 4043
+  },
+
+  NOT_FOUND_ROUTE: {
+    message: 'API route not found',
+    code: 4044
+  },
+  // 500
+  SERVER_UNKNOWN_ERROR: {
+    message: 'Unknown error',
+    code: 5001
   }
 };
