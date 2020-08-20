@@ -4,6 +4,7 @@ import {UserRoleEnum} from '../../../constants';
 import {HASH_PASSWORD_SYNC} from '../../../helpers';
 import {DBModelFieldInit} from './dbStructure.model';
 import {DatabaseModelEnum} from '../constants';
+import {OAuthToken} from './oAuthToken.model';
 
 export interface IUserModel {
   id: number
@@ -70,6 +71,9 @@ export class User extends Model {
 
 User.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.USER_MODEL_NAME
+  modelName: DatabaseModelEnum.USER_MODEL_NAME,
+  tableName: DatabaseModelEnum.USER_MODEL_NAME
 });
+
+User.hasMany(OAuthToken,{foreignKey:'user_id'});
 

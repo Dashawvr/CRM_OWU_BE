@@ -1,7 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 import {sequelize} from '../../../configs';
 import {DatabaseModelEnum} from '../constants';
-import {User} from './user.model';
 import {DBModelFieldInit} from './dbStructure.model';
 
 export interface IOauthTokenModel {
@@ -42,8 +41,7 @@ export class OAuthToken extends Model {
 
 OAuthToken.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.AUTH_TOKEN_MODEL_NAME
+  modelName: DatabaseModelEnum.AUTH_TOKEN_MODEL_NAME,
+  tableName: DatabaseModelEnum.AUTH_TOKEN_MODEL_NAME
 });
-
-OAuthToken.belongsTo(User, {foreignKey: 'user_id'});
 

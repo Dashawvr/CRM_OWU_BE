@@ -21,7 +21,8 @@ export const checkRefreshToken = async (req: IRequestExtended, res: Response, ne
       return next(new ErrorHandler(ResponseStatusCodesEnum.FORBIDDEN, 'Bad_tokens'));
     }
   });
-  const user = await userService.getUserByRefreshToken(refresh_token); // error oauth_token is not associated to user!
+
+  const user = await userService.getUserByRefreshToken(refresh_token);
 
   if (!user) {
     return next(new ErrorHandler(ResponseStatusCodesEnum.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));

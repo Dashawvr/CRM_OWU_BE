@@ -24,7 +24,7 @@ class UserService {
   }
 
   getUserByRefreshToken(refresh_token: string): Promise<IUser | null> {
-    return User.findOne({ // error oauth_token is not associated to user!
+    return User.findOne({
       include: {
         model: OAuthToken,
         required: true,
