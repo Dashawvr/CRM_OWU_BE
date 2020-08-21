@@ -21,5 +21,6 @@ export enum DatabaseModelEnum {
   DISCOUNT_MODEL_NAME = 'discount',
   APPLICATION_DISCOUNT_MODEL_NAME = 'application_discount',
   SOURCE_MODEL_NAME = 'source',
-  APPLICATION_SOURCE_MODEL_NAME = 'application_source'
+  APPLICATION_SOURCE_MODEL_NAME = 'application_source',
+  PAYMENT_FILE_MODEL_NAME = 'payment_file'
 }

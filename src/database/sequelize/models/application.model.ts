@@ -1,5 +1,5 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
-import {ApplicationFile, Payment, DBModelFieldInit, ApplicationDiscount, ApplicationSource} from '../models';
+import {ApplicationDiscount, ApplicationFile, ApplicationSource, DBModelFieldInit, Payment} from '../models';
 import {sequelize} from '../../../configs';
 import {DatabaseModelEnum} from '../constants';
 

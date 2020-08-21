@@ -10,6 +10,7 @@ export * from './comment.model';
 export * from './clientFile.model';
 export * from './applicationFile.model';
 export * from './source.model';
+export * from './paymentFile.model';
 export * from './payment.model';
 export * from './paymentStatus.model';
 export * from './paymentType.model';
