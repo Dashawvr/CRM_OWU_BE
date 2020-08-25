@@ -1,4 +1,4 @@
-export enum DatabaseModelEnum {
+export enum DatabaseModel {
   USER_MODEL_NAME = 'user',
   OAUTH_TOKEN_MODEL_NAME = 'oauth_token',
   TASK_MODEL_NAME = 'task',

@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IErrorModel {
   id: number;
@@ -49,6 +50,6 @@ export class Error extends Model {
 
 Error.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.ERROR_MODEL_NAME,
-  tableName: DatabaseModelEnum.ERROR_MODEL_NAME
+  modelName: DatabaseModel.ERROR_MODEL_NAME,
+  tableName: DatabaseModel.ERROR_MODEL_NAME
 });

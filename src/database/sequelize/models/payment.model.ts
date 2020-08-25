@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit, PaymentFile} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IPaymentModel {
   id: number;
@@ -49,8 +50,8 @@ export class Payment extends Model {
 
 Payment.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.PAYMENT_MODEL_NAME,
-  tableName: DatabaseModelEnum.PAYMENT_MODEL_NAME
+  modelName: DatabaseModel.PAYMENT_MODEL_NAME,
+  tableName: DatabaseModel.PAYMENT_MODEL_NAME
 });
 
 Payment.hasMany(PaymentFile, {foreignKey: 'payment_id', onDelete: 'cascade'});

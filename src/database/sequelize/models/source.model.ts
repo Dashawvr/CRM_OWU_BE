@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {ApplicationSource, DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ISourceModel {
   id: number;
@@ -40,8 +41,8 @@ export class Source extends Model {
 
 Source.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.SOURCE_MODEL_NAME,
-  tableName: DatabaseModelEnum.SOURCE_MODEL_NAME
+  modelName: DatabaseModel.SOURCE_MODEL_NAME,
+  tableName: DatabaseModel.SOURCE_MODEL_NAME
 });
 
 Source.hasMany(ApplicationSource, {foreignKey: 'source_id'});

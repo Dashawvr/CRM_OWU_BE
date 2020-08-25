@@ -1,4 +1,4 @@
-export enum UserActionEnum {
+export enum UserAction {
   AUTH,
   CONFIRM_EMAIL,
   RESET_PASS ,

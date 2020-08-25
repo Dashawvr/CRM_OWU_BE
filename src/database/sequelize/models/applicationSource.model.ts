@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IApplicationSourceModel {
   id: number;
@@ -26,7 +27,7 @@ export class ApplicationSource extends Model {
 
 ApplicationSource.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.APPLICATION_SOURCE_MODEL_NAME,
-  tableName: DatabaseModelEnum.APPLICATION_SOURCE_MODEL_NAME,
+  modelName: DatabaseModel.APPLICATION_SOURCE_MODEL_NAME,
+  tableName: DatabaseModel.APPLICATION_SOURCE_MODEL_NAME,
   timestamps: false
 });

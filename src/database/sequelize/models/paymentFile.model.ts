@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IPaymentFileModel {
   id: number;
@@ -47,6 +48,6 @@ export class PaymentFile extends Model {
 
 PaymentFile.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.PAYMENT_FILE_MODEL_NAME,
-  tableName: DatabaseModelEnum.PAYMENT_FILE_MODEL_NAME
+  modelName: DatabaseModel.PAYMENT_FILE_MODEL_NAME,
+  tableName: DatabaseModel.PAYMENT_FILE_MODEL_NAME
 });

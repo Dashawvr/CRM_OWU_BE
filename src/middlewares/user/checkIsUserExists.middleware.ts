@@ -1,10 +1,10 @@
 import {NextFunction, Response} from 'express';
 
+import {IRequestExtended} from '../../interfaces';
+import {ResponseStatusCodes} from '../../constants';
 import {IUser} from '../../database';
 import {userService} from '../../services';
-import {ResponseStatusCodesEnum} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
-import {IRequestExtended} from '../../interfaces';
 import {idValidator} from '../../validators';
 
 export const checkIsUserExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
@@ -15,7 +15,7 @@ export const checkIsUserExists = async (req: IRequestExtended, res: Response, ne
   if (error) {
     return next(
       new ErrorHandler(
-        ResponseStatusCodesEnum.NOT_FOUND,
+        ResponseStatusCodes.NOT_FOUND,
         errors.BAD_REQUEST_WRONG_PARAMS.message,
         errors.BAD_REQUEST_WRONG_PARAMS.code));
   }
@@ -24,7 +24,7 @@ export const checkIsUserExists = async (req: IRequestExtended, res: Response, ne
 
   if (!user) {
     return next(new ErrorHandler(
-      ResponseStatusCodesEnum.NOT_FOUND,
+      ResponseStatusCodes.NOT_FOUND,
       errors.NOT_FOUND_USER_NOT_PRESENT.message,
       errors.NOT_FOUND_USER_NOT_PRESENT.code));
   }

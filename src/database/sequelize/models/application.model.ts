@@ -1,7 +1,14 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
-import {ApplicationDiscount, ApplicationFile, ApplicationSource, DBModelFieldInit, Payment} from '../models';
+
+import {
+  ApplicationDiscount,
+  ApplicationFile,
+  ApplicationSource,
+  DBModelFieldInit,
+  Payment
+} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IApplicationModel {
   id: number;
@@ -55,8 +62,8 @@ export class Application extends Model {
 
 Application.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.APPLICATION_MODEL_NAME,
-  tableName: DatabaseModelEnum.APPLICATION_MODEL_NAME
+  modelName: DatabaseModel.APPLICATION_MODEL_NAME,
+  tableName: DatabaseModel.APPLICATION_MODEL_NAME
 });
 
 Application.hasMany(ApplicationFile, {foreignKey: 'application_id', onDelete: 'cascade'});

@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ITaskModel {
   id: number;
@@ -59,6 +60,6 @@ export class Task extends Model {
 
 Task.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.TASK_MODEL_NAME,
-  tableName: DatabaseModelEnum.TASK_MODEL_NAME
+  modelName: DatabaseModel.TASK_MODEL_NAME,
+  tableName: DatabaseModel.TASK_MODEL_NAME
 });

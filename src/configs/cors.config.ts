@@ -1,6 +1,6 @@
-import {config} from './config';
+import {ResponseStatusCodes} from '../constants';
 import {ErrorHandler, errors} from '../errors';
-import {ResponseStatusCodesEnum} from '../constants/enums';
+import {config} from './global.config';
 
 export const corsOptions = {
   origin: (origin: any, callback: CallableFunction) => {
@@ -8,7 +8,7 @@ export const corsOptions = {
 
     if (!whiteList.includes(origin)) {
       return callback(new ErrorHandler(
-        ResponseStatusCodesEnum.FORBIDDEN,
+        ResponseStatusCodes.FORBIDDEN,
         errors.CORS_NOT_ALLOWED.message,
         errors.CORS_NOT_ALLOWED.code
       ), false);

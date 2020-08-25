@@ -1,7 +1,14 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
-import {Application, ClientFile, ClientGroup, Comment, DBModelFieldInit} from '../models';
+
+import {
+  Application,
+  ClientFile,
+  ClientGroup,
+  Comment,
+  DBModelFieldInit
+} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IClientModel {
   id: number;
@@ -65,8 +72,8 @@ export class Client extends Model {
 
 Client.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.CLIENT_MODEL_NAME,
-  tableName: DatabaseModelEnum.CLIENT_MODEL_NAME
+  modelName: DatabaseModel.CLIENT_MODEL_NAME,
+  tableName: DatabaseModel.CLIENT_MODEL_NAME
 });
 
 Client.hasMany(Comment, {foreignKey: 'client_id'});

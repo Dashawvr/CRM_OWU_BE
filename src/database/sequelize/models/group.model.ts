@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {ClientGroup, DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IGroupModel {
   id: number;
@@ -60,8 +61,8 @@ export class Group extends Model {
 
 Group.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.GROUP_MODEL_NAME,
-  tableName: DatabaseModelEnum.GROUP_MODEL_NAME
+  modelName: DatabaseModel.GROUP_MODEL_NAME,
+  tableName: DatabaseModel.GROUP_MODEL_NAME
 });
 
 Group.hasMany(ClientGroup, {foreignKey: 'group_id'});

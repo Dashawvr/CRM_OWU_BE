@@ -3,7 +3,7 @@ import {NextFunction, Response} from 'express';
 import {IRequestExtended, IUserUpdateFields} from '../../interfaces';
 import {IUser} from '../../database';
 import {userService} from '../../services';
-import {ResponseStatusCodesEnum} from '../../constants';
+import {ResponseStatusCodes} from '../../constants';
 
 class UserController {
 
@@ -12,7 +12,7 @@ class UserController {
 
     await userService.create(user);
 
-    res.sendStatus(ResponseStatusCodesEnum.CREATED);
+    res.sendStatus(ResponseStatusCodes.CREATED);
   }
 
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
@@ -21,7 +21,7 @@ class UserController {
 
     await userService.update(id, updateFields);
 
-    res.sendStatus(ResponseStatusCodesEnum.CREATED);
+    res.sendStatus(ResponseStatusCodes.CREATED);
   }
 
   async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
@@ -29,7 +29,7 @@ class UserController {
 
     await userService.delete(id);
 
-    res.sendStatus(ResponseStatusCodesEnum.NO_CONTENT);
+    res.sendStatus(ResponseStatusCodes.NO_CONTENT);
   }
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
