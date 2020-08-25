@@ -4,7 +4,7 @@ export const winstonOptions = {
   errorFile: {
     level: 'error',
     name: 'file.error',
-    filename: `${process.cwd()}/../logs/error.log`,
+    filename: `${__dirname}/../logs/error.log`,
     handleExceptions: true,
     json: true,
     maxsize: WinstonFileSize.MEGABYTES * WinstonFileSize.KILOBYTES * WinstonFileSize.BYTES,
