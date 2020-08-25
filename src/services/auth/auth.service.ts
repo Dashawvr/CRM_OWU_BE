@@ -2,20 +2,33 @@ import {IOAuthToken, OAuthToken} from '../../database';
 
 class AuthService {
 
-  createAuthToken(token: IOAuthToken): Promise<IOAuthToken> {
-    return OAuthToken.create(token) as unknown as Promise<IOAuthToken>;
+  async createAuthToken(token: IOAuthToken): Promise<IOAuthToken | undefined> {
+    try {
+      return await OAuthToken.create(token) as unknown as Promise<IOAuthToken>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  deleteAuthTokenByAccessToken(access_token: string): Promise<number> {
-    return OAuthToken.destroy({
-      where: {
-        access_token
-      }
-    });
+  async deleteAuthTokenByAccessToken(access_token: string): Promise<number | undefined> {
+    try {
+      return await OAuthToken.destroy({
+        where: {access_token}
+      });
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  updateAuthTokenByUserId(user_id: number, tokens: IOAuthToken): Promise<[number, IOAuthToken[]]> {
-    return OAuthToken.update(tokens, {where: {user_id}}) as unknown as Promise<[number, IOAuthToken[]]>;
+  async updateAuthTokenByUserId(user_id: number, tokens: IOAuthToken): Promise<[number, IOAuthToken[]] | undefined> {
+    try {
+      return await OAuthToken.update(tokens, {
+        where: {user_id}
+      }) as unknown as Promise<[number, IOAuthToken[]]>;
+    } catch (e) {
+      // TODO error service
+    }
+
   }
 }
 
