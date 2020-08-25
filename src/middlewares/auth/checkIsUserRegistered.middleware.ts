@@ -19,7 +19,7 @@ export const checkIsUserRegistered = async (req: IRequestExtended, res: Response
     ));
   }
 
-  const user = await userService.getUserByLogin(login);
+  const user = await userService.getByLogin(login);
 
   if (!user) {
     return next(
