@@ -21,7 +21,7 @@ export const checkAccessToken = async (req: IRequestExtended, res: Response, nex
     }
   });
 
-  const user = await userService.getUserByAccessToken(access_token);
+  const user = await userService.getByAccessToken(access_token);
 
   if (!user) {
     return next(new ErrorHandler(ResponseStatusCodesEnum.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));

@@ -1,5 +1,5 @@
 import {Request} from 'express-serve-static-core';
-import {IUser} from '../database';
+import {IUser} from '../../database';
 
 export interface IRequestExtended extends Request {
   user?: IUser;
