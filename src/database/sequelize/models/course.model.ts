@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {Application, DBModelFieldInit, Group} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ICourseModel {
   id: number;
@@ -40,8 +41,8 @@ export class Course extends Model {
 
 Course.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.COURSE_MODEL_NAME,
-  tableName: DatabaseModelEnum.COURSE_MODEL_NAME
+  modelName: DatabaseModel.COURSE_MODEL_NAME,
+  tableName: DatabaseModel.COURSE_MODEL_NAME
 });
 
 Course.hasMany(Application, {foreignKey: 'course_id'});

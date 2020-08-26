@@ -1,5 +1,3 @@
-import {RateLimitEnum} from '../constants';
-
 export const config = {
   PORT: process.env.PORT || '3000',
   HOST: process.env.HOST || 'http://localhost',
@@ -24,10 +22,6 @@ export const config = {
   DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
   DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql',
 
-  SERVER_RATE_LIMIT: {
-    windowMs: RateLimitEnum.MINUTES * RateLimitEnum.SECONDS * RateLimitEnum.MILLISECONDS,
-    max: 1000
-  },
   SEQUELIZE_SYNC_OPTIONS: {
     alter: true
   }

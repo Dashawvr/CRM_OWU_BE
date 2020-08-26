@@ -1,12 +1,13 @@
 import {IOAuthToken, OAuthToken} from '../../database';
+import {logger} from '../../loggers';
 
 class AuthService {
 
   async createAuthToken(token: IOAuthToken): Promise<IOAuthToken | undefined> {
     try {
       return await OAuthToken.create(token) as unknown as Promise<IOAuthToken>;
-    } catch (e) {
-      // TODO error service
+    } catch (error) {
+      logger.error(error);
     }
   }
 
@@ -15,8 +16,8 @@ class AuthService {
       return await OAuthToken.destroy({
         where: {access_token}
       });
-    } catch (e) {
-      // TODO error service
+    } catch (error) {
+      logger.error(error);
     }
   }
 
@@ -25,10 +26,9 @@ class AuthService {
       return await OAuthToken.update(tokens, {
         where: {user_id}
       }) as unknown as Promise<[number, IOAuthToken[]]>;
-    } catch (e) {
-      // TODO error service
+    } catch (error) {
+      logger.error(error);
     }
-
   }
 }
 

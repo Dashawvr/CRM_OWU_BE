@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IClientGroupModel {
   id: number;
@@ -26,7 +27,7 @@ export class ClientGroup extends Model {
 
 ClientGroup.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.CLIENT_GROUP_MODEL_NAME,
-  tableName: DatabaseModelEnum.CLIENT_GROUP_MODEL_NAME,
+  modelName: DatabaseModel.CLIENT_GROUP_MODEL_NAME,
+  tableName: DatabaseModel.CLIENT_GROUP_MODEL_NAME,
   timestamps: false
 });

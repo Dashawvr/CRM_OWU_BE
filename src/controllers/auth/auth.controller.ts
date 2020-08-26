@@ -1,10 +1,10 @@
 import {NextFunction, Response} from 'express';
 
-import {UserActionEnum} from '../../constants';
-import {tokenizer} from '../../helpers';
 import {IRequestExtended} from '../../interfaces';
-import {authService} from '../../services';
 import {IUser} from '../../database/';
+import {authService} from '../../services';
+import {UserAction} from '../../constants';
+import {tokenizer} from '../../helpers';
 
 class AuthController {
 
@@ -12,7 +12,7 @@ class AuthController {
 
     const {id: user_id} = req.user as IUser;
 
-    const tokens = tokenizer(UserActionEnum.AUTH);
+    const tokens = tokenizer(UserAction.AUTH);
 
     await authService.createAuthToken({
       ...tokens,
@@ -37,7 +37,7 @@ class AuthController {
 
   async refreshToken(req: IRequestExtended, res: Response, next: NextFunction) {
     const {id} = req.user as IUser;
-    const tokens = tokenizer(UserActionEnum.AUTH);
+    const tokens = tokenizer(UserAction.AUTH);
 
     await authService.updateAuthTokenByUserId(id, tokens);
 

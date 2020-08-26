@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {ApplicationDiscount, DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IDiscountModel {
   id: number;
@@ -45,8 +46,8 @@ export class Discount extends Model {
 
 Discount.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.DISCOUNT_MODEL_NAME,
-  tableName: DatabaseModelEnum.DISCOUNT_MODEL_NAME
+  modelName: DatabaseModel.DISCOUNT_MODEL_NAME,
+  tableName: DatabaseModel.DISCOUNT_MODEL_NAME
 });
 
 Discount.hasMany(ApplicationDiscount, {foreignKey: 'discount_id'});

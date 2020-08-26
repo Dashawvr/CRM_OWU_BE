@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit, Task} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ITaskStatusModel {
   id: number;
@@ -46,8 +47,8 @@ export class TaskStatus extends Model {
 
 TaskStatus.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.TASK_STATUS_MODEL_NAME,
-  tableName: DatabaseModelEnum.TASK_STATUS_MODEL_NAME
+  modelName: DatabaseModel.TASK_STATUS_MODEL_NAME,
+  tableName: DatabaseModel.TASK_STATUS_MODEL_NAME
 });
 
 TaskStatus.hasMany(Task, {foreignKey: 'status_id'});

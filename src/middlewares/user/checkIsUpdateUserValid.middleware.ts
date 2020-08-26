@@ -1,7 +1,7 @@
 import {NextFunction, Response} from 'express';
 
 import {updateUserValidator} from '../../validators';
-import {ResponseStatusCodesEnum} from '../../constants';
+import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler} from '../../errors';
 import {IRequestExtended, IUserUpdateFields} from '../../interfaces';
 
@@ -11,7 +11,7 @@ export const checkIsUpdateUserValid = (req: IRequestExtended, res: Response, nex
   const {error} = updateUserValidator.validate(updateFields);
 
   if (error) {
-    return next(new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, error.details[0].message));
+    return next(new ErrorHandler(ResponseStatusCodes.BAD_REQUEST, error.details[0].message));
   }
 
   next();

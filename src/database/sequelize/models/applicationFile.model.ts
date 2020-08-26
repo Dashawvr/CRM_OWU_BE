@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IApplicationFileModel {
   id: number;
@@ -47,6 +48,6 @@ export class ApplicationFile extends Model {
 
 ApplicationFile.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.APPLICATION_FILE_MODEL_NAME,
-  tableName: DatabaseModelEnum.APPLICATION_FILE_MODEL_NAME
+  modelName: DatabaseModel.APPLICATION_FILE_MODEL_NAME,
+  tableName: DatabaseModel.APPLICATION_FILE_MODEL_NAME
 });

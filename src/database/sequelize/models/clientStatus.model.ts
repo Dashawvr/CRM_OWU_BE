@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {Client, DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IClientStatusModel {
   id: number;
@@ -46,8 +47,8 @@ export class ClientStatus extends Model {
 
 ClientStatus.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.CLIENT_STATUS_MODEL_NAME,
-  tableName: DatabaseModelEnum.CLIENT_STATUS_MODEL_NAME
+  modelName: DatabaseModel.CLIENT_STATUS_MODEL_NAME,
+  tableName: DatabaseModel.CLIENT_STATUS_MODEL_NAME
 });
 
 ClientStatus.hasMany(Client, {foreignKey: 'status_id'});

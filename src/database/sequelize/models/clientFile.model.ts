@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IClientFileModel {
   id: number;
@@ -47,6 +48,6 @@ export class ClientFile extends Model {
 
 ClientFile.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.CLIENT_FILE_MODEL_NAME,
-  tableName: DatabaseModelEnum.CLIENT_FILE_MODEL_NAME
+  modelName: DatabaseModel.CLIENT_FILE_MODEL_NAME,
+  tableName: DatabaseModel.CLIENT_FILE_MODEL_NAME
 });

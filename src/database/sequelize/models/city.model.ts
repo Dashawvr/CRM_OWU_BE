@@ -1,7 +1,13 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
-import {Application, DBModelFieldInit, Group, UserCity} from '../models';
+
+import {
+  Application,
+  DBModelFieldInit,
+  Group,
+  UserCity
+} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ICityModel {
   id: number;
@@ -34,8 +40,8 @@ export class City extends Model {
 
 City.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.CITY_MODEL_NAME,
-  tableName: DatabaseModelEnum.CITY_MODEL_NAME
+  modelName: DatabaseModel.CITY_MODEL_NAME,
+  tableName: DatabaseModel.CITY_MODEL_NAME
 });
 
 City.hasMany(UserCity, {foreignKey: 'city_id'});

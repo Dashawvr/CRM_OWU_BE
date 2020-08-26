@@ -1,9 +1,16 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
-import {Comment, DBModelFieldInit, OAuthToken, Task, UserCity} from '../models';
-import {sequelize} from '../../../configs';
-import {UserRoleEnum} from '../../../constants';
+
+import {
+  Comment,
+  DBModelFieldInit,
+  OAuthToken,
+  Task,
+  UserCity
+} from '../models';
+import {UserRole} from '../../../constants';
+import {DatabaseModel} from '../constants';
 import {HASH_PASSWORD_SYNC} from '../../../helpers';
-import {DatabaseModelEnum} from '../constants';
+import {sequelize} from '../../../configs';
 
 export interface IUserModel {
   id: number
@@ -11,7 +18,7 @@ export interface IUserModel {
   password: string
   name: string
   surname: string
-  role: UserRoleEnum
+  role: UserRole
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -22,7 +29,7 @@ export interface IUser {
   password: string
   name: string
   surname: string
-  role: UserRoleEnum
+  role: UserRole
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -56,12 +63,12 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
   role: {
     type: DataTypes.ENUM({
       values: [
-        UserRoleEnum.ROLE_USER,
-        UserRoleEnum.ROLE_ADMIN,
-        UserRoleEnum.ROLE_SUPER_ADMIN
+        UserRole.ROLE_USER,
+        UserRole.ROLE_ADMIN,
+        UserRole.ROLE_SUPER_ADMIN
       ]
     }),
-    defaultValue: UserRoleEnum.ROLE_USER
+    defaultValue: UserRole.ROLE_USER
   }
 };
 
@@ -70,8 +77,8 @@ export class User extends Model {
 
 User.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.USER_MODEL_NAME,
-  tableName: DatabaseModelEnum.USER_MODEL_NAME
+  modelName: DatabaseModel.USER_MODEL_NAME,
+  tableName: DatabaseModel.USER_MODEL_NAME
 });
 
 User.hasMany(OAuthToken, {foreignKey: 'user_id', onDelete: 'cascade'});

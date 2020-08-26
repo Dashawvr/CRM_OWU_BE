@@ -1,7 +1,7 @@
 import {NextFunction, Response} from 'express';
 
 import {IRequestExtended} from '../../interfaces';
-import {ResponseStatusCodesEnum} from '../../constants';
+import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {CHECK_HASH} from '../../helpers';
 import {IUser} from '../../database';
@@ -16,7 +16,7 @@ export const checkIsPasswordCorrect = async (req: IRequestExtended, res: Respons
   if (!isPasswordCorrect) {
     return next(
       new ErrorHandler(
-        ResponseStatusCodesEnum.NOT_FOUND,
+        ResponseStatusCodes.NOT_FOUND,
         errors.NOT_FOUND_USER_NOT_PRESENT.message,
         errors.NOT_FOUND_USER_NOT_PRESENT.code
       ));

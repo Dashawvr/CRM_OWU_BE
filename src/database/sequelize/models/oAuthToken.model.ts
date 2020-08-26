@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IOauthTokenModel {
   id: number;
@@ -41,7 +42,7 @@ export class OAuthToken extends Model {
 
 OAuthToken.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.OAUTH_TOKEN_MODEL_NAME,
-  tableName: DatabaseModelEnum.OAUTH_TOKEN_MODEL_NAME
+  modelName: DatabaseModel.OAUTH_TOKEN_MODEL_NAME,
+  tableName: DatabaseModel.OAUTH_TOKEN_MODEL_NAME
 });
 

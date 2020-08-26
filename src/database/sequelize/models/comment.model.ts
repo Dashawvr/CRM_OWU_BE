@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface ICommentModel {
   id: number;
@@ -36,6 +37,6 @@ export class Comment extends Model {
 
 Comment.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.COMMENT_MODEL_NAME,
-  tableName: DatabaseModelEnum.COMMENT_MODEL_NAME
+  modelName: DatabaseModel.COMMENT_MODEL_NAME,
+  tableName: DatabaseModel.COMMENT_MODEL_NAME
 });

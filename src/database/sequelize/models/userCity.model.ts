@@ -1,7 +1,8 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+
 import {DBModelFieldInit} from '../models';
+import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
-import {DatabaseModelEnum} from '../constants';
 
 export interface IUserCityModel {
   id: number;
@@ -26,7 +27,7 @@ export class UserCity extends Model {
 
 UserCity.init(modelAttributes as ModelAttributes, {
   sequelize,
-  modelName: DatabaseModelEnum.USER_CITY_MODEL_NAME,
-  tableName: DatabaseModelEnum.USER_CITY_MODEL_NAME,
+  modelName: DatabaseModel.USER_CITY_MODEL_NAME,
+  tableName: DatabaseModel.USER_CITY_MODEL_NAME,
   timestamps: false
 });

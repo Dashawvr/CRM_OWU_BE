@@ -1,7 +1,6 @@
 import * as Joi from 'Joi';
 
-import {UserRoleEnum} from '../../constants';
-import {nameRegExp, surnameRegExp} from '../../constants';
+import {nameRegExp, surnameRegExp, UserRole} from '../../constants';
 
 export const updateUserValidator = Joi.object({
   login: Joi.string().min(5).max(255).alphanum().trim(),
@@ -9,8 +8,8 @@ export const updateUserValidator = Joi.object({
   name: Joi.string().regex(nameRegExp).trim(),
   surname: Joi.string().regex(surnameRegExp).trim(),
   role: Joi.string().valid(
-    UserRoleEnum.ROLE_SUPER_ADMIN,
-    UserRoleEnum.ROLE_ADMIN,
-    UserRoleEnum.ROLE_USER
+    UserRole.ROLE_SUPER_ADMIN,
+    UserRole.ROLE_ADMIN,
+    UserRole.ROLE_USER
   ).trim()
 });
