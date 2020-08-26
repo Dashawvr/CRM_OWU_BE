@@ -1,61 +1,91 @@
-import {OAuthToken, User} from '../../database';
-import {IUser} from '../../database';
 import {IUserResponse, IUserUpdateFields} from '../../interfaces';
+import {IUser, OAuthToken, User} from '../../database';
 
 class UserService {
 
-  create(user: IUser): Promise<IUser> {
-    return User.create(user) as unknown as Promise<IUser>;
+  async create(user: IUser): Promise<IUser | undefined> {
+    try {
+      return await User.create(user) as unknown as Promise<IUser>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  update(id: number, updateFields: IUserUpdateFields): Promise<[number, IUser[]]> {
-    return User.update(updateFields, {where: {id}}) as unknown as Promise<[number, IUser[]]>;
+  async update(id: number, updateFields: IUserUpdateFields): Promise<[number, IUser[]] | undefined> {
+    try {
+      return await User.update(updateFields, {where: {id}}) as unknown as Promise<[number, IUser[]]>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  delete(id: number): Promise<number> {
-    return User.destroy({where: {id}});
+  async delete(id: number): Promise<number | undefined> {
+    try {
+      return await User.destroy({where: {id}});
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  getAll(): Promise<IUserResponse> { //TODO params
-    return User.findAndCountAll() as unknown as Promise<IUserResponse>;
+  async getAll(): Promise<IUserResponse | undefined> { //TODO params
+    try {
+      return await User.findAndCountAll() as unknown as Promise<IUserResponse>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  getByLogin(login: string): Promise<IUser | null> {
-    return User.findOne({
-      where: {
-        login
-      }
-    }) as Promise<IUser | null>;
+  async getByLogin(login: string): Promise<IUser | null | undefined> {
+    try {
+      return await User.findOne({
+        where: {login}
+      }) as unknown as Promise<IUser | null>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  getById(id: number): Promise<IUser | null> {
-    return User.findOne({
-      where: {id}
-    }) as Promise<IUser | null>;
+  async getById(id: number): Promise<IUser | null | undefined> {
+    try {
+      return await User.findOne({
+        where: {id}
+      }) as unknown as Promise<IUser | null>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  getByAccessToken(access_token: string): Promise<IUser | null> {
-    return User.findOne({
-      include: {
-        model: OAuthToken,
-        required: true,
-        where: {
-          access_token
+  async getByAccessToken(access_token: string): Promise<IUser | null | undefined> {
+    try {
+      return await User.findOne({
+        include: {
+          model: OAuthToken,
+          required: true,
+          where: {
+            access_token
+          }
         }
-      }
-    }) as Promise<IUser | null>;
+      }) as unknown as Promise<IUser | null>;
+    } catch (e) {
+      // TODO error service
+    }
   }
 
-  getByRefreshToken(refresh_token: string): Promise<IUser | null> {
-    return User.findOne({
-      include: {
-        model: OAuthToken,
-        required: true,
-        where: {
-          refresh_token
+  async getByRefreshToken(refresh_token: string): Promise<IUser | null | undefined> {
+    try {
+      return await User.findOne({
+        include: {
+          model: OAuthToken,
+          required: true,
+          where: {
+            refresh_token
+          }
         }
-      }
-    }) as Promise<IUser | null>;
+      }) as unknown as Promise<IUser | null>;
+    } catch (e) {
+      // TODO error service
+    }
+
   }
 }
 
