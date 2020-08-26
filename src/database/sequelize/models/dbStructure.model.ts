@@ -8,7 +8,7 @@ export interface IDBResponse<T> {
   dataValues: T;
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  [index: string]: any; // error Member index should be declared before all field definitions.(@typescript-eslint/member-ordering)
+  [index: string]: any;
 }
 
 export type PropType<T, K extends keyof T> = T[K];

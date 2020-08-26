@@ -1,10 +1,9 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
+import {Comment, DBModelFieldInit, OAuthToken, Task, UserCity} from '../models';
 import {sequelize} from '../../../configs';
 import {UserRoleEnum} from '../../../constants';
 import {HASH_PASSWORD_SYNC} from '../../../helpers';
-import {DBModelFieldInit} from './dbStructure.model';
 import {DatabaseModelEnum} from '../constants';
-import {OAuthToken} from './oAuthToken.model';
 
 export interface IUserModel {
   id: number
@@ -75,5 +74,8 @@ User.init(modelAttributes as ModelAttributes, {
   tableName: DatabaseModelEnum.USER_MODEL_NAME
 });
 
-User.hasMany(OAuthToken,{foreignKey:'user_id'});
+User.hasMany(OAuthToken, {foreignKey: 'user_id', onDelete: 'cascade'});
+User.hasMany(Task, {foreignKey: 'user_id'});
+User.hasMany(Comment, {foreignKey: 'user_id', onDelete: 'cascade'});
+User.hasMany(UserCity, {foreignKey: 'user_id'});
 
