@@ -9,9 +9,7 @@ export const checkIsSuperAdminOrAdmin = (req: IRequestExtended, res: Response, n
 
   const {role} = req.authUser as IUser;
 
-  const allowedRoles = [UserRole.ROLE_SUPER_ADMIN, UserRole.ROLE_ADMIN];
-
-  if (!allowedRoles.includes(role)) {
+  if (role !== UserRole.ROLE_SUPER_ADMIN && role !== UserRole.ROLE_ADMIN) {
     return next(
       new ErrorHandler(
         ResponseStatusCodes.FORBIDDEN,
