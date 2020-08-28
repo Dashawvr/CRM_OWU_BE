@@ -1,9 +1,9 @@
 import * as jwt from 'jsonwebtoken';
 
-import {config} from '../configs';
-import {ResponseStatusCodes, UserAction} from '../constants';
-import {ErrorHandler} from '../errors';
-import {IOAuthToken} from '../database';
+import {config} from '../../configs';
+import {ResponseStatusCodes, UserAction} from '../../constants';
+import {ErrorHandler} from '../../errors';
+import {IOAuthToken} from '../../database';
 
 export const tokenizer = (method: UserAction): IOAuthToken => {
 
