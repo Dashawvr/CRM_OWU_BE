@@ -5,7 +5,7 @@ class AuthService {
 
   async createAuthToken(token: IOAuthToken): Promise<IOAuthToken | undefined> {
     try {
-      return await OAuthToken.create(token) as unknown as Promise<IOAuthToken>;
+      return await OAuthToken.create(token);
     } catch (error) {
       logger.error(error);
     }
@@ -25,7 +25,7 @@ class AuthService {
     try {
       return await OAuthToken.update(tokens, {
         where: {user_id}
-      }) as unknown as Promise<[number, IOAuthToken[]]>;
+      });
     } catch (error) {
       logger.error(error);
     }

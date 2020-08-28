@@ -1,8 +1,0 @@
-export enum UserAction {
-  AUTH,
-  CONFIRM_EMAIL,
-  RESET_PASS ,
-  SUCCESS_REG ,
-  ACCOUNT_BLOCKED ,
-  ACCOUNT_UNBLOCKED
-}

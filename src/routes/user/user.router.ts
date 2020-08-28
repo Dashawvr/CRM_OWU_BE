@@ -2,24 +2,26 @@ import {Router} from 'express';
 
 import {
   checkAccessToken,
-  checkIsAdmin,
+  checkCreateRule,
+  checkDeleteRule,
   checkIsCreateUserValid,
-  checkIsSuperAdmin,
+  checkIsSuperAdminOrAdmin,
   checkIsUpdateUserValid,
-  checkIsUserExists
+  checkIsUserExists,
+  checkUpdateRule
 } from '../../middlewares';
 import {userController} from '../../controllers';
 
 const router = Router();
 
 router.use(checkAccessToken);
+router.use(checkIsSuperAdminOrAdmin);
 
-router.post('/', checkIsSuperAdmin, checkIsCreateUserValid, userController.create); //TODO create rules
-router.patch('/:user_id', checkIsSuperAdmin, checkIsUserExists, checkIsUpdateUserValid, userController.update);
-router.delete('/:user_id', checkIsSuperAdmin, checkIsUserExists, userController.delete);
+router.post('/', checkIsCreateUserValid, checkCreateRule, userController.create);
+router.patch('/:user_id', checkIsUserExists, checkIsUpdateUserValid, checkUpdateRule, userController.update);
+router.delete('/:user_id', checkIsUserExists, checkDeleteRule, userController.delete);
 
-router.use(checkIsAdmin);
-router.get('/', userController.getAll); //TODO with params
+router.get('/', userController.getAll);
 router.get('/:user_id', checkIsUserExists, userController.getById);
 
 export const userRouter = router;

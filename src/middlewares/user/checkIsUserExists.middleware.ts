@@ -30,6 +30,5 @@ export const checkIsUserExists = async (req: IRequestExtended, res: Response, ne
   }
 
   req.user = user;
-
   next();
 };

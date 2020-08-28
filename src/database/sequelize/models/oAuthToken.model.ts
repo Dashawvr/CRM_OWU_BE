@@ -38,6 +38,9 @@ const modelAttributes: DBModelFieldInit<IOauthTokenModel> = {
 };
 
 export class OAuthToken extends Model {
+  id!: number;
+  access_token!: string;
+  refresh_token!: string;
 }
 
 OAuthToken.init(modelAttributes as ModelAttributes, {

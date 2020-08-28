@@ -33,7 +33,13 @@ class UserController {
   }
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+    const params = req.query;
 
+    const users = await userService.getAll(params);
+
+    res.json({
+      data: users
+    });
   }
 
   async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {

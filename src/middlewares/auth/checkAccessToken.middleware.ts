@@ -27,7 +27,7 @@ export const checkAccessToken = async (req: IRequestExtended, res: Response, nex
     return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));
   }
 
-  req.user = user;
+  req.authUser = user;
   req.access_token = access_token;
 
   next();

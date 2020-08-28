@@ -63,16 +63,22 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
   role: {
     type: DataTypes.ENUM({
       values: [
-        UserRole.ROLE_USER,
+        UserRole.ROLE_MANAGER,
         UserRole.ROLE_ADMIN,
         UserRole.ROLE_SUPER_ADMIN
       ]
     }),
-    defaultValue: UserRole.ROLE_USER
+    defaultValue: UserRole.ROLE_MANAGER
   }
 };
 
-export class User extends Model {
+export class User extends Model{
+  id!: number;
+  login!: string;
+  name!: string;
+  password!: string;
+  role!: UserRole;
+  surname!: string;
 }
 
 User.init(modelAttributes as ModelAttributes, {

@@ -10,6 +10,6 @@ export const createUserValidator = Joi.object({
   role: Joi.string().valid(
     UserRole.ROLE_SUPER_ADMIN,
     UserRole.ROLE_ADMIN,
-    UserRole.ROLE_USER
+    UserRole.ROLE_MANAGER
   ).trim().required()
 });
