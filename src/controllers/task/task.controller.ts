@@ -1,17 +1,17 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended, IUserParams, IUserUpdateFields} from '../../interfaces';
-import {IUser} from '../../database';
-import {userService} from '../../services';
+import {IRequestExtended, ITaskParams, ITaskUpdateFields} from '../../interfaces';
+import {ITask} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
+import {taskService} from '../../services';
 
-class UserController {
+class TaskController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const user = req.body as IUser;
+      const task = req.body as ITask;
 
-      await userService.create(user);
+      await taskService.create(task);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -22,10 +22,10 @@ class UserController {
 
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.user as IUser;
-      const updateFields = req.body as IUserUpdateFields;
+      const {id} = req.task as ITask;
+      const updateFields = req.body as ITaskUpdateFields;
 
-      await userService.update(id, updateFields);
+      await taskService.update(id, updateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -36,9 +36,9 @@ class UserController {
 
   async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.user as IUser;
+      const {id} = req.task as ITask;
 
-      await userService.delete(id);
+      await taskService.delete(id);
 
       res.sendStatus(ResponseStatusCodes.NO_CONTENT);
 
@@ -49,12 +49,12 @@ class UserController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IUserParams;
+      const params = req.query as ITaskParams;
 
-      const users = await userService.getAll(params);
+      const tasks = await taskService.getAll(params);
 
       res.json({
-        data: users
+        data: tasks
       });
 
     } catch (error) {
@@ -64,12 +64,12 @@ class UserController {
 
   async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.user as IUser;
+      const {id} = req.task as ITask;
 
-      const user = await userService.getById(id);
+      const task = await taskService.getById(id);
 
       res.json({
-        data: user
+        data: task
       });
 
     } catch (error) {
@@ -78,4 +78,4 @@ class UserController {
   }
 }
 
-export const userController = new UserController();
+export const taskController = new TaskController();

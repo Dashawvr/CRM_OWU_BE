@@ -1,6 +1,6 @@
 import {IUser} from '../../database';
 
 export interface IUserResponse {
-  rows: IUser[],
-  count: number
+  rows: IUser[];
+  count: number;
 }

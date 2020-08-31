@@ -56,6 +56,12 @@ const modelAttributes: DBModelFieldInit<ITaskModel> = {
 };
 
 export class Task extends Model {
+  id!: number;
+  title!: string;
+  dateFrom!: Date;
+  dateTo!: Date;
+  important!: boolean;
+  description!: string;
 }
 
 Task.init(modelAttributes as ModelAttributes, {

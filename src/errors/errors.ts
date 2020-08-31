@@ -41,6 +41,10 @@ export const errors = {
     message: 'User is not found',
     code: 4042
   },
+  NOT_FOUND_TASK_NOT_PRESENT: {
+    message: 'Task is not found',
+    code: 4043
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {
