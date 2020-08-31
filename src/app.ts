@@ -51,13 +51,16 @@ class App {
   }
 
   private customErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
+    if (err.parent) {
+      err.message = err.parent.sqlMessage;
+    }
+
     res
       .status(err.status || ResponseStatusCodes.SERVER_ERROR)
       .json({
         message: err.message || errors.SERVER_UNKNOWN_ERROR.message,
         code: err.code || errors.SERVER_UNKNOWN_ERROR.code
       });
-
   }
 }
 

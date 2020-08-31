@@ -5,8 +5,8 @@ import {
   UpdateRule,
   UserAction,
   UserRole
-} from '../constants';
-import {ErrorHandler} from '../errors';
+} from '../../constants';
+import {ErrorHandler} from '../../errors';
 
 export const roleVerification = (method: UserAction, role: UserRole): UserRole[] => {
 

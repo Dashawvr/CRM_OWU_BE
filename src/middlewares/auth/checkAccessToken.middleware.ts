@@ -8,27 +8,31 @@ import {userService} from '../../services';
 import {config} from '../../configs';
 
 export const checkAccessToken = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<any> => {
+  try {
+    const access_token = req.get('Authorization') as string;
 
-  const access_token = req.get('Authorization') as string;
-
-  if (!access_token) {
-    return next(new ErrorHandler(ResponseStatusCodes.BAD_REQUEST, 'No token'));
-  }
-
-  verify(access_token, config.JWT_SECRET, (err: VerifyErrors | null) => {
-    if (err) {
-      return next(new ErrorHandler(ResponseStatusCodes.UNAUTHORIZED, 'Invalid token'));
+    if (!access_token) {
+      return next(new ErrorHandler(ResponseStatusCodes.BAD_REQUEST, 'No token'));
     }
-  });
 
-  const user = await userService.getByAccessToken(access_token);
+    verify(access_token, config.JWT_SECRET, (err: VerifyErrors | null) => {
+      if (err) {
+        return next(new ErrorHandler(ResponseStatusCodes.UNAUTHORIZED, 'Invalid token'));
+      }
+    });
 
-  if (!user) {
-    return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));
+    const user = await userService.getByAccessToken(access_token);
+
+    if (!user) {
+      return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));
+    }
+
+    req.authUser = user;
+    req.access_token = access_token;
+
+    next();
+
+  } catch (error) {
+    next(error);
   }
-
-  req.authUser = user;
-  req.access_token = access_token;
-
-  next();
 };
