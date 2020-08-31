@@ -45,6 +45,10 @@ export const errors = {
     message: 'Task is not found',
     code: 4043
   },
+  NOT_FOUND_TASK_STATUS_NOT_PRESENT: {
+    message: 'Task status is not found',
+    code: 4044
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

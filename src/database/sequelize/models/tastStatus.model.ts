@@ -43,6 +43,10 @@ const modelAttributes: DBModelFieldInit<ITaskStatusModel> = {
 };
 
 export class TaskStatus extends Model {
+  id!: number;
+  name!: string;
+  color!: string;
+  description!: string;
 }
 
 TaskStatus.init(modelAttributes as ModelAttributes, {
