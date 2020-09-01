@@ -59,15 +59,24 @@ const modelAttributes: DBModelFieldInit<IClientModel> = {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   phone: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 };
 
 export class Client extends Model {
+  id!: number;
+  name!: string;
+  surname!: string;
+  patronymic!: string;
+  age!: number;
+  email!: string;
+  phone!: string;
 }
 
 Client.init(modelAttributes as ModelAttributes, {

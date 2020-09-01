@@ -49,6 +49,10 @@ export const errors = {
     message: 'Task status is not found',
     code: 4044
   },
+  NOT_FOUND_CLIENT_NOT_PRESENT: {
+    message: 'Client is not found',
+    code: 4045
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

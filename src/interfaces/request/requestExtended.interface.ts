@@ -1,6 +1,7 @@
 import {Request} from 'express-serve-static-core';
 
 import {
+  IClient,
   ITask,
   ITaskStatus,
   IUser
@@ -11,5 +12,6 @@ export interface IRequestExtended extends Request {
   authUser?: IUser;
   task?: ITask;
   taskStatus?: ITaskStatus
+  client?: IClient
   access_token?: string;
 }
