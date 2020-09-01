@@ -12,11 +12,13 @@ const router = Router();
 
 router.use(checkAccessToken);
 
-router.post('/', checkIsCreateClientValid, clientController.create);
-router.patch('/:client_id', checkIsClientExists, checkIsUpdateClientValid, clientController.update);
-router.delete('/:client_id', checkIsClientExists, clientController.delete);
-
 router.get('/', clientController.getAll);
-router.get('/:client_id', checkIsClientExists, clientController.getById);
+router.post('/', checkIsCreateClientValid, clientController.create);
+
+router.use('/:client_id', checkIsClientExists);
+
+router.get('/:client_id', clientController.getById);
+router.patch('/:client_id', checkIsUpdateClientValid, clientController.update);
+router.delete('/:client_id', clientController.delete);
 
 export const clientRouter = router;

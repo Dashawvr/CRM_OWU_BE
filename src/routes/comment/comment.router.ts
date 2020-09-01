@@ -13,11 +13,13 @@ const router = Router();
 
 router.use(checkAccessToken);
 
-router.post('/', checkIsCreateCommentValid, commentController.create);
-router.patch('/:comment_id', checkIsCommentExists, checkIsUpdateCommentValid, checkCommentUpdateRule, commentController.update);
-router.delete('/:comment_id', checkIsCommentExists, commentController.delete);
-
 router.get('/', commentController.getAll);
-router.get('/:comment_id', checkIsCommentExists, commentController.getById);
+router.post('/', checkIsCreateCommentValid, commentController.create);
+
+router.use('/:comment_id', checkIsCommentExists);
+
+router.get('/:comment_id', commentController.getById);
+router.patch('/:comment_id', checkIsUpdateCommentValid, checkCommentUpdateRule, commentController.update);
+router.delete('/:comment_id', commentController.delete);
 
 export const commentRouter = router;

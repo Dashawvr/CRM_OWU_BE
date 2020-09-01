@@ -12,11 +12,13 @@ const router = Router();
 
 router.use(checkAccessToken);
 
-router.post('/', checkIsCreateTaskStatusValid, taskStatusController.create);
-router.patch('/:status_id', checkIsTaskStatusExists, checkIsUpdateTaskStatusValid, taskStatusController.update);
-router.delete('/:status_id', checkIsTaskStatusExists, taskStatusController.delete);
-
 router.get('/', taskStatusController.getAll);
-router.get('/:status_id', checkIsTaskStatusExists, taskStatusController.getById);
+router.post('/', checkIsCreateTaskStatusValid, taskStatusController.create);
+
+router.use('/:status_id', checkIsTaskStatusExists);
+
+router.get('/:status_id', taskStatusController.getById);
+router.patch('/:status_id', checkIsUpdateTaskStatusValid, taskStatusController.update);
+router.delete('/:status_id', taskStatusController.delete);
 
 export const taskStatusRouter = router;

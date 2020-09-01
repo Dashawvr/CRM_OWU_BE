@@ -17,11 +17,13 @@ const router = Router();
 router.use(checkAccessToken);
 router.use(checkIsSuperAdminOrAdmin);
 
-router.post('/', checkIsCreateUserValid, checkCreateRule, userController.create);
-router.patch('/:user_id', checkIsUserExists, checkIsUpdateUserValid, checkUpdateRule, userController.update);
-router.delete('/:user_id', checkIsUserExists, checkDeleteRule, userController.delete);
-
 router.get('/', userController.getAll);
-router.get('/:user_id', checkIsUserExists, userController.getById);
+router.post('/', checkIsCreateUserValid, checkCreateRule, userController.create);
+
+router.use('/:user_id', checkIsUserExists);
+
+router.get('/:user_id', userController.getById);
+router.patch('/:user_id', checkIsUpdateUserValid, checkUpdateRule, userController.update);
+router.delete('/:user_id', checkDeleteRule, userController.delete);
 
 export const userRouter = router;

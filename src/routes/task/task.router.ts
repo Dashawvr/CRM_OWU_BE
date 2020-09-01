@@ -12,11 +12,13 @@ const router = Router();
 
 router.use(checkAccessToken);
 
-router.post('/', checkIsCreateTaskValid, taskController.create);
-router.patch('/:task_id', checkIsTaskExists, checkIsUpdateTaskValid, taskController.update);
-router.delete('/:task_id', checkIsTaskExists, taskController.delete);
-
 router.get('/', taskController.getAll);
-router.get('/:task_id', checkIsTaskExists, taskController.getById);
+router.post('/', checkIsCreateTaskValid, taskController.create);
+
+router.use('/:task_id', checkIsTaskExists);
+
+router.get('/:task_id', taskController.getById);
+router.patch('/:task_id', checkIsUpdateTaskValid, taskController.update);
+router.delete('/:task_id', taskController.delete);
 
 export const taskRouter = router;
