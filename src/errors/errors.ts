@@ -53,6 +53,10 @@ export const errors = {
     message: 'Client is not found',
     code: 4045
   },
+  NOT_FOUND_CLIENT_STATUS_NOT_PRESENT: {
+    message: 'Client status is not found',
+    code: 4046
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

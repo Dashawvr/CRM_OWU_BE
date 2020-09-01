@@ -30,7 +30,8 @@ const modelAttributes: DBModelFieldInit<IClientStatusModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   color: {
     type: DataTypes.STRING,
@@ -43,6 +44,10 @@ const modelAttributes: DBModelFieldInit<IClientStatusModel> = {
 };
 
 export class ClientStatus extends Model {
+  id!: number;
+  name!: string;
+  color!: string;
+  description!: string;
 }
 
 ClientStatus.init(modelAttributes as ModelAttributes, {
