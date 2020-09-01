@@ -57,6 +57,10 @@ export const errors = {
     message: 'Client status is not found',
     code: 4046
   },
+  NOT_FOUND_COMMENT_NOT_PRESENT: {
+    message: 'Comment is not found',
+    code: 4047
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

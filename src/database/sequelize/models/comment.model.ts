@@ -33,6 +33,8 @@ const modelAttributes: DBModelFieldInit<ICommentModel> = {
 };
 
 export class Comment extends Model {
+  id!: number;
+  text!: string;
 }
 
 Comment.init(modelAttributes as ModelAttributes, {
