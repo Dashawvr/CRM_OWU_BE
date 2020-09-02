@@ -31,11 +31,14 @@ const modelAttributes: DBModelFieldInit<ICityModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 };
 
 export class City extends Model {
+  id!: number;
+  name!: string;
 }
 
 City.init(modelAttributes as ModelAttributes, {

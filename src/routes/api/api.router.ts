@@ -2,6 +2,7 @@ import {Router} from 'express';
 
 import {
   authRouter,
+  cityRouter,
   clientRouter,
   clientStatusRouter,
   commentRouter,
@@ -19,5 +20,6 @@ router.use('/taskStatuses', taskStatusRouter);
 router.use('/clients', clientRouter);
 router.use('/clientStatuses', clientStatusRouter);
 router.use('/comments', commentRouter);
+router.use('/cities', cityRouter);
 
 export const apiRouter = router;

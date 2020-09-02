@@ -61,6 +61,10 @@ export const errors = {
     message: 'Comment is not found',
     code: 4047
   },
+  NOT_FOUND_CITY_NOT_PRESENT: {
+    message: 'City is not found',
+    code: 4048
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {
