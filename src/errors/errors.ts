@@ -65,6 +65,10 @@ export const errors = {
     message: 'City is not found',
     code: 4048
   },
+  NOT_FOUND_GROUP_NOT_PRESENT: {
+    message: 'Group is not found',
+    code: 4049
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

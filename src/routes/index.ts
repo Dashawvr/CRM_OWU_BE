@@ -6,5 +6,6 @@ export * from './client';
 export * from './clientStatus';
 export * from './comment';
 export * from './city';
+export * from './group';
 export * from './api';
 export * from './notFound';

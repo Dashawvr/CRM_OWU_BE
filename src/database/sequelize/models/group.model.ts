@@ -36,7 +36,8 @@ const modelAttributes: DBModelFieldInit<IGroupModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   practice: {
     type: DataTypes.INTEGER,
@@ -51,12 +52,18 @@ const modelAttributes: DBModelFieldInit<IGroupModel> = {
     allowNull: false
   },
   startTime: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.TIME,
     allowNull: false
   }
 };
 
 export class Group extends Model {
+  id!: number;
+  name!: string;
+  practice!: number;
+  startDate!: Date;
+  endDate!: Date;
+  startTime!: Date;
 }
 
 Group.init(modelAttributes as ModelAttributes, {

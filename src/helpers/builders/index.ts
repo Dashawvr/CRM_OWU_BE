@@ -5,3 +5,4 @@ export * from './clientOption.builder';
 export * from './clientStatusOption.builder';
 export * from './commentOption.builder';
 export * from './cityOption.builder';
+export * from './groupOption.builder';

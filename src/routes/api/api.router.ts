@@ -6,6 +6,7 @@ import {
   clientRouter,
   clientStatusRouter,
   commentRouter,
+  groupRouter,
   taskRouter,
   taskStatusRouter,
   userRouter
@@ -21,5 +22,6 @@ router.use('/clients', clientRouter);
 router.use('/clientStatuses', clientStatusRouter);
 router.use('/comments', commentRouter);
 router.use('/cities', cityRouter);
+router.use('/groups', groupRouter);
 
 export const apiRouter = router;
