@@ -44,6 +44,7 @@ class ClientService {
       .patronymic(patronymic)
       .ageFrom(ageFrom)
       .ageTo(ageTo)
+      .ageFromTo(ageFrom, ageTo)
       .email(email)
       .phone(phone)
       .status_id(status_id)

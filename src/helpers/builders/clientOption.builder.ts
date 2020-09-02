@@ -64,6 +64,19 @@ export class ClientOptionBuilder {
     return this;
   }
 
+  ageFromTo(ageFrom: number | undefined, ageTo: number | undefined): ClientOptionBuilder {
+    if (ageFrom && ageTo) {
+      this._options.where.age = {
+        [Op.and]: [
+          {[Op.gte]: ageFrom},
+          {[Op.lte]: ageTo}
+        ]
+      };
+    }
+
+    return this;
+  }
+
   email(email: string | undefined): ClientOptionBuilder {
     if (email) {
       this._options.where.email = {

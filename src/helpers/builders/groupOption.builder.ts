@@ -44,6 +44,19 @@ export class GroupOptionBuilder {
     return this;
   }
 
+  practiceFromTo(practiceFrom: number | undefined, practiceTo: number | undefined): GroupOptionBuilder {
+    if (practiceFrom && practiceTo) {
+      this._options.where.practice = {
+        [Op.and]: [
+          {[Op.gte]: practiceFrom},
+          {[Op.lte]: practiceTo}
+        ]
+      };
+    }
+
+    return this;
+  }
+
   startDateFrom(startDateFrom: Date | undefined): GroupOptionBuilder {
     if (startDateFrom) {
       this._options.where.startDate = {
@@ -58,6 +71,19 @@ export class GroupOptionBuilder {
     if (startDateTo) {
       this._options.where.startDate = {
         [Op.lte]: startDateTo
+      };
+    }
+
+    return this;
+  }
+
+  startDateFromTo(startDateFrom: Date | undefined, startDateTo: Date | undefined): GroupOptionBuilder {
+    if (startDateFrom && startDateTo) {
+      this._options.where.startDate = {
+        [Op.and]: [
+          {[Op.gte]: startDateFrom},
+          {[Op.lte]: startDateTo}
+        ]
       };
     }
 
@@ -84,6 +110,19 @@ export class GroupOptionBuilder {
     return this;
   }
 
+  endDateFromTo(endDateFrom: Date | undefined, endDateTo: Date | undefined): GroupOptionBuilder {
+    if (endDateFrom && endDateTo) {
+      this._options.where.endDate = {
+        [Op.and]: [
+          {[Op.gte]: endDateFrom},
+          {[Op.lte]: endDateTo}
+        ]
+      };
+    }
+
+    return this;
+  }
+
   startTimeFrom(startTimeFrom: Date | undefined): GroupOptionBuilder {
     if (startTimeFrom) {
       this._options.where.startTime = {
@@ -98,6 +137,19 @@ export class GroupOptionBuilder {
     if (startTimeTo) {
       this._options.where.startTime = {
         [Op.lte]: startTimeTo
+      };
+    }
+
+    return this;
+  }
+
+  startTimeFromTo(startTimeFrom: Date | undefined, startTimeTo: Date | undefined): GroupOptionBuilder {
+    if (startTimeFrom && startTimeTo) {
+      this._options.where.startTime = {
+        [Op.and]: [
+          {[Op.gte]: startTimeFrom},
+          {[Op.lte]: startTimeTo}
+        ]
       };
     }
 
