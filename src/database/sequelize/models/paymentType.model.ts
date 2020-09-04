@@ -28,7 +28,8 @@ const modelAttributes: DBModelFieldInit<IPaymentTypeModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   description: {
     type: DataTypes.TEXT,
@@ -37,6 +38,9 @@ const modelAttributes: DBModelFieldInit<IPaymentTypeModel> = {
 };
 
 export class PaymentType extends Model {
+  id!: number;
+  name!: string;
+  description!: string;
 }
 
 PaymentType.init(modelAttributes as ModelAttributes, {

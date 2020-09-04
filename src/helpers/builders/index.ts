@@ -11,3 +11,4 @@ export * from './applicationOption.builder';
 export * from './discountOption.builder';
 export * from './paymentOption.builder';
 export * from './paymentStatusOption.builder';
+export * from './paymentTypeOption.builder';

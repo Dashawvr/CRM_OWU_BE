@@ -8,3 +8,4 @@ export * from './group';
 export * from './course';
 export * from './discount';
 export * from './paymentStatus';
+export * from './paymentType';
