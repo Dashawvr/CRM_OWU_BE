@@ -1,1 +1,1 @@
-export const cityNameRegExp = new RegExp('[A-Za-zа-яА-ЩЬЮЯҐЄІЇа-щьюяґєії]');
+export const cityNameRegExp = new RegExp('^([^0-9]*)$');

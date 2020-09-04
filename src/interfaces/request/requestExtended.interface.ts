@@ -1,6 +1,7 @@
 import {Request} from 'express-serve-static-core';
 
 import {
+  IApplication,
   ICity,
   IClient,
   IClientStatus,
@@ -23,5 +24,6 @@ export interface IRequestExtended extends Request {
   city?: ICity
   group?: IGroup
   course?: ICourse
+  application?: IApplication
   access_token?: string;
 }

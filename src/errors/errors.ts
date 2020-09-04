@@ -73,6 +73,10 @@ export const errors = {
     message: 'Course is not found',
     code: 40410
   },
+  NOT_FOUND_APPLICATION_NOT_PRESENT: {
+    message: 'Application is not found',
+    code: 40411
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

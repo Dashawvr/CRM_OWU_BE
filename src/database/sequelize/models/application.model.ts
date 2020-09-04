@@ -29,6 +29,7 @@ export interface IApplication {
   city_id?: number;
   client_id?: number;
   course_id?: number;
+  discount_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -58,6 +59,11 @@ const modelAttributes: DBModelFieldInit<IApplicationModel> = {
 };
 
 export class Application extends Model {
+  id!: number;
+  price!: number;
+  leftToPay!: number;
+  practice!: boolean;
+  laptop!: boolean;
 }
 
 Application.init(modelAttributes as ModelAttributes, {

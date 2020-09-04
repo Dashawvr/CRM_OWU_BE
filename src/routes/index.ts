@@ -8,5 +8,6 @@ export * from './comment';
 export * from './city';
 export * from './group';
 export * from './course';
+export * from './application';
 export * from './api';
 export * from './notFound';
