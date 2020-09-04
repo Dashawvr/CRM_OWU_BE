@@ -28,7 +28,8 @@ const modelAttributes: DBModelFieldInit<ICourseModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   price: {
     type: DataTypes.INTEGER,
@@ -37,6 +38,9 @@ const modelAttributes: DBModelFieldInit<ICourseModel> = {
 };
 
 export class Course extends Model {
+  id!: number;
+  name!: string;
+  price!: number;
 }
 
 Course.init(modelAttributes as ModelAttributes, {

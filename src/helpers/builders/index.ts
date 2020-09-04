@@ -6,3 +6,4 @@ export * from './clientStatusOption.builder';
 export * from './commentOption.builder';
 export * from './cityOption.builder';
 export * from './groupOption.builder';
+export * from './courseOption.builder';

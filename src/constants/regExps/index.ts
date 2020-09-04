@@ -5,3 +5,4 @@ export * from './client';
 export * from './clientStatus';
 export * from './city';
 export * from './group';
+export * from './course';

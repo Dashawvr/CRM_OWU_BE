@@ -7,3 +7,4 @@ export * from './clientStatus';
 export * from './comment';
 export * from './city';
 export * from './group';
+export * from './course';

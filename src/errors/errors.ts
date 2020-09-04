@@ -69,6 +69,10 @@ export const errors = {
     message: 'Group is not found',
     code: 4049
   },
+  NOT_FOUND_COURSE_NOT_PRESENT: {
+    message: 'Course is not found',
+    code: 40410
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

@@ -5,6 +5,7 @@ import {
   IClient,
   IClientStatus,
   IComment,
+  ICourse,
   IGroup,
   ITask,
   ITaskStatus,
@@ -21,5 +22,6 @@ export interface IRequestExtended extends Request {
   comment?: IComment
   city?: ICity
   group?: IGroup
+  course?: ICourse
   access_token?: string;
 }
