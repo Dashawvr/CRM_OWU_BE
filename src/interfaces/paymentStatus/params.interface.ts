@@ -1,4 +1,4 @@
-export interface IClientStatusParams {
+export interface IPaymentStatusParams {
   name?: string;
   color?: string;
   description?: string;

@@ -85,6 +85,10 @@ export const errors = {
     message: 'Payment is not found',
     code: 40413
   },
+  NOT_FOUND_PAYMENT_STATUS_NOT_PRESENT: {
+    message: 'Payment status is not found',
+    code: 40414
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

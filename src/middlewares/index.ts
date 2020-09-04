@@ -11,3 +11,4 @@ export * from './course';
 export * from './application';
 export * from './discount';
 export * from './payment';
+export * from './paymentStatus';

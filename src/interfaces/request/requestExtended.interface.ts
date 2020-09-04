@@ -9,7 +9,7 @@ import {
   ICourse,
   IDiscount,
   IGroup,
-  IPayment,
+  IPayment, IPaymentStatus,
   ITask,
   ITaskStatus,
   IUser
@@ -29,5 +29,6 @@ export interface IRequestExtended extends Request {
   application?: IApplication
   discount?: IDiscount
   payment?: IPayment
+  paymentStatus?: IPaymentStatus
   access_token?: string;
 }

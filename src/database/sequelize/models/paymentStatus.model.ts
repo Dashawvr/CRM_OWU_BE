@@ -30,7 +30,8 @@ const modelAttributes: DBModelFieldInit<IPaymentStatusModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   color: {
     type: DataTypes.STRING,
@@ -43,6 +44,10 @@ const modelAttributes: DBModelFieldInit<IPaymentStatusModel> = {
 };
 
 export class PaymentStatus extends Model {
+  id!: number;
+  name!: string;
+  color!: string;
+  description!: string;
 }
 
 PaymentStatus.init(modelAttributes as ModelAttributes, {
