@@ -6,8 +6,10 @@ import {
   IClient,
   IClientStatus,
   IComment,
-  ICourse, IDiscount,
+  ICourse,
+  IDiscount,
   IGroup,
+  IPayment,
   ITask,
   ITaskStatus,
   IUser
@@ -26,5 +28,6 @@ export interface IRequestExtended extends Request {
   course?: ICourse
   application?: IApplication
   discount?: IDiscount
+  payment?: IPayment
   access_token?: string;
 }

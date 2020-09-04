@@ -81,6 +81,10 @@ export const errors = {
     message: 'Discount is not found',
     code: 40412
   },
+  NOT_FOUND_PAYMENT_NOT_PRESENT: {
+    message: 'Payment is not found',
+    code: 40413
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

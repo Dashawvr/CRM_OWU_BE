@@ -46,6 +46,10 @@ const modelAttributes: DBModelFieldInit<IPaymentModel> = {
 };
 
 export class Payment extends Model {
+  id!: number;
+  number!: number;
+  date!: Date;
+  amount!: number;
 }
 
 Payment.init(modelAttributes as ModelAttributes, {

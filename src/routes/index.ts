@@ -10,5 +10,6 @@ export * from './group';
 export * from './course';
 export * from './application';
 export * from './discount';
+export * from './payment';
 export * from './api';
 export * from './notFound';

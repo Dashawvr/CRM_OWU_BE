@@ -10,6 +10,7 @@ import {
   courseRouter,
   discountRouter,
   groupRouter,
+  paymentRouter,
   taskRouter,
   taskStatusRouter,
   userRouter
@@ -29,5 +30,6 @@ router.use('/groups', groupRouter);
 router.use('/courses', courseRouter);
 router.use('/applications', applicationRouter);
 router.use('/discounts', discountRouter);
+router.use('/payments', paymentRouter);
 
 export const apiRouter = router;
