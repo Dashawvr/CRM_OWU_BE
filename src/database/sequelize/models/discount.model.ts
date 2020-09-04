@@ -18,6 +18,7 @@ export interface IDiscount {
   name: string;
   description: string;
   amount: number;
+  application_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -30,7 +31,8 @@ const modelAttributes: DBModelFieldInit<IDiscountModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   description: {
     type: DataTypes.TEXT
@@ -42,6 +44,10 @@ const modelAttributes: DBModelFieldInit<IDiscountModel> = {
 };
 
 export class Discount extends Model {
+  id!: number;
+  name!: string;
+  description!: string;
+  amount!: number;
 }
 
 Discount.init(modelAttributes as ModelAttributes, {

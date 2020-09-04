@@ -8,6 +8,7 @@ import {
   clientStatusRouter,
   commentRouter,
   courseRouter,
+  discountRouter,
   groupRouter,
   taskRouter,
   taskStatusRouter,
@@ -27,5 +28,6 @@ router.use('/cities', cityRouter);
 router.use('/groups', groupRouter);
 router.use('/courses', courseRouter);
 router.use('/applications', applicationRouter);
+router.use('/discounts', discountRouter);
 
 export const apiRouter = router;

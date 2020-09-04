@@ -9,3 +9,4 @@ export * from './city';
 export * from './group';
 export * from './course';
 export * from './application';
+export * from './discount';

@@ -77,6 +77,10 @@ export const errors = {
     message: 'Application is not found',
     code: 40411
   },
+  NOT_FOUND_DISCOUNT_NOT_PRESENT: {
+    message: 'Discount is not found',
+    code: 40412
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

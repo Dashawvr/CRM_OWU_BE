@@ -6,7 +6,7 @@ import {
   IClient,
   IClientStatus,
   IComment,
-  ICourse,
+  ICourse, IDiscount,
   IGroup,
   ITask,
   ITaskStatus,
@@ -25,5 +25,6 @@ export interface IRequestExtended extends Request {
   group?: IGroup
   course?: ICourse
   application?: IApplication
+  discount?: IDiscount
   access_token?: string;
 }
