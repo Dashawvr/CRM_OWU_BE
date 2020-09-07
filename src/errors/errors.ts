@@ -93,6 +93,10 @@ export const errors = {
     message: 'Payment status is not found',
     code: 40415
   },
+  NOT_FOUND_SOURCE_NOT_PRESENT: {
+    message: 'Source is not found',
+    code: 40416
+  },
 
   // 500
   SERVER_UNKNOWN_ERROR: {

@@ -16,6 +16,7 @@ export interface ISource {
   id: number;
   name: string;
   description: string;
+  application_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -28,7 +29,8 @@ const modelAttributes: DBModelFieldInit<ISourceModel> = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   description: {
     type: DataTypes.TEXT,
@@ -37,6 +39,9 @@ const modelAttributes: DBModelFieldInit<ISourceModel> = {
 };
 
 export class Source extends Model {
+  id!: number;
+  name!: string;
+  description!: string;
 }
 
 Source.init(modelAttributes as ModelAttributes, {

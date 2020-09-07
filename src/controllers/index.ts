@@ -14,3 +14,4 @@ export * from './discount';
 export * from './payment';
 export * from './paymentStatus';
 export * from './paymentType';
+export * from './source';

@@ -11,7 +11,7 @@ import {
   IGroup,
   IPayment,
   IPaymentStatus,
-  IPaymentType,
+  IPaymentType, ISource,
   ITask,
   ITaskStatus,
   IUser
@@ -33,5 +33,6 @@ export interface IRequestExtended extends Request {
   payment?: IPayment
   paymentStatus?: IPaymentStatus
   paymentType?: IPaymentType
+  source?: ISource
   access_token?: string;
 }
