@@ -16,7 +16,7 @@ export const checkIsUserExists = async (req: IRequestExtended, res: Response, ne
     if (error) {
       return next(
         new ErrorHandler(
-          ResponseStatusCodes.NOT_FOUND,
+          ResponseStatusCodes.BAD_REQUEST,
           errors.BAD_REQUEST_WRONG_PARAMS.message,
           errors.BAD_REQUEST_WRONG_PARAMS.code));
     }
@@ -26,8 +26,8 @@ export const checkIsUserExists = async (req: IRequestExtended, res: Response, ne
     if (!user) {
       return next(new ErrorHandler(
         ResponseStatusCodes.NOT_FOUND,
-        errors.NOT_FOUND_USER_NOT_PRESENT.message,
-        errors.NOT_FOUND_USER_NOT_PRESENT.code));
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.code));
     }
 
     req.user = user;

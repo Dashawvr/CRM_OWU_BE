@@ -9,9 +9,7 @@ class TaskStatusController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const taskStatus = req.body as ITaskStatus;
-
-      await taskStatusService.create(taskStatus);
+      await taskStatusService.create(req.body as ITaskStatus);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class TaskStatusController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.taskStatus as ITaskStatus;
-      const updateFields = req.body as ITaskStatusUpdateFields;
 
-      await taskStatusService.update(id, updateFields);
+      await taskStatusService.update(id, req.body as ITaskStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class TaskStatusController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ITaskStatusParams;
-
-      const taskStatuses = await taskStatusService.getAll(params);
+      const taskStatuses = await taskStatusService.getAll(req.query as ITaskStatusParams);
 
       res.json({
         data: taskStatuses
@@ -62,11 +57,9 @@ class TaskStatusController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.taskStatus as ITaskStatus;
-
-      const taskStatus = await taskStatusService.getById(id);
+      const taskStatus = req.taskStatus as ITaskStatus;
 
       res.json({
         data: taskStatus

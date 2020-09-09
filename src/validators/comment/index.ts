@@ -1,2 +1,2 @@
-export * from './createComment.validator';
-export * from './updateComment.validator';
+export * from './create.validator';
+export * from './update.validator';

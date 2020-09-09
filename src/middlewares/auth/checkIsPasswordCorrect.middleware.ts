@@ -17,8 +17,8 @@ export const checkIsPasswordCorrect = async (req: IRequestExtended, res: Respons
     return next(
       new ErrorHandler(
         ResponseStatusCodes.NOT_FOUND,
-        errors.NOT_FOUND_USER_NOT_PRESENT.message,
-        errors.NOT_FOUND_USER_NOT_PRESENT.code
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.code
       ));
   }
 

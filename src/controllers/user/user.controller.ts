@@ -9,9 +9,7 @@ class UserController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const user = req.body as IUser;
-
-      await userService.create(user);
+      await userService.create(req.body as IUser);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class UserController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.user as IUser;
-      const updateFields = req.body as IUserUpdateFields;
 
-      await userService.update(id, updateFields);
+      await userService.update(id, req.body as IUserUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class UserController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IUserParams;
-
-      const users = await userService.getAll(params);
+      const users = await userService.getAll(req.query as IUserParams);
 
       res.json({
         data: users
@@ -62,11 +57,9 @@ class UserController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.user as IUser;
-
-      const user = await userService.getById(id);
+      const user = req.user as IUser;
 
       res.json({
         data: user

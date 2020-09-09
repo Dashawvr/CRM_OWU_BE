@@ -1,5 +1,4 @@
-export * from './rateLimit.enum';
-export * from './responseStatusCode.enum';
+export * from './rateLimit';
+export * from './responseStatus';
 export * from './user';
 export * from './file';
-export * from './winstonFileSize.enum';

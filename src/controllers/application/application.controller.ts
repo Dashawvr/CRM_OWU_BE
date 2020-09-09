@@ -9,9 +9,7 @@ class ApplicationController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const application = req.body as IApplication;
-
-      await applicationService.create(application);
+      await applicationService.create(req.body as IApplication);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class ApplicationController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.application as IApplication;
-      const updateFields = req.body as IApplicationUpdateFields;
 
-      await applicationService.update(id, updateFields);
+      await applicationService.update(id, req.body as IApplicationUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class ApplicationController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IApplicationParams;
-
-      const applications = await applicationService.getAll(params);
+      const applications = await applicationService.getAll(req.query as IApplicationParams);
 
       res.json({
         data: applications
@@ -62,11 +57,9 @@ class ApplicationController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.application as IApplication;
-
-      const application = await applicationService.getById(id);
+      const application = req.application as IApplication;
 
       res.json({
         data: application

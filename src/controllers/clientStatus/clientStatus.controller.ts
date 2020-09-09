@@ -9,9 +9,7 @@ class ClientStatusController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const clientStatus = req.body as IClientStatus;
-
-      await clientStatusService.create(clientStatus);
+      await clientStatusService.create(req.body as IClientStatus);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class ClientStatusController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.clientStatus as IClientStatus;
-      const updateFields = req.body as IClientStatusUpdateFields;
 
-      await clientStatusService.update(id, updateFields);
+      await clientStatusService.update(id, req.body as IClientStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class ClientStatusController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IClientStatusParams;
-
-      const clientStatuses = await clientStatusService.getAll(params);
+      const clientStatuses = await clientStatusService.getAll(req.query as IClientStatusParams);
 
       res.json({
         data: clientStatuses
@@ -62,11 +57,9 @@ class ClientStatusController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.clientStatus as IClientStatus;
-
-      const clientStatus = await clientStatusService.getById(id);
+      const clientStatus = req.clientStatus as IClientStatus;
 
       res.json({
         data: clientStatus

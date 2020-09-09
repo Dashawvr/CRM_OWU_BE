@@ -9,9 +9,7 @@ class SourceController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const source = req.body as ISource;
-
-      await sourceService.create(source);
+      await sourceService.create(req.body as ISource);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class SourceController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.source as ISource;
-      const updateFields = req.body as ISourceUpdateFields;
 
-      await sourceService.update(id, updateFields);
+      await sourceService.update(id, req.body as ISourceUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class SourceController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ISourceParams;
-
-      const sources = await sourceService.getAll(params);
+      const sources = await sourceService.getAll(req.query as ISourceParams);
 
       res.json({
         data: sources
@@ -62,11 +57,9 @@ class SourceController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.source as ISource;
-
-      const source = await sourceService.getById(id);
+      const source = req.source as ISource;
 
       res.json({
         data: source

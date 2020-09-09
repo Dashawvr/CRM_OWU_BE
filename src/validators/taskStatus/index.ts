@@ -1,2 +1,2 @@
-export * from './createTaskStatus.validator';
-export * from './updateTaskStatus.validator';
+export * from './create.validator';
+export * from './update.validator';

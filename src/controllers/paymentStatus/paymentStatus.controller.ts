@@ -9,9 +9,7 @@ class PaymentStatusController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const paymentStatus = req.body as IPaymentStatus;
-
-      await paymentStatusService.create(paymentStatus);
+      await paymentStatusService.create(req.body as IPaymentStatus);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class PaymentStatusController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.paymentStatus as IPaymentStatus;
-      const updateFields = req.body as IPaymentStatusUpdateFields;
 
-      await paymentStatusService.update(id, updateFields);
+      await paymentStatusService.update(id, req.body as IPaymentStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class PaymentStatusController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IPaymentStatusParams;
-
-      const paymentStatuses = await paymentStatusService.getAll(params);
+      const paymentStatuses = await paymentStatusService.getAll(req.query as IPaymentStatusParams);
 
       res.json({
         data: paymentStatuses
@@ -62,11 +57,9 @@ class PaymentStatusController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.paymentStatus as IPaymentStatus;
-
-      const paymentStatus = await paymentStatusService.getById(id);
+      const paymentStatus = req.paymentStatus as IPaymentStatus;
 
       res.json({
         data: paymentStatus

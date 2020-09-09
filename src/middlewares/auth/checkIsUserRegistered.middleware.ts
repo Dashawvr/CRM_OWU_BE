@@ -26,8 +26,8 @@ export const checkIsUserRegistered = async (req: IRequestExtended, res: Response
       return next(
         new ErrorHandler(
           ResponseStatusCodes.NOT_FOUND,
-          errors.NOT_FOUND_USER_NOT_PRESENT.message,
-          errors.NOT_FOUND_USER_NOT_PRESENT.code
+          errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
+          errors.NOT_FOUND_ENTITY_NOT_PRESENT.code
         ));
     }
 
