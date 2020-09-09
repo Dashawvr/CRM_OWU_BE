@@ -1,3 +1,3 @@
-export * from './createUser.validator';
-export * from './updateUser.validator';
+export * from './create.validator';
+export * from './update.validator';
 export * from './id.validator';

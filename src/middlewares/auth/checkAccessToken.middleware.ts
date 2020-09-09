@@ -24,7 +24,7 @@ export const checkAccessToken = async (req: IRequestExtended, res: Response, nex
     const user = await userService.getByAccessToken(access_token);
 
     if (!user) {
-      return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));
+      return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_ENTITY_NOT_PRESENT.message));
     }
 
     req.authUser = user;

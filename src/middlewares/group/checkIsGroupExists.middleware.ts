@@ -16,7 +16,7 @@ export const checkIsGroupExists = async (req: IRequestExtended, res: Response, n
     if (error) {
       return next(
         new ErrorHandler(
-          ResponseStatusCodes.NOT_FOUND,
+          ResponseStatusCodes.BAD_REQUEST,
           errors.BAD_REQUEST_WRONG_PARAMS.message,
           errors.BAD_REQUEST_WRONG_PARAMS.code));
     }
@@ -26,8 +26,8 @@ export const checkIsGroupExists = async (req: IRequestExtended, res: Response, n
     if (!group) {
       return next(new ErrorHandler(
         ResponseStatusCodes.NOT_FOUND,
-        errors.NOT_FOUND_GROUP_NOT_PRESENT.message,
-        errors.NOT_FOUND_GROUP_NOT_PRESENT.code));
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.code));
     }
 
     req.group = group;

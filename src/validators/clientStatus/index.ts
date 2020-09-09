@@ -1,2 +1,2 @@
-export * from './createClientStatus.validator';
-export * from './updateClientStatus.validator';
+export * from './create.validator';
+export * from './update.validator';

@@ -9,9 +9,7 @@ class PaymentController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const payment = req.body as IPayment;
-
-      await paymentService.create(payment);
+      await paymentService.create(req.body as IPayment);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class PaymentController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.payment as IPayment;
-      const updateFields = req.body as IPaymentUpdateFields;
 
-      await paymentService.update(id, updateFields);
+      await paymentService.update(id, req.body as IPaymentUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class PaymentController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IPaymentParams;
-
-      const payments = await paymentService.getAll(params);
+      const payments = await paymentService.getAll(req.query as IPaymentParams);
 
       res.json({
         data: payments
@@ -62,11 +57,9 @@ class PaymentController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.payment as IPayment;
-
-      const payment = await paymentService.getById(id);
+      const payment = req.payment as IPayment;
 
       res.json({
         data: payment

@@ -9,9 +9,7 @@ class CourseController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const course = req.body as ICourse;
-
-      await courseService.create(course);
+      await courseService.create(req.body as ICourse);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class CourseController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.course as ICourse;
-      const updateFields = req.body as ICourseUpdateFields;
 
-      await courseService.update(id, updateFields);
+      await courseService.update(id, req.body as ICourseUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class CourseController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ICourseParams;
-
-      const courses = await courseService.getAll(params);
+      const courses = await courseService.getAll(req.query as ICourseParams);
 
       res.json({
         data: courses
@@ -62,11 +57,9 @@ class CourseController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.course as ICourse;
-
-      const course = await courseService.getById(id);
+      const course = req.course as ICourse;
 
       res.json({
         data: course

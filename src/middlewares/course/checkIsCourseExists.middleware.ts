@@ -16,7 +16,7 @@ export const checkIsCourseExists = async (req: IRequestExtended, res: Response, 
     if (error) {
       return next(
         new ErrorHandler(
-          ResponseStatusCodes.NOT_FOUND,
+          ResponseStatusCodes.BAD_REQUEST,
           errors.BAD_REQUEST_WRONG_PARAMS.message,
           errors.BAD_REQUEST_WRONG_PARAMS.code));
     }
@@ -26,8 +26,8 @@ export const checkIsCourseExists = async (req: IRequestExtended, res: Response, 
     if (!course) {
       return next(new ErrorHandler(
         ResponseStatusCodes.NOT_FOUND,
-        errors.NOT_FOUND_COURSE_NOT_PRESENT.message,
-        errors.NOT_FOUND_COURSE_NOT_PRESENT.code));
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
+        errors.NOT_FOUND_ENTITY_NOT_PRESENT.code));
     }
 
     req.course = course;

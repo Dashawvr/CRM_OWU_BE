@@ -9,9 +9,7 @@ class CommentController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const comment = req.body as IComment;
-
-      await commentService.create(comment);
+      await commentService.create(req.body as IComment);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class CommentController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.comment as IComment;
-      const updateFields = req.body as ICommentUpdateFields;
 
-      await commentService.update(id, updateFields);
+      await commentService.update(id, req.body as ICommentUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class CommentController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ICommentParams;
-
-      const comments = await commentService.getAll(params);
+      const comments = await commentService.getAll(req.query as ICommentParams);
 
       res.json({
         data: comments
@@ -62,11 +57,9 @@ class CommentController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.comment as IComment;
-
-      const comment = await commentService.getById(id);
+      const comment = req.comment as IComment;
 
       res.json({
         data: comment

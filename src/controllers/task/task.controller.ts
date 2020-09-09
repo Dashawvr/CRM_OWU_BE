@@ -9,9 +9,7 @@ class TaskController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const task = req.body as ITask;
-
-      await taskService.create(task);
+      await taskService.create(req.body as ITask);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class TaskController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.task as ITask;
-      const updateFields = req.body as ITaskUpdateFields;
 
-      await taskService.update(id, updateFields);
+      await taskService.update(id, req.body as ITaskUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class TaskController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ITaskParams;
-
-      const tasks = await taskService.getAll(params);
+      const tasks = await taskService.getAll(req.query as ITaskParams);
 
       res.json({
         data: tasks
@@ -62,11 +57,9 @@ class TaskController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.task as ITask;
-
-      const task = await taskService.getById(id);
+      const task = req.task as ITask;
 
       res.json({
         data: task

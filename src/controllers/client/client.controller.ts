@@ -9,9 +9,7 @@ class ClientController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const client = req.body as IClient;
-
-      await clientService.create(client);
+      await clientService.create(req.body as IClient);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class ClientController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.client as IClient;
-      const updateFields = req.body as IClientUpdateFields;
 
-      await clientService.update(id, updateFields);
+      await clientService.update(id, req.body as IClientUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class ClientController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IClientParams;
-
-      const clients = await clientService.getAll(params);
+      const clients = await clientService.getAll(req.query as IClientParams);
 
       res.json({
         data: clients
@@ -62,11 +57,9 @@ class ClientController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.client as IClient;
-
-      const client = await clientService.getById(id);
+      const client = req.client as IClient;
 
       res.json({
         data: client

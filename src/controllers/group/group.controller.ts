@@ -9,9 +9,7 @@ class GroupController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const group = req.body as IGroup;
-
-      await groupService.create(group);
+      await groupService.create(req.body as IGroup);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class GroupController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.group as IGroup;
-      const updateFields = req.body as IGroupUpdateFields;
 
-      await groupService.update(id, updateFields);
+      await groupService.update(id, req.body as IGroupUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class GroupController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IGroupParams;
-
-      const groups = await groupService.getAll(params);
+      const groups = await groupService.getAll(req.query as IGroupParams);
 
       res.json({
         data: groups
@@ -62,11 +57,9 @@ class GroupController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.group as IGroup;
-
-      const group = await groupService.getById(id);
+      const group = req.group as IGroup;
 
       res.json({
         data: group

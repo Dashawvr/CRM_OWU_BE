@@ -25,7 +25,7 @@ export const checkRefreshToken = async (req: IRequestExtended, res: Response, ne
     const user = await userService.getByRefreshToken(refresh_token);
 
     if (!user) {
-      return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_USER_NOT_PRESENT.message));
+      return next(new ErrorHandler(ResponseStatusCodes.NOT_FOUND, errors.NOT_FOUND_ENTITY_NOT_PRESENT.message));
     }
 
     req.user = user;

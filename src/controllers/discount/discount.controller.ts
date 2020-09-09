@@ -9,9 +9,7 @@ class DiscountController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const discount = req.body as IDiscount;
-
-      await discountService.create(discount);
+      await discountService.create(req.body as IDiscount);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class DiscountController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.discount as IDiscount;
-      const updateFields = req.body as IDiscountUpdateFields;
 
-      await discountService.update(id, updateFields);
+      await discountService.update(id, req.body as IDiscountUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class DiscountController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as IDiscountParams;
-
-      const discounts = await discountService.getAll(params);
+      const discounts = await discountService.getAll(req.query as IDiscountParams);
 
       res.json({
         data: discounts
@@ -62,11 +57,9 @@ class DiscountController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.discount as IDiscount;
-
-      const discount = await discountService.getById(id);
+      const discount = req.discount as IDiscount;
 
       res.json({
         data: discount

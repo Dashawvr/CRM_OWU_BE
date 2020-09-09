@@ -9,9 +9,7 @@ class CityController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const city = req.body as ICity;
-
-      await cityService.create(city);
+      await cityService.create(req.body as ICity);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -23,9 +21,8 @@ class CityController {
   async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.city as ICity;
-      const updateFields = req.body as ICityUpdateFields;
 
-      await cityService.update(id, updateFields);
+      await cityService.update(id, req.body as ICityUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -49,9 +46,7 @@ class CityController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const params = req.query as ICityParams;
-
-      const cities = await cityService.getAll(params);
+      const cities = await cityService.getAll(req.query as ICityParams);
 
       res.json({
         data: cities
@@ -62,11 +57,9 @@ class CityController {
     }
   }
 
-  async getById(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const {id} = req.city as ICity;
-
-      const city = await cityService.getById(id);
+      const city = req.city as ICity;
 
       res.json({
         data: city
