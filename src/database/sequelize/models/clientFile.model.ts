@@ -44,6 +44,10 @@ const modelAttributes: DBModelFieldInit<IClientFileModel> = {
 };
 
 export class ClientFile extends Model {
+  id!: number;
+  name!: string;
+  path!: string;
+  document_type!: string;
 }
 
 ClientFile.init(modelAttributes as ModelAttributes, {
