@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from 'express';
 import * as express from 'express';
 import * as cors from 'cors';
 import * as rateLimit from 'express-rate-limit';
+import * as fileUpload from 'express-fileupload';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as dotEnv from 'dotenv';
@@ -23,6 +24,7 @@ class App {
     this.app.use(morgan(config.MORGAN_FORMAT));
     this.app.use(cors(corsOptions));
     this.app.use(rateLimit(rateLimitOptions));
+    this.app.use(fileUpload());
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));

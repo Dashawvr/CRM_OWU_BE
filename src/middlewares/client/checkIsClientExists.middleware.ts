@@ -9,7 +9,7 @@ import {idValidator} from '../../validators';
 
 export const checkIsClientExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {client_id} = req.params;
+    const {client_id} = req.body.client_id ? req.body : req.params;
 
     const {error} = idValidator.validate(client_id);
 

@@ -16,6 +16,7 @@ export const fileOptions = {
     'text/plain',
     'text/csv',
     'video/webm',
+    'video/mp4',
     'audio/webm',
     'audio/mpeg',
     'application/x-7z-compressed'

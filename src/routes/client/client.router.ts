@@ -3,6 +3,7 @@ import {Router} from 'express';
 import {
   checkAccessToken,
   checkIsClientExists,
+  checkIsClientFilesValid,
   checkIsCreateClientValid,
   checkIsUpdateClientValid
 } from '../../middlewares';
@@ -13,7 +14,7 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', clientController.getAll);
-router.post('/', checkIsCreateClientValid, clientController.create);
+router.post('/', checkIsCreateClientValid, checkIsClientFilesValid, clientController.create);
 
 router.use('/:client_id', checkIsClientExists);
 

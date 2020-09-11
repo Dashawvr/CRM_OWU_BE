@@ -4,6 +4,7 @@ import {
   IApplication,
   ICity,
   IClient,
+  IClientFile,
   IClientStatus,
   IComment,
   ICourse,
@@ -11,7 +12,8 @@ import {
   IGroup,
   IPayment,
   IPaymentStatus,
-  IPaymentType, ISource,
+  IPaymentType,
+  ISource,
   ITask,
   ITaskStatus,
   IUser
@@ -21,18 +23,19 @@ export interface IRequestExtended extends Request {
   user?: IUser;
   authUser?: IUser;
   task?: ITask;
-  taskStatus?: ITaskStatus
-  client?: IClient
-  clientStatus?: IClientStatus
-  comment?: IComment
-  city?: ICity
-  group?: IGroup
-  course?: ICourse
-  application?: IApplication
-  discount?: IDiscount
-  payment?: IPayment
-  paymentStatus?: IPaymentStatus
-  paymentType?: IPaymentType
-  source?: ISource
+  taskStatus?: ITaskStatus;
+  client?: IClient;
+  clientStatus?: IClientStatus;
+  clientFile?: IClientFile;
+  comment?: IComment;
+  city?: ICity;
+  group?: IGroup;
+  course?: ICourse;
+  application?: IApplication;
+  discount?: IDiscount;
+  payment?: IPayment;
+  paymentStatus?: IPaymentStatus;
+  paymentType?: IPaymentType;
+  source?: ISource;
   access_token?: string;
 }

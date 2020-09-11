@@ -1,35 +1,21 @@
 import {NextFunction, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IClientParams, IClientUpdateFields, IRequestExtended} from '../../interfaces';
-import {IClient} from '../../database';
+import {IClientFileParams, IRequestExtended} from '../../interfaces';
+import {IClientFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {clientFileService, clientService} from '../../services';
+import {clientFileService} from '../../services';
 
-class ClientController {
+class ClientFileController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
+      const {client_id} = req.body;
       const files = req.files as FileArray;
 
-      const {id} = await clientService.create(req.body as IClient);
-
       if (files) {
-        await clientFileService.bulkCreate(id, files);
+        await clientFileService.bulkCreate(+client_id, files);
       }
-
-      res.sendStatus(ResponseStatusCodes.CREATED);
-
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const {id} = req.client as IClient;
-
-      await clientService.update(id, req.body as IClientUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -40,9 +26,7 @@ class ClientController {
 
   async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.client as IClient;
-
-      await clientService.delete(id);
+      await clientFileService.delete(req.clientFile as IClientFile);
 
       res.sendStatus(ResponseStatusCodes.NO_CONTENT);
 
@@ -53,10 +37,10 @@ class ClientController {
 
   async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const clients = await clientService.getAll(req.query as IClientParams);
+      const files = await clientFileService.getAll(req.query as IClientFileParams);
 
       res.json({
-        data: clients
+        data: files
       });
 
     } catch (error) {
@@ -66,10 +50,10 @@ class ClientController {
 
   getById(req: IRequestExtended, res: Response, next: NextFunction): void {
     try {
-      const client = req.client as IClient;
+      const file = req.clientFile as IClientFile;
 
       res.json({
-        data: client
+        data: file
       });
 
     } catch (error) {
@@ -78,4 +62,4 @@ class ClientController {
   }
 }
 
-export const clientController = new ClientController();
+export const clientFileController = new ClientFileController();

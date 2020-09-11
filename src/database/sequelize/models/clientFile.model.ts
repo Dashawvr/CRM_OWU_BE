@@ -14,11 +14,11 @@ export interface IClientFileModel {
 }
 
 export interface IClientFile {
-  id: number;
+  id?: number;
   name: string;
   path: string;
   document_type: string;
-  client_id?: string;
+  client_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -35,7 +35,8 @@ const modelAttributes: DBModelFieldInit<IClientFileModel> = {
   },
   path: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   document_type: {
     type: DataTypes.STRING,

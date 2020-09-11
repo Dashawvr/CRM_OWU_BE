@@ -1,3 +1,5 @@
+import {fileOptions} from '../configs';
+
 export const errors = {
   // 400
   BAD_REQUEST_WRONG_PARAMS: {
@@ -9,11 +11,11 @@ export const errors = {
     code: 4001
   },
   BAD_REQUEST_INVALID_FILE_MIME_TYPE: {
-    code: 4003
+    code: 4002
   },
-  BAD_REQUEST_MAX_PHOTO_AMOUNT: {
-    code: 4004,
-    message: 'Cant upload more than one user photo'
+  BAD_REQUEST_MAX_DOCUMENT_SIZE: {
+    code: 4003,
+    message: `Max document size is ${fileOptions.MAX_DOCUMENT_SIZE / (1024 * 1024)}mb`
   },
 
   // 401

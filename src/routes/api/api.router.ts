@@ -4,6 +4,7 @@ import {
   applicationRouter,
   authRouter,
   cityRouter,
+  clientFileRouter,
   clientRouter,
   clientStatusRouter,
   commentRouter,
@@ -27,6 +28,7 @@ router.use('/tasks', taskRouter);
 router.use('/taskStatuses', taskStatusRouter);
 router.use('/clients', clientRouter);
 router.use('/clientStatuses', clientStatusRouter);
+router.use('/clientFiles', clientFileRouter);
 router.use('/comments', commentRouter);
 router.use('/cities', cityRouter);
 router.use('/groups', groupRouter);

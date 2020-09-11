@@ -1,23 +1,62 @@
-import {IClientFileParams, IClientFileResponse, IClientFileUpdateFields} from '../../interfaces';
+import {FileArray} from 'express-fileupload';
+import {readdirSync, rmdirSync, unlinkSync} from 'fs';
+import {join} from 'path';
+import {v1} from 'uuid';
+
+import {IClientFileParams, IClientFileResponse} from '../../interfaces';
+import {ClientFileOptionBuilder, filesMv} from '../../helpers';
 import {ClientFile, IClientFile} from '../../database';
-import {ClientFileOptionBuilder} from '../../helpers';
 
 class ClientFileService {
 
-  create(files: IClientFile[]): Promise<IClientFile[]> {
-    return ClientFile.bulkCreate(files);
+  async bulkCreate(client_id: number, {files}: FileArray): Promise<IClientFile[]> {
+    const filesToSave: IClientFile[] = [];
+    const path = join(`${process.cwd()}/static/client/${client_id}/documents`);
+
+    if (!Array.isArray(files)) {
+      files = [files];
+    }
+
+    files.forEach(file => {
+      const extension = file.name.split('.').pop();
+      const generatedName = `${v1()}.${extension}`;
+
+      filesToSave.push({
+        document_type: file.mimetype,
+        name: file.name,
+        path: join(`${path}/${generatedName}`),
+        client_id
+      });
+
+      file.name = generatedName;
+    });
+
+    const savedFiles = await ClientFile.bulkCreate(filesToSave);
+
+    if (savedFiles) {
+      await filesMv(path, files);
+    }
+
+    return savedFiles;
   }
 
-  update(id: number, updateFields: IClientFileUpdateFields): Promise<[number, IClientFile[]]> {
-    return ClientFile.update(updateFields, {
-      where: {id}
-    });
-  }
+  async delete({id, path, client_id}: IClientFile): Promise<number> {
 
-  delete(id: number): Promise<number> {
-    return ClientFile.destroy({
+    const countOfDeletedFiles = await ClientFile.destroy({
       where: {id}
     });
+
+    if (countOfDeletedFiles) {
+      unlinkSync(path);
+    }
+
+    const files = readdirSync(join(`${process.cwd()}/static/client/${client_id}/documents`));
+
+    if (!files.length) {
+      rmdirSync(join(`${process.cwd()}/static/client/${client_id}`), {recursive: true});
+    }
+
+    return countOfDeletedFiles;
   }
 
   getAll(params: IClientFileParams): Promise<IClientFileResponse> {
