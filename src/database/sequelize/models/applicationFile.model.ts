@@ -18,7 +18,7 @@ export interface IApplicationFile {
   name: string;
   path: string;
   document_type: string;
-  application_id?: string;
+  application_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }

@@ -1,6 +1,9 @@
+import {rmdirSync} from 'fs';
+
 import {IClientParams, IClientResponse, IClientUpdateFields} from '../../interfaces';
 import {Client, IClient} from '../../database';
 import {ClientOptionBuilder} from '../../helpers';
+import {join} from 'path';
 
 class ClientService {
 
@@ -15,9 +18,17 @@ class ClientService {
   }
 
   delete(id: number): Promise<number> {
-    return Client.destroy({
+    const path = join(`${process.cwd()}/static/client/${id}`);
+
+    const numberOfDeletedClients = Client.destroy({
       where: {id}
     });
+
+    if (numberOfDeletedClients) {
+      rmdirSync(path, {recursive: true});
+    }
+
+    return numberOfDeletedClients;
   }
 
   getAll(params: IClientParams): Promise<IClientResponse> {
