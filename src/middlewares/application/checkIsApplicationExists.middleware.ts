@@ -9,7 +9,7 @@ import {idValidator} from '../../validators';
 
 export const checkIsApplicationExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {application_id} = req.params;
+    const {application_id} = req.body.application_id ? req.body : req.params;
 
     const {error} = idValidator.validate(application_id);
 

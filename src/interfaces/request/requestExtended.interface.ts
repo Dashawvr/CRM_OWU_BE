@@ -2,6 +2,7 @@ import {Request} from 'express-serve-static-core';
 
 import {
   IApplication,
+  IApplicationFile,
   ICity,
   IClient,
   IClientFile,
@@ -32,6 +33,7 @@ export interface IRequestExtended extends Request {
   group?: IGroup;
   course?: ICourse;
   application?: IApplication;
+  applicationFile?: IApplicationFile;
   discount?: IDiscount;
   payment?: IPayment;
   paymentStatus?: IPaymentStatus;

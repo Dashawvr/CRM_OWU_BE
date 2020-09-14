@@ -9,7 +9,7 @@ import {idValidator} from '../../validators';
 
 export const checkIsCourseExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {course_id} = req.params;
+    const {course_id} = req.body.course_id ? req.body : req.params;
 
     const {error} = idValidator.validate(course_id);
 

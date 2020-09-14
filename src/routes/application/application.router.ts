@@ -3,6 +3,9 @@ import {Router} from 'express';
 import {
   checkAccessToken,
   checkIsApplicationExists,
+  checkIsCityExists,
+  checkIsClientExists,
+  checkIsCourseExists,
   checkIsCreateApplicationValid,
   checkIsUpdateApplicationValid
 } from '../../middlewares';
@@ -13,7 +16,14 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', applicationController.getAll);
-router.post('/', checkIsCreateApplicationValid, applicationController.create);
+router.post('/',
+  checkIsCreateApplicationValid,
+  checkIsClientExists,
+  checkIsCityExists,
+  checkIsCourseExists,
+  applicationController.create
+)
+;
 
 router.use('/:application_id', checkIsApplicationExists);
 

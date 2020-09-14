@@ -1,3 +1,6 @@
+import {rmdirSync} from 'fs';
+import {join} from 'path';
+
 import {IApplicationParams, IApplicationResponse, IApplicationUpdateFields} from '../../interfaces';
 import {Application, IApplication} from '../../database';
 import {ApplicationOptionBuilder} from '../../helpers';
@@ -15,9 +18,17 @@ class ApplicationService {
   }
 
   delete(id: number): Promise<number> {
-    return Application.destroy({
+    const path = join(`${process.cwd()}/static/application/${id}`);
+
+    const numberOfDeletedClients = Application.destroy({
       where: {id}
     });
+
+    if (numberOfDeletedClients) {
+      rmdirSync(path, {recursive: true});
+    }
+
+    return numberOfDeletedClients;
   }
 
   getAll(params: IApplicationParams): Promise<IApplicationResponse> {

@@ -1,15 +1,22 @@
 import {NextFunction, Response} from 'express';
+import {FileArray} from 'express-fileupload';
 
 import {IApplicationParams, IApplicationUpdateFields, IRequestExtended} from '../../interfaces';
 import {IApplication} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {applicationService} from '../../services';
+import {applicationFileService, applicationService} from '../../services';
 
 class ApplicationController {
 
   async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      await applicationService.create(req.body as IApplication);
+      const files = req.files as FileArray;
+
+      const {id} = await applicationService.create(req.body as IApplication);
+
+      if (files) {
+        await applicationFileService.bulkCreate(id, files);
+      }
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

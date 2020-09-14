@@ -1,6 +1,7 @@
 import {Router} from 'express';
 
 import {
+  applicationFileRouter,
   applicationRouter,
   authRouter,
   cityRouter,
@@ -34,6 +35,7 @@ router.use('/cities', cityRouter);
 router.use('/groups', groupRouter);
 router.use('/courses', courseRouter);
 router.use('/applications', applicationRouter);
+router.use('/applicationFiles', applicationFileRouter);
 router.use('/discounts', discountRouter);
 router.use('/payments', paymentRouter);
 router.use('/paymentStatuses', paymentStatusRouter);
