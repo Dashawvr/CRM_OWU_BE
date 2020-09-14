@@ -14,7 +14,7 @@ export interface IApplicationFileModel {
 }
 
 export interface IApplicationFile {
-  id: number;
+  id?: number;
   name: string;
   path: string;
   document_type: string;
@@ -44,6 +44,10 @@ const modelAttributes: DBModelFieldInit<IApplicationFileModel> = {
 };
 
 export class ApplicationFile extends Model {
+  id!: number;
+  name!: string;
+  path!: string;
+  document_type!: string;
 }
 
 ApplicationFile.init(modelAttributes as ModelAttributes, {

@@ -1,17 +1,17 @@
 import {NextFunction, Response} from 'express';
 
 import {IRequestExtended} from '../../interfaces';
-import {ICity} from '../../database';
+import {IApplicationFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
-import {cityService} from '../../services';
+import {applicationFileService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsCityExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsApplicationFileExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {city_id} = req.body.city_id ? req.body : req.params;
+    const {file_id} = req.params;
 
-    const {error} = idValidator.validate(city_id);
+    const {error} = idValidator.validate(file_id);
 
     if (error) {
       return next(
@@ -21,16 +21,16 @@ export const checkIsCityExists = async (req: IRequestExtended, res: Response, ne
           errors.BAD_REQUEST_WRONG_PARAMS.code));
     }
 
-    const city = await cityService.getById(+city_id) as ICity;
+    const file = await applicationFileService.getById(+file_id) as IApplicationFile;
 
-    if (!city) {
+    if (!file) {
       return next(new ErrorHandler(
         ResponseStatusCodes.NOT_FOUND,
         errors.NOT_FOUND_ENTITY_NOT_PRESENT.message,
         errors.NOT_FOUND_ENTITY_NOT_PRESENT.code));
     }
 
-    req.city = city;
+    req.applicationFile = file;
     next();
 
   } catch (error) {

@@ -10,6 +10,7 @@ export * from './city';
 export * from './group';
 export * from './course';
 export * from './application';
+export * from './applicationFile';
 export * from './discount';
 export * from './payment';
 export * from './paymentStatus';
