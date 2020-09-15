@@ -11,7 +11,11 @@ export const checkIsSourceExists = async (req: IRequestExtended, res: Response, 
   try {
     const {source_id} = req.params;
 
-    const {error} = idValidator.validate(source_id);
+    if (!source_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+source_id);
 
     if (error) {
       return next(

@@ -9,9 +9,13 @@ import {idValidator} from '../../validators';
 
 export const checkIsClientStatusExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {status_id} = req.params;
+    const {status_id} = req.body.status_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(status_id);
+    if (!status_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+status_id);
 
     if (error) {
       return next(

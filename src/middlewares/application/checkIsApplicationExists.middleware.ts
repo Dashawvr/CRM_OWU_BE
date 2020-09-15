@@ -11,7 +11,11 @@ export const checkIsApplicationExists = async (req: IRequestExtended, res: Respo
   try {
     const {application_id} = req.body.application_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(application_id);
+    if (!application_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+application_id);
 
     if (error) {
       return next(

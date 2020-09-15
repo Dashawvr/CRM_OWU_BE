@@ -11,7 +11,11 @@ export const checkIsGroupExists = async (req: IRequestExtended, res: Response, n
   try {
     const {group_id} = req.params;
 
-    const {error} = idValidator.validate(group_id);
+    if (!group_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+group_id);
 
     if (error) {
       return next(

@@ -4,7 +4,9 @@ import {
   checkAccessToken,
   checkIsCreateTaskValid,
   checkIsTaskExists,
-  checkIsUpdateTaskValid
+  checkIsTaskStatusExists,
+  checkIsUpdateTaskValid,
+  checkIsUserExists
 } from '../../middlewares';
 import {taskController} from '../../controllers';
 
@@ -13,7 +15,11 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', taskController.getAll);
-router.post('/', checkIsCreateTaskValid, taskController.create);
+router.post('/',
+  checkIsCreateTaskValid,
+  checkIsTaskStatusExists,
+  checkIsUserExists,
+  taskController.create);
 
 router.use('/:task_id', checkIsTaskExists);
 

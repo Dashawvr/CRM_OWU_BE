@@ -1,5 +1,3 @@
 import * as Joi from 'joi';
 
-import {idRegExp} from '../../constants';
-
-export const idValidator = Joi.string().regex(idRegExp).trim().required();
+export const idValidator = Joi.number().integer().positive().required();

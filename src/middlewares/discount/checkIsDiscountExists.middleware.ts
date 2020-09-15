@@ -11,7 +11,11 @@ export const checkIsDiscountExists = async (req: IRequestExtended, res: Response
   try {
     const {discount_id} = req.params;
 
-    const {error} = idValidator.validate(discount_id);
+    if (!discount_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+discount_id);
 
     if (error) {
       return next(

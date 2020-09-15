@@ -11,7 +11,7 @@ export const checkIsApplicationFileExists = async (req: IRequestExtended, res: R
   try {
     const {file_id} = req.params;
 
-    const {error} = idValidator.validate(file_id);
+    const {error} = idValidator.validate(+file_id);
 
     if (error) {
       return next(

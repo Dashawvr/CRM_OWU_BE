@@ -4,6 +4,7 @@ import {
   checkAccessToken,
   checkIsClientExists,
   checkIsClientFilesValid,
+  checkIsClientStatusExists,
   checkIsCreateClientValid,
   checkIsUpdateClientValid
 } from '../../middlewares';
@@ -14,7 +15,11 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', clientController.getAll);
-router.post('/', checkIsCreateClientValid, checkIsClientFilesValid, clientController.create);
+router.post('/',
+  checkIsCreateClientValid,
+  checkIsClientFilesValid,
+  checkIsClientStatusExists,
+  clientController.create);
 
 router.use('/:client_id', checkIsClientExists);
 

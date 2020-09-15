@@ -3,9 +3,11 @@ import {Router} from 'express';
 import {
   checkAccessToken,
   checkCommentUpdateRule,
+  checkIsClientExists,
   checkIsCommentExists,
   checkIsCreateCommentValid,
-  checkIsUpdateCommentValid
+  checkIsUpdateCommentValid,
+  checkIsUserExists
 } from '../../middlewares';
 import {commentController} from '../../controllers';
 
@@ -14,7 +16,11 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', commentController.getAll);
-router.post('/', checkIsCreateCommentValid, commentController.create);
+router.post('/',
+  checkIsCreateCommentValid,
+  checkIsClientExists,
+  checkIsUserExists,
+  commentController.create);
 
 router.use('/:comment_id', checkIsCommentExists);
 

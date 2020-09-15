@@ -2,8 +2,11 @@ import {Router} from 'express';
 
 import {
   checkAccessToken,
+  checkIsApplicationExists,
   checkIsCreatePaymentValid,
   checkIsPaymentExists,
+  checkIsPaymentStatusExists,
+  checkIsPaymentTypeExists,
   checkIsUpdatePaymentValid
 } from '../../middlewares';
 import {paymentController} from '../../controllers';
@@ -13,7 +16,12 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', paymentController.getAll);
-router.post('/', checkIsCreatePaymentValid, paymentController.create);
+router.post('/',
+  checkIsCreatePaymentValid,
+  checkIsPaymentTypeExists,
+  checkIsPaymentStatusExists,
+  checkIsApplicationExists,
+  paymentController.create);
 
 router.use('/:payment_id', checkIsPaymentExists);
 

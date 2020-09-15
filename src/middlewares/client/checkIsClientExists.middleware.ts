@@ -11,7 +11,11 @@ export const checkIsClientExists = async (req: IRequestExtended, res: Response, 
   try {
     const {client_id} = req.body.client_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(client_id);
+    if (!client_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+client_id);
 
     if (error) {
       return next(

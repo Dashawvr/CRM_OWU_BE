@@ -9,9 +9,13 @@ import {idValidator} from '../../validators';
 
 export const checkIsUserExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {user_id} = req.params;
+    const {user_id} = req.body.user_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(user_id);
+    if (!user_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+user_id);
 
     if (error) {
       return next(

@@ -1,14 +1,14 @@
 import * as Joi from 'Joi';
 
-import {titleRegExp} from '../../constants';
+import {onlyLettersRegExp} from '../../constants';
 
 export const updateTaskValidator = Joi.object({
-  title: Joi.string().regex(titleRegExp).min(5).max(255).trim(),
-  dateFrom: Joi.string().isoDate(),
-  dateTo: Joi.string().isoDate(),
-  important: Joi.boolean().strict(),
+  title: Joi.string().regex(onlyLettersRegExp).min(5).max(255).trim(),
+  dateFrom: Joi.string().isoDate().trim(),
+  dateTo: Joi.string().isoDate().trim(),
+  important: Joi.boolean().truthy('1', 1).falsy('0', 0),
   description: Joi.string().max(4000).trim(),
-  user_id: Joi.number().integer().positive(),
   status_id: Joi.number().integer().positive(),
+  user_id: Joi.number().integer().positive(),
   client_id: Joi.number().integer().positive()
 });

@@ -38,8 +38,7 @@ const modelAttributes: DBModelFieldInit<IPaymentStatusModel> = {
     allowNull: false
   },
   description: {
-    type: DataTypes.TEXT,
-    allowNull: false
+    type: DataTypes.TEXT
   }
 };
 

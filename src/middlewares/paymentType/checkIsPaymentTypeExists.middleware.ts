@@ -9,9 +9,13 @@ import {idValidator} from '../../validators';
 
 export const checkIsPaymentTypeExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const {type_id} = req.params;
+    const {type_id} = req.body.type_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(type_id);
+    if (!type_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+type_id);
 
     if (error) {
       return next(

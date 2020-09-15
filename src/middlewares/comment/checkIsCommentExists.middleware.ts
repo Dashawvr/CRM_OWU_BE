@@ -11,7 +11,11 @@ export const checkIsCommentExists = async (req: IRequestExtended, res: Response,
   try {
     const {comment_id} = req.params;
 
-    const {error} = idValidator.validate(comment_id);
+    if (!comment_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+comment_id);
 
     if (error) {
       return next(

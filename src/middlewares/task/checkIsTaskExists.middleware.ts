@@ -11,7 +11,11 @@ export const checkIsTaskExists = async (req: IRequestExtended, res: Response, ne
   try {
     const {task_id} = req.params;
 
-    const {error} = idValidator.validate(task_id);
+    if (!task_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+task_id);
 
     if (error) {
       return next(

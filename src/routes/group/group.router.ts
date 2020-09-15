@@ -2,6 +2,8 @@ import {Router} from 'express';
 
 import {
   checkAccessToken,
+  checkIsCityExists,
+  checkIsCourseExists,
   checkIsCreateGroupValid,
   checkIsGroupExists,
   checkIsUpdateGroupValid
@@ -13,7 +15,11 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', groupController.getAll);
-router.post('/', checkIsCreateGroupValid, groupController.create);
+router.post('/',
+  checkIsCreateGroupValid,
+  checkIsCityExists,
+  checkIsCourseExists,
+  groupController.create);
 
 router.use('/:group_id', checkIsGroupExists);
 

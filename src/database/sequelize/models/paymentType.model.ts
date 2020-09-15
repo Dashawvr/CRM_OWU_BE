@@ -32,8 +32,7 @@ const modelAttributes: DBModelFieldInit<IPaymentTypeModel> = {
     unique: true
   },
   description: {
-    type: DataTypes.TEXT,
-    allowNull: false
+    type: DataTypes.TEXT
   }
 };
 

@@ -3,7 +3,6 @@ export * from './userCity.model';
 export * from './clientGroup.model';
 export * from './applicationDiscount.model';
 export * from './applicationSource.model';
-export * from './error.model';
 export * from './oAuthToken.model';
 export * from './task.model';
 export * from './comment.model';

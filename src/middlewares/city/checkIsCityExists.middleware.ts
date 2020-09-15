@@ -11,7 +11,11 @@ export const checkIsCityExists = async (req: IRequestExtended, res: Response, ne
   try {
     const {city_id} = req.body.city_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(city_id);
+    if (!city_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+city_id);
 
     if (error) {
       return next(

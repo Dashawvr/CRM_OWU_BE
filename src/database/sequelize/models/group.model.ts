@@ -52,7 +52,7 @@ const modelAttributes: DBModelFieldInit<IGroupModel> = {
     allowNull: false
   },
   startTime: {
-    type: DataTypes.STRING,
+    type: DataTypes.TIME,
     allowNull: false
   }
 };

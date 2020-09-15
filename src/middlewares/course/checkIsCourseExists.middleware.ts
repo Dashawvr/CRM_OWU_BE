@@ -11,7 +11,11 @@ export const checkIsCourseExists = async (req: IRequestExtended, res: Response, 
   try {
     const {course_id} = req.body.course_id ? req.body : req.params;
 
-    const {error} = idValidator.validate(course_id);
+    if (!course_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+course_id);
 
     if (error) {
       return next(

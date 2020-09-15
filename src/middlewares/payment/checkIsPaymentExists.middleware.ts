@@ -11,7 +11,11 @@ export const checkIsPaymentExists = async (req: IRequestExtended, res: Response,
   try {
     const {payment_id} = req.params;
 
-    const {error} = idValidator.validate(payment_id);
+    if (!payment_id) {
+      return next();
+    }
+
+    const {error} = idValidator.validate(+payment_id);
 
     if (error) {
       return next(
