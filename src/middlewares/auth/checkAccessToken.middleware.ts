@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 import {verify, VerifyErrors} from 'jsonwebtoken';
 
-import {IRequestExtended} from '../../interfaces';
+import {IAuthRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {userService} from '../../services';
 import {config} from '../../configs';
 
-export const checkAccessToken = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<any> => {
+export const checkAccessToken = async (req: IAuthRequestExtended, res: Response, next: NextFunction): Promise<any> => {
   try {
     const access_token = req.get('Authorization') as string;
 

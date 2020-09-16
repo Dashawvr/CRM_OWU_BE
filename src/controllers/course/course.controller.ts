@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {ICourseParams, ICourseUpdateFields, IRequestExtended} from '../../interfaces';
+import {ICourseParams, ICourseRequestExtended, ICourseUpdateFields} from '../../interfaces';
 import {ICourse} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {courseService} from '../../services';
 
 class CourseController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await courseService.create(req.body as ICourse);
 
@@ -18,7 +18,7 @@ class CourseController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ICourseRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.course as ICourse;
 
@@ -31,7 +31,7 @@ class CourseController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ICourseRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.course as ICourse;
 
@@ -44,7 +44,7 @@ class CourseController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const courses = await courseService.getAll(req.query as ICourseParams);
 
@@ -57,7 +57,7 @@ class CourseController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ICourseRequestExtended, res: Response, next: NextFunction): void {
     try {
       const course = req.course as ICourse;
 

@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ICourseRequestExtended} from '../../interfaces';
 import {ICourse} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {courseService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsCourseExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsCourseExists = async (req: ICourseRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {course_id} = req.body.course_id ? req.body : req.params;
 

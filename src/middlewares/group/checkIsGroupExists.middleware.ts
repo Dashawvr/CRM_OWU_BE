@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IGroupRequestExtended} from '../../interfaces';
 import {IGroup} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {groupService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsGroupExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsGroupExists = async (req: IGroupRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {group_id} = req.params;
 

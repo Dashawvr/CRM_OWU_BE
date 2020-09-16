@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IUserRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {IUser} from '../../database';
 import {userService} from '../../services';
 import {ErrorHandler, errors} from '../../errors';
 import {idValidator} from '../../validators';
 
-export const checkIsUserExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsUserExists = async (req: IUserRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {user_id} = req.body.user_id ? req.body : req.params;
 

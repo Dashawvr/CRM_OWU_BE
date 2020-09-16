@@ -1,14 +1,14 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IClientParams, IClientUpdateFields, IRequestExtended} from '../../interfaces';
+import {IClientParams, IClientRequestExtended, IClientUpdateFields} from '../../interfaces';
 import {IClient} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {clientFileService, clientService} from '../../services';
 
 class ClientController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const files = req.files as FileArray;
 
@@ -25,7 +25,7 @@ class ClientController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IClientRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.client as IClient;
 
@@ -38,7 +38,7 @@ class ClientController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IClientRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.client as IClient;
 
@@ -51,7 +51,7 @@ class ClientController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const clients = await clientService.getAll(req.query as IClientParams);
 
@@ -64,7 +64,7 @@ class ClientController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IClientRequestExtended, res: Response, next: NextFunction): void {
     try {
       const client = req.client as IClient;
 

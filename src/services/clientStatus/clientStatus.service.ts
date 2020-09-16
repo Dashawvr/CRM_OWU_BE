@@ -1,7 +1,7 @@
 import {
-  IClientStatusParams,
-  IClientStatusResponse,
-  IClientStatusUpdateFields
+  IStatusParams,
+  IStatusResponse,
+  IStatusUpdateFields
 } from '../../interfaces';
 import {ClientStatus, IClientStatus} from '../../database';
 import {ClientStatusOptionBuilder} from '../../helpers';
@@ -12,7 +12,7 @@ class ClientStatusService {
     return ClientStatus.create(clientStatus);
   }
 
-  update(id: number, updateFields: IClientStatusUpdateFields): Promise<[number, IClientStatus[]]> {
+  update(id: number, updateFields: IStatusUpdateFields): Promise<[number, IClientStatus[]]> {
     return ClientStatus.update(updateFields, {
       where: {id}
     });
@@ -24,7 +24,7 @@ class ClientStatusService {
     });
   }
 
-  getAll(params: IClientStatusParams): Promise<IClientStatusResponse> {
+  getAll(params: IStatusParams): Promise<IStatusResponse<IClientStatus>> {
     const {
       name,
       color,

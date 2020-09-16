@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IPaymentParams, IPaymentUpdateFields, IRequestExtended} from '../../interfaces';
+import {IPaymentParams, IPaymentRequestExtended, IPaymentUpdateFields} from '../../interfaces';
 import {IPayment} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {paymentService} from '../../services';
 
 class PaymentController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await paymentService.create(req.body as IPayment);
 
@@ -18,7 +18,7 @@ class PaymentController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.payment as IPayment;
 
@@ -31,7 +31,7 @@ class PaymentController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.payment as IPayment;
 
@@ -44,7 +44,7 @@ class PaymentController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const payments = await paymentService.getAll(req.query as IPaymentParams);
 
@@ -57,7 +57,7 @@ class PaymentController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IPaymentRequestExtended, res: Response, next: NextFunction): void {
     try {
       const payment = req.payment as IPayment;
 

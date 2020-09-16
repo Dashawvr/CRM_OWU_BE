@@ -1,11 +1,11 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ICommentRequestExtended} from '../../interfaces';
 import {IComment, IUser} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 
-export const checkCommentUpdateRule = (req: IRequestExtended, res: Response, next: NextFunction): void => {
+export const checkCommentUpdateRule = (req: ICommentRequestExtended, res: Response, next: NextFunction): void => {
 
   const {id} = req.authUser as IUser;
   const {user_id} = req.comment as IComment;

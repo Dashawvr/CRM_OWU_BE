@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IPaymentRequestExtended} from '../../interfaces';
 import {IPayment} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {paymentService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsPaymentExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsPaymentExists = async (req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {payment_id} = req.params;
 

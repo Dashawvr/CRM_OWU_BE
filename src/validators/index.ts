@@ -9,6 +9,6 @@ export * from './course';
 export * from './application';
 export * from './discount';
 export * from './payment';
-export * from './paymentType';
 export * from './source';
 export * from './status';
+export * from './type';

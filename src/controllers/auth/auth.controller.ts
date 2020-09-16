@@ -1,6 +1,6 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IAuthRequestExtended} from '../../interfaces';
 import {IUser} from '../../database/';
 import {authService} from '../../services';
 import {UserAction} from '../../constants';
@@ -8,7 +8,7 @@ import {tokenizer} from '../../helpers';
 
 class AuthController {
 
-  async loginUser(req: IRequestExtended, res: Response, next: NextFunction) {
+  async loginUser(req: IAuthRequestExtended, res: Response, next: NextFunction) {
     try {
       const {id: user_id} = req.user as IUser;
 
@@ -28,7 +28,7 @@ class AuthController {
     }
   }
 
-  async logoutUser(req: IRequestExtended, res: Response, next: NextFunction) {
+  async logoutUser(req: IAuthRequestExtended, res: Response, next: NextFunction) {
     try {
       const access_token = req.access_token;
 
@@ -43,7 +43,7 @@ class AuthController {
     }
   }
 
-  async refreshToken(req: IRequestExtended, res: Response, next: NextFunction) {
+  async refreshToken(req: IAuthRequestExtended, res: Response, next: NextFunction) {
     try {
       const {id} = req.user as IUser;
       const tokens = tokenizer(UserAction.AUTH);

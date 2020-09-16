@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IDiscountParams, IDiscountUpdateFields, IRequestExtended} from '../../interfaces';
+import {IDiscountParams, IDiscountRequestExtended, IDiscountUpdateFields} from '../../interfaces';
 import {IDiscount} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {discountService} from '../../services';
 
 class DiscountController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await discountService.create(req.body as IDiscount);
 
@@ -18,7 +18,7 @@ class DiscountController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IDiscountRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.discount as IDiscount;
 
@@ -31,7 +31,7 @@ class DiscountController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IDiscountRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.discount as IDiscount;
 
@@ -44,7 +44,7 @@ class DiscountController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const discounts = await discountService.getAll(req.query as IDiscountParams);
 
@@ -57,7 +57,7 @@ class DiscountController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IDiscountRequestExtended, res: Response, next: NextFunction): void {
     try {
       const discount = req.discount as IDiscount;
 

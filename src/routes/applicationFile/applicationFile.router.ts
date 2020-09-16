@@ -4,7 +4,7 @@ import {
   checkAccessToken,
   checkIsApplicationExists,
   checkIsApplicationFileExists,
-  checkIsApplicationFilesValid
+  checkIsFilesValid
 } from '../../middlewares';
 import {applicationFileController} from '../../controllers';
 
@@ -13,7 +13,7 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', applicationFileController.getAll);
-router.post('/', checkIsApplicationExists, checkIsApplicationFilesValid, applicationFileController.create);
+router.post('/', checkIsApplicationExists, checkIsFilesValid, applicationFileController.create);
 
 router.use('/:file_id', checkIsApplicationFileExists);
 

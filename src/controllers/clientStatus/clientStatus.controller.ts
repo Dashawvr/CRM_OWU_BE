@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IClientStatusParams, IClientStatusUpdateFields, IRequestExtended} from '../../interfaces';
+import {IStatusParams, IStatusRequestExtended, IStatusUpdateFields} from '../../interfaces';
 import {IClientStatus} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {clientStatusService} from '../../services';
 
 class ClientStatusController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await clientStatusService.create(req.body as IClientStatus);
 
@@ -18,11 +18,11 @@ class ClientStatusController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IStatusRequestExtended<IClientStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.clientStatus as IClientStatus;
+      const {id} = req.status as IClientStatus;
 
-      await clientStatusService.update(id, req.body as IClientStatusUpdateFields);
+      await clientStatusService.update(id, req.body as IStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -31,9 +31,9 @@ class ClientStatusController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IStatusRequestExtended<IClientStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.clientStatus as IClientStatus;
+      const {id} = req.status as IClientStatus;
 
       await clientStatusService.delete(id);
 
@@ -44,12 +44,12 @@ class ClientStatusController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const clientStatuses = await clientStatusService.getAll(req.query as IClientStatusParams);
+      const statuses = await clientStatusService.getAll(req.query as IStatusParams);
 
       res.json({
-        data: clientStatuses
+        data: statuses
       });
 
     } catch (error) {
@@ -57,12 +57,12 @@ class ClientStatusController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IStatusRequestExtended<IClientStatus>, res: Response, next: NextFunction): void {
     try {
-      const clientStatus = req.clientStatus as IClientStatus;
+      const status = req.status as IClientStatus;
 
       res.json({
-        data: clientStatus
+        data: status
       });
 
     } catch (error) {

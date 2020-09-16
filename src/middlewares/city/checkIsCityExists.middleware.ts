@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ICityRequestExtended} from '../../interfaces';
 import {ICity} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {cityService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsCityExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsCityExists = async (req: ICityRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {city_id} = req.body.city_id ? req.body : req.params;
 

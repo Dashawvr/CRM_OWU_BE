@@ -1,7 +1,7 @@
 import {
-  IPaymentTypeParams,
-  IPaymentTypeResponse,
-  IPaymentTypeUpdateFields
+  ITypeParams,
+  ITypeResponse,
+  ITypeUpdateFields
 } from '../../interfaces';
 import {IPaymentType, PaymentType} from '../../database';
 import {PaymentTypeOptionBuilder} from '../../helpers';
@@ -12,7 +12,7 @@ class PaymentTypeService {
     return PaymentType.create(paymentType);
   }
 
-  update(id: number, updateFields: IPaymentTypeUpdateFields): Promise<[number, IPaymentType[]]> {
+  update(id: number, updateFields: ITypeUpdateFields): Promise<[number, IPaymentType[]]> {
     return PaymentType.update(updateFields, {
       where: {id}
     });
@@ -24,7 +24,7 @@ class PaymentTypeService {
     });
   }
 
-  getAll(params: IPaymentTypeParams): Promise<IPaymentTypeResponse> {
+  getAll(params: ITypeParams): Promise<ITypeResponse<IPaymentType>> {
     const {
       name,
       color,

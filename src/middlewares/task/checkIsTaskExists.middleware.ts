@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ITaskRequestExtended} from '../../interfaces';
 import {ITask} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {taskService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsTaskExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsTaskExists = async (req: ITaskRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {task_id} = req.params;
 

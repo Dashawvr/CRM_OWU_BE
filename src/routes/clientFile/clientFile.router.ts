@@ -4,7 +4,7 @@ import {
   checkAccessToken,
   checkIsClientExists,
   checkIsClientFileExists,
-  checkIsClientFilesValid
+  checkIsFilesValid
 } from '../../middlewares';
 import {clientFileController} from '../../controllers';
 
@@ -13,7 +13,7 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', clientFileController.getAll);
-router.post('/', checkIsClientExists, checkIsClientFilesValid, clientFileController.create);
+router.post('/', checkIsClientExists, checkIsFilesValid, clientFileController.create);
 
 router.use('/:file_id', checkIsClientFileExists);
 

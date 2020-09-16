@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IPaymentStatusParams, IPaymentStatusUpdateFields, IRequestExtended} from '../../interfaces';
+import {IStatusParams, IStatusRequestExtended, IStatusUpdateFields} from '../../interfaces';
 import {IPaymentStatus} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {paymentStatusService} from '../../services';
 
 class PaymentStatusController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await paymentStatusService.create(req.body as IPaymentStatus);
 
@@ -18,11 +18,11 @@ class PaymentStatusController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IStatusRequestExtended<IPaymentStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.paymentStatus as IPaymentStatus;
+      const {id} = req.status as IPaymentStatus;
 
-      await paymentStatusService.update(id, req.body as IPaymentStatusUpdateFields);
+      await paymentStatusService.update(id, req.body as IStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -31,9 +31,9 @@ class PaymentStatusController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IStatusRequestExtended<IPaymentStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.paymentStatus as IPaymentStatus;
+      const {id} = req.status as IPaymentStatus;
 
       await paymentStatusService.delete(id);
 
@@ -44,12 +44,12 @@ class PaymentStatusController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const paymentStatuses = await paymentStatusService.getAll(req.query as IPaymentStatusParams);
+      const statuses = await paymentStatusService.getAll(req.query as IStatusParams);
 
       res.json({
-        data: paymentStatuses
+        data: statuses
       });
 
     } catch (error) {
@@ -57,12 +57,12 @@ class PaymentStatusController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IStatusRequestExtended<IPaymentStatus>, res: Response, next: NextFunction): void {
     try {
-      const paymentStatus = req.paymentStatus as IPaymentStatus;
+      const status = req.status as IPaymentStatus;
 
       res.json({
-        data: paymentStatus
+        data: status
       });
 
     } catch (error) {

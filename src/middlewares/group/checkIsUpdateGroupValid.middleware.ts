@@ -1,11 +1,11 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IGroupUpdateFields, IRequestExtended} from '../../interfaces';
+import {IGroupUpdateFields} from '../../interfaces';
 import {updateGroupValidator} from '../../validators';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler} from '../../errors';
 
-export const checkIsUpdateGroupValid = (req: IRequestExtended, res: Response, next: NextFunction): void => {
+export const checkIsUpdateGroupValid = (req: Request, res: Response, next: NextFunction): void => {
   const updateFields = req.body as IGroupUpdateFields;
 
   const {error} = updateGroupValidator.validate(updateFields);

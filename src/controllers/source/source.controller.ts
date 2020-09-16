@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IRequestExtended, ISourceParams, ISourceUpdateFields} from '../../interfaces';
+import {ISourceParams, ISourceRequestExtended, ISourceUpdateFields} from '../../interfaces';
 import {ISource} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {sourceService} from '../../services';
 
 class SourceController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await sourceService.create(req.body as ISource);
 
@@ -18,7 +18,7 @@ class SourceController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ISourceRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.source as ISource;
 
@@ -31,7 +31,7 @@ class SourceController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ISourceRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.source as ISource;
 
@@ -44,7 +44,7 @@ class SourceController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const sources = await sourceService.getAll(req.query as ISourceParams);
 
@@ -57,7 +57,7 @@ class SourceController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ISourceRequestExtended, res: Response, next: NextFunction): void {
     try {
       const source = req.source as ISource;
 

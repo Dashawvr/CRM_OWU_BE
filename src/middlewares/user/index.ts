@@ -4,3 +4,6 @@ export * from './checkIsUpdateUserValid.middleware';
 export * from './checkCreateRule.middleware';
 export * from './checkUpdateRule.middleware';
 export * from './checkDeleteRule.middleware';
+export * from './checkIsAdmin.middleware';
+export * from './checkIsSuperAdmin.middleware';
+export * from './checkIsSuperAdminOrAdmin.middleware';

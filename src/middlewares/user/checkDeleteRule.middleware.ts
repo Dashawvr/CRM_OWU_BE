@@ -1,12 +1,12 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IAuthRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes, UserAction} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {IUser} from '../../database';
 import {roleVerification} from '../../helpers';
 
-export const checkDeleteRule = (req: IRequestExtended, res: Response, next: NextFunction): void => {
+export const checkDeleteRule = (req: IAuthRequestExtended, res: Response, next: NextFunction): void => {
 
   const {role} = req.authUser as IUser;
   const {role: createdUserRole} = req.user as IUser;

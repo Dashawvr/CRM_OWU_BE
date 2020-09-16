@@ -1,14 +1,14 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IApplicationParams, IApplicationUpdateFields, IRequestExtended} from '../../interfaces';
+import {IApplicationParams, IApplicationRequestExtended, IApplicationUpdateFields} from '../../interfaces';
 import {IApplication} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {applicationFileService, applicationService} from '../../services';
 
 class ApplicationController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const files = req.files as FileArray;
 
@@ -25,7 +25,7 @@ class ApplicationController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IApplicationRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.application as IApplication;
 
@@ -38,7 +38,7 @@ class ApplicationController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IApplicationRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.application as IApplication;
 
@@ -51,7 +51,7 @@ class ApplicationController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const applications = await applicationService.getAll(req.query as IApplicationParams);
 
@@ -64,7 +64,7 @@ class ApplicationController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IApplicationRequestExtended, res: Response, next: NextFunction): void {
     try {
       const application = req.application as IApplication;
 

@@ -1,11 +1,11 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {ICourseUpdateFields, IRequestExtended} from '../../interfaces';
+import {ICourseUpdateFields} from '../../interfaces';
 import {updateCourseValidator} from '../../validators';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler} from '../../errors';
 
-export const checkIsUpdateCourseValid = (req: IRequestExtended, res: Response, next: NextFunction): void => {
+export const checkIsUpdateCourseValid = (req: Request, res: Response, next: NextFunction): void => {
   const updateFields = req.body as ICourseUpdateFields;
 
   const {error} = updateCourseValidator.validate(updateFields);

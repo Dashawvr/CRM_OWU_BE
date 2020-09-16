@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IApplicationRequestExtended} from '../../interfaces';
 import {IApplication} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {applicationService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsApplicationExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsApplicationExists = async (req: IApplicationRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {application_id} = req.body.application_id ? req.body : req.params;
 

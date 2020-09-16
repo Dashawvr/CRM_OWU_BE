@@ -1,11 +1,11 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IApplicationUpdateFields, IRequestExtended} from '../../interfaces';
+import {IApplicationUpdateFields} from '../../interfaces';
 import {updateApplicationValidator} from '../../validators';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler} from '../../errors';
 
-export const checkIsUpdateApplicationValid = (req: IRequestExtended, res: Response, next: NextFunction): void => {
+export const checkIsUpdateApplicationValid = (req: Request, res: Response, next: NextFunction): void => {
   const updateFields = req.body as IApplicationUpdateFields;
 
   const {error} = updateApplicationValidator.validate(updateFields);

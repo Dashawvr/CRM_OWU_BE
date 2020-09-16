@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {ICommentParams, ICommentUpdateFields, IRequestExtended} from '../../interfaces';
+import {ICommentParams, ICommentRequestExtended, ICommentUpdateFields} from '../../interfaces';
 import {IComment} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {commentService} from '../../services';
 
 class CommentController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await commentService.create(req.body as IComment);
 
@@ -18,7 +18,7 @@ class CommentController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ICommentRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.comment as IComment;
 
@@ -31,7 +31,7 @@ class CommentController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ICommentRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.comment as IComment;
 
@@ -44,7 +44,7 @@ class CommentController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const comments = await commentService.getAll(req.query as ICommentParams);
 
@@ -57,7 +57,7 @@ class CommentController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ICommentRequestExtended, res: Response, next: NextFunction): void {
     try {
       const comment = req.comment as IComment;
 

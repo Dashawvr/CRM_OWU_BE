@@ -1,12 +1,12 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IUserRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {userService} from '../../services';
 import {loginValidator} from '../../validators';
 
-export const checkIsUserRegistered = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<any> => {
+export const checkIsUserRegistered = async (req: IUserRequestExtended, res: Response, next: NextFunction): Promise<any> => {
   try {
     const {login} = req.body;
 

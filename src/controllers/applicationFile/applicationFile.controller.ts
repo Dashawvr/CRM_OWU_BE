@@ -1,14 +1,14 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IApplicationFileParams, IRequestExtended} from '../../interfaces';
+import {IApplicationFileParams, IFileRequestExtended} from '../../interfaces';
 import {IApplicationFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {applicationFileService} from '../../services';
 
 class ApplicationFileController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const {application_id} = req.body;
       const files = req.files as FileArray;
@@ -24,9 +24,9 @@ class ApplicationFileController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IFileRequestExtended<IApplicationFile>, res: Response, next: NextFunction): Promise<void> {
     try {
-      await applicationFileService.delete(req.applicationFile as IApplicationFile);
+      await applicationFileService.delete(req.file as IApplicationFile);
 
       res.sendStatus(ResponseStatusCodes.NO_CONTENT);
 
@@ -35,7 +35,7 @@ class ApplicationFileController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const files = await applicationFileService.getAll(req.query as IApplicationFileParams);
 
@@ -48,9 +48,9 @@ class ApplicationFileController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IFileRequestExtended<IApplicationFile>, res: Response, next: NextFunction): void {
     try {
-      const file = req.applicationFile as IApplicationFile;
+      const file = req.file as IApplicationFile;
 
       res.json({
         data: file

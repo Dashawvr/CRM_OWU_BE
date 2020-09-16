@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IClientRequestExtended} from '../../interfaces';
 import {IClient} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {clientService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsClientExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsClientExists = async (req: IClientRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {client_id} = req.body.client_id ? req.body : req.params;
 

@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ICommentRequestExtended} from '../../interfaces';
 import {IComment} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {commentService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsCommentExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsCommentExists = async (req: ICommentRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {comment_id} = req.params;
 

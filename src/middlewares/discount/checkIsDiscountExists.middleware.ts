@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IDiscountRequestExtended} from '../../interfaces';
 import {IDiscount} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {discountService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsDiscountExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsDiscountExists = async (req: IDiscountRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {discount_id} = req.params;
 

@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IPaymentTypeParams, IPaymentTypeUpdateFields, IRequestExtended} from '../../interfaces';
+import {ITypeParams, ITypeRequestExtended, ITypeUpdateFields} from '../../interfaces';
 import {IPaymentType} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {paymentTypeService} from '../../services';
 
 class PaymentTypeController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await paymentTypeService.create(req.body as IPaymentType);
 
@@ -18,11 +18,11 @@ class PaymentTypeController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ITypeRequestExtended<IPaymentType>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.paymentType as IPaymentType;
+      const {id} = req.type as IPaymentType;
 
-      await paymentTypeService.update(id, req.body as IPaymentTypeUpdateFields);
+      await paymentTypeService.update(id, req.body as ITypeUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -31,9 +31,9 @@ class PaymentTypeController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ITypeRequestExtended<IPaymentType>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.paymentType as IPaymentType;
+      const {id} = req.type as IPaymentType;
 
       await paymentTypeService.delete(id);
 
@@ -44,12 +44,12 @@ class PaymentTypeController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const paymentTypes = await paymentTypeService.getAll(req.query as IPaymentTypeParams);
+      const types = await paymentTypeService.getAll(req.query as ITypeParams);
 
       res.json({
-        data: paymentTypes
+        data: types
       });
 
     } catch (error) {
@@ -57,12 +57,12 @@ class PaymentTypeController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ITypeRequestExtended<IPaymentType>, res: Response, next: NextFunction): void {
     try {
-      const paymentType = req.paymentType as IPaymentType;
+      const type = req.type as IPaymentType;
 
       res.json({
-        data: paymentType
+        data: type
       });
 
     } catch (error) {

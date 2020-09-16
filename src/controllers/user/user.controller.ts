@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IRequestExtended, IUserParams, IUserUpdateFields} from '../../interfaces';
+import {IUserParams, IUserRequestExtended, IUserUpdateFields} from '../../interfaces';
 import {IUser} from '../../database';
 import {userService} from '../../services';
 import {ResponseStatusCodes} from '../../constants';
 
 class UserController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await userService.create(req.body as IUser);
 
@@ -18,7 +18,7 @@ class UserController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IUserRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.user as IUser;
 
@@ -31,7 +31,7 @@ class UserController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IUserRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.user as IUser;
 
@@ -44,7 +44,7 @@ class UserController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const users = await userService.getAll(req.query as IUserParams);
 
@@ -57,7 +57,7 @@ class UserController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IUserRequestExtended, res: Response, next: NextFunction): void {
     try {
       const user = req.user as IUser;
 

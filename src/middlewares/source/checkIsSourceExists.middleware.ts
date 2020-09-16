@@ -1,13 +1,13 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {ISourceRequestExtended} from '../../interfaces';
 import {ISource} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {sourceService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsSourceExists = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsSourceExists = async (req: ISourceRequestExtended, res: Response, next: NextFunction): Promise<void> => {
   try {
     const {source_id} = req.params;
 

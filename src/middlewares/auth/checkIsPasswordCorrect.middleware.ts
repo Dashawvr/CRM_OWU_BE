@@ -1,12 +1,12 @@
 import {NextFunction, Response} from 'express';
 
-import {IRequestExtended} from '../../interfaces';
+import {IUserRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {CHECK_HASH} from '../../helpers';
 import {IUser} from '../../database';
 
-export const checkIsPasswordCorrect = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<any> => {
+export const checkIsPasswordCorrect = async (req: IUserRequestExtended, res: Response, next: NextFunction): Promise<any> => {
 
   const {password: hashPassword} = req.user as IUser;
   const {password} = req.body as IUser;

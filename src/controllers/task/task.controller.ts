@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IRequestExtended, ITaskParams, ITaskUpdateFields} from '../../interfaces';
+import {ITaskParams, ITaskRequestExtended, ITaskUpdateFields} from '../../interfaces';
 import {ITask} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {taskService} from '../../services';
 
 class TaskController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await taskService.create(req.body as ITask);
 
@@ -18,7 +18,7 @@ class TaskController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ITaskRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.task as ITask;
 
@@ -31,7 +31,7 @@ class TaskController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ITaskRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.task as ITask;
 
@@ -44,7 +44,7 @@ class TaskController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const tasks = await taskService.getAll(req.query as ITaskParams);
 
@@ -57,7 +57,7 @@ class TaskController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ITaskRequestExtended, res: Response, next: NextFunction): void {
     try {
       const task = req.task as ITask;
 

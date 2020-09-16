@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {IRequestExtended, ITaskStatusParams, ITaskStatusUpdateFields} from '../../interfaces';
+import {IStatusParams, IStatusRequestExtended, IStatusUpdateFields} from '../../interfaces';
 import {ITaskStatus} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {taskStatusService} from '../../services';
 
 class TaskStatusController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await taskStatusService.create(req.body as ITaskStatus);
 
@@ -18,11 +18,11 @@ class TaskStatusController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: IStatusRequestExtended<ITaskStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.taskStatus as ITaskStatus;
+      const {id} = req.status as ITaskStatus;
 
-      await taskStatusService.update(id, req.body as ITaskStatusUpdateFields);
+      await taskStatusService.update(id, req.body as IStatusUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
@@ -31,9 +31,9 @@ class TaskStatusController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IStatusRequestExtended<ITaskStatus>, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.taskStatus as ITaskStatus;
+      const {id} = req.status as ITaskStatus;
 
       await taskStatusService.delete(id);
 
@@ -44,9 +44,9 @@ class TaskStatusController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const taskStatuses = await taskStatusService.getAll(req.query as ITaskStatusParams);
+      const taskStatuses = await taskStatusService.getAll(req.query as IStatusParams);
 
       res.json({
         data: taskStatuses
@@ -57,12 +57,12 @@ class TaskStatusController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: IStatusRequestExtended<ITaskStatus>, res: Response, next: NextFunction): void {
     try {
-      const taskStatus = req.taskStatus as ITaskStatus;
+      const status = req.status as ITaskStatus;
 
       res.json({
-        data: taskStatus
+        data: status
       });
 
     } catch (error) {

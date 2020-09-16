@@ -1,7 +1,7 @@
 import {
-  IPaymentStatusParams,
-  IPaymentStatusResponse,
-  IPaymentStatusUpdateFields
+  IStatusParams,
+  IStatusResponse,
+  IStatusUpdateFields
 } from '../../interfaces';
 import {IPaymentStatus, PaymentStatus} from '../../database';
 import {PaymentStatusOptionBuilder} from '../../helpers';
@@ -12,7 +12,7 @@ class PaymentStatusService {
     return PaymentStatus.create(paymentStatus);
   }
 
-  update(id: number, updateFields: IPaymentStatusUpdateFields): Promise<[number, IPaymentStatus[]]> {
+  update(id: number, updateFields: IStatusUpdateFields): Promise<[number, IPaymentStatus[]]> {
     return PaymentStatus.update(updateFields, {
       where: {id}
     });
@@ -24,7 +24,7 @@ class PaymentStatusService {
     });
   }
 
-  getAll(params: IPaymentStatusParams): Promise<IPaymentStatusResponse> {
+  getAll(params: IStatusParams): Promise<IStatusResponse<IPaymentStatus>> {
     const {
       name,
       color,

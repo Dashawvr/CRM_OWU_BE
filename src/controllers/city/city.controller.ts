@@ -1,13 +1,13 @@
-import {NextFunction, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 
-import {ICityParams, ICityUpdateFields, IRequestExtended} from '../../interfaces';
+import {ICityParams, ICityRequestExtended, ICityUpdateFields} from '../../interfaces';
 import {ICity} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {cityService} from '../../services';
 
 class CityController {
 
-  async create(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await cityService.create(req.body as ICity);
 
@@ -18,7 +18,7 @@ class CityController {
     }
   }
 
-  async update(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async update(req: ICityRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.city as ICity;
 
@@ -31,7 +31,7 @@ class CityController {
     }
   }
 
-  async delete(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: ICityRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
       const {id} = req.city as ICity;
 
@@ -44,7 +44,7 @@ class CityController {
     }
   }
 
-  async getAll(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const cities = await cityService.getAll(req.query as ICityParams);
 
@@ -57,7 +57,7 @@ class CityController {
     }
   }
 
-  getById(req: IRequestExtended, res: Response, next: NextFunction): void {
+  getById(req: ICityRequestExtended, res: Response, next: NextFunction): void {
     try {
       const city = req.city as ICity;
 

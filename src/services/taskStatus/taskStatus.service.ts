@@ -1,7 +1,7 @@
 import {
-  ITaskStatusParams,
-  ITaskStatusResponse,
-  ITaskStatusUpdateFields
+  IStatusParams,
+  IStatusResponse,
+  IStatusUpdateFields
 } from '../../interfaces';
 import {ITaskStatus, TaskStatus} from '../../database';
 import {TaskStatusOptionBuilder} from '../../helpers';
@@ -12,7 +12,7 @@ class TaskStatusService {
     return TaskStatus.create(taskStatus);
   }
 
-  update(id: number, updateFields: ITaskStatusUpdateFields): Promise<[number, ITaskStatus[]]> {
+  update(id: number, updateFields: IStatusUpdateFields): Promise<[number, ITaskStatus[]]> {
     return TaskStatus.update(updateFields, {
       where: {id}
     });
@@ -24,7 +24,7 @@ class TaskStatusService {
     });
   }
 
-  getAll(params: ITaskStatusParams): Promise<ITaskStatusResponse> {
+  getAll(params: IStatusParams): Promise<IStatusResponse<ITaskStatus>> {
     const {
       name,
       color,

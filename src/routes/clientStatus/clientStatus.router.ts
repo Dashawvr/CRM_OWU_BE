@@ -3,8 +3,8 @@ import {Router} from 'express';
 import {
   checkAccessToken,
   checkIsClientStatusExists,
-  checkIsCreateClientStatusValid,
-  checkIsUpdateClientStatusValid
+  checkIsCreateStatusValid,
+  checkIsUpdateStatusValid
 } from '../../middlewares';
 import {clientStatusController} from '../../controllers';
 
@@ -13,12 +13,12 @@ const router = Router();
 router.use(checkAccessToken);
 
 router.get('/', clientStatusController.getAll);
-router.post('/', checkIsCreateClientStatusValid, clientStatusController.create);
+router.post('/', checkIsCreateStatusValid, clientStatusController.create);
 
 router.use('/:status_id', checkIsClientStatusExists);
 
 router.get('/:status_id', clientStatusController.getById);
-router.patch('/:status_id', checkIsUpdateClientStatusValid, clientStatusController.update);
+router.patch('/:status_id', checkIsUpdateStatusValid, clientStatusController.update);
 router.delete('/:status_id', clientStatusController.delete);
 
 export const clientStatusRouter = router;
