@@ -10,6 +10,7 @@ import * as dotEnv from 'dotenv';
 import {resolve} from 'path';
 
 import {ResponseStatusCodes} from './constants';
+import {initDBAssociations} from './database';
 import {config, corsOptions, rateLimitOptions} from './configs';
 import {errors} from './errors';
 import {logger} from './loggers';
@@ -30,6 +31,7 @@ class App {
     this.app.use(express.urlencoded({extended: true}));
     this.app.use(express.static(resolve(process.cwd(), '../', 'public')));
 
+    initDBAssociations();
     this.mountRoutes();
 
     this.app.use(this.logErrors);

@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {DBModelFieldInit, Task} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -54,5 +54,3 @@ TaskStatus.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.TASK_STATUS_MODEL_NAME,
   tableName: DatabaseModel.TASK_STATUS_MODEL_NAME
 });
-
-TaskStatus.hasMany(Task, {foreignKey: 'status_id'});

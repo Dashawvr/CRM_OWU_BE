@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {Client, DBModelFieldInit} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -55,5 +55,3 @@ ClientStatus.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.CLIENT_STATUS_MODEL_NAME,
   tableName: DatabaseModel.CLIENT_STATUS_MODEL_NAME
 });
-
-ClientStatus.hasMany(Client, {foreignKey: 'status_id'});

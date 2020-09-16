@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {DBModelFieldInit, Payment} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -47,5 +47,3 @@ PaymentType.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.PAYMENT_TYPE_MODEL_NAME,
   tableName: DatabaseModel.PAYMENT_TYPE_MODEL_NAME
 });
-
-PaymentType.hasMany(Payment, {foreignKey: 'type_id'});

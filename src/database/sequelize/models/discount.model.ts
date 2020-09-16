@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {ApplicationDiscount, DBModelFieldInit} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -55,5 +55,3 @@ Discount.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.DISCOUNT_MODEL_NAME,
   tableName: DatabaseModel.DISCOUNT_MODEL_NAME
 });
-
-Discount.hasMany(ApplicationDiscount, {foreignKey: 'discount_id'});

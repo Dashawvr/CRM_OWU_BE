@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {ApplicationSource, DBModelFieldInit} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -49,5 +49,3 @@ Source.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.SOURCE_MODEL_NAME,
   tableName: DatabaseModel.SOURCE_MODEL_NAME
 });
-
-Source.hasMany(ApplicationSource, {foreignKey: 'source_id'});

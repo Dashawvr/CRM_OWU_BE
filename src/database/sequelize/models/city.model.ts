@@ -1,11 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {
-  Application,
-  DBModelFieldInit,
-  Group,
-  UserCity
-} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -46,7 +41,3 @@ City.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.CITY_MODEL_NAME,
   tableName: DatabaseModel.CITY_MODEL_NAME
 });
-
-City.hasMany(UserCity, {foreignKey: 'city_id'});
-City.hasMany(Application, {foreignKey: 'city_id'});
-City.hasMany(Group, {foreignKey: 'city_id'});

@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {ClientGroup, DBModelFieldInit} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -71,5 +71,3 @@ Group.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.GROUP_MODEL_NAME,
   tableName: DatabaseModel.GROUP_MODEL_NAME
 });
-
-Group.hasMany(ClientGroup, {foreignKey: 'group_id'});

@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {DBModelFieldInit, PaymentFile} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -57,5 +57,3 @@ Payment.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.PAYMENT_MODEL_NAME,
   tableName: DatabaseModel.PAYMENT_MODEL_NAME
 });
-
-Payment.hasMany(PaymentFile, {foreignKey: 'payment_id', onDelete: 'cascade'});

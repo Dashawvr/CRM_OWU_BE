@@ -1,12 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {
-  Application,
-  ClientFile,
-  ClientGroup,
-  Comment,
-  DBModelFieldInit
-} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -84,8 +78,3 @@ Client.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.CLIENT_MODEL_NAME,
   tableName: DatabaseModel.CLIENT_MODEL_NAME
 });
-
-Client.hasMany(Comment, {foreignKey: 'client_id'});
-Client.hasMany(ClientFile, {foreignKey: 'client_id', onDelete: 'cascade'});
-Client.hasMany(Application, {foreignKey: 'client_id', onDelete: 'cascade'});
-Client.hasMany(ClientGroup, {foreignKey: 'client_id'});

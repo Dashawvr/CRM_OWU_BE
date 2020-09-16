@@ -1,12 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {
-  ApplicationDiscount,
-  ApplicationFile,
-  ApplicationSource,
-  DBModelFieldInit,
-  Payment
-} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -71,8 +65,3 @@ Application.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.APPLICATION_MODEL_NAME,
   tableName: DatabaseModel.APPLICATION_MODEL_NAME
 });
-
-Application.hasMany(ApplicationFile, {foreignKey: 'application_id', onDelete: 'cascade'});
-Application.hasMany(Payment, {foreignKey: 'application_id', onDelete: 'cascade'});
-Application.hasMany(ApplicationDiscount, {foreignKey: 'application_id'});
-Application.hasMany(ApplicationSource, {foreignKey: 'application_id'});

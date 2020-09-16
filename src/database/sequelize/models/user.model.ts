@@ -1,12 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {
-  Comment,
-  DBModelFieldInit,
-  OAuthToken,
-  Task,
-  UserCity
-} from '../models';
+import {DBModelFieldInit} from '../models';
 import {UserRole} from '../../../constants';
 import {DatabaseModel} from '../constants';
 import {HASH_PASSWORD_SYNC} from '../../../helpers';
@@ -72,7 +66,7 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
   }
 };
 
-export class User extends Model{
+export class User extends Model {
   id!: number;
   login!: string;
   name!: string;
@@ -86,9 +80,4 @@ User.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.USER_MODEL_NAME,
   tableName: DatabaseModel.USER_MODEL_NAME
 });
-
-User.hasMany(OAuthToken, {foreignKey: 'user_id', onDelete: 'cascade'});
-User.hasMany(Task, {foreignKey: 'user_id'});
-User.hasMany(Comment, {foreignKey: 'user_id', onDelete: 'cascade'});
-User.hasMany(UserCity, {foreignKey: 'user_id'});
 

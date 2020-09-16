@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {Application, DBModelFieldInit, Group} from '../models';
+import {DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -48,6 +48,3 @@ Course.init(modelAttributes as ModelAttributes, {
   modelName: DatabaseModel.COURSE_MODEL_NAME,
   tableName: DatabaseModel.COURSE_MODEL_NAME
 });
-
-Course.hasMany(Application, {foreignKey: 'course_id'});
-Course.hasMany(Group, {foreignKey: 'course_id'});
