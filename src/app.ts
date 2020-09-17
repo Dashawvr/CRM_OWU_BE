@@ -38,7 +38,7 @@ class App {
     this.app.use(this.customErrorHandler);
   }
 
-  private mountRoutes(): void {
+  private mountRoutes = (): void => {
     this.app.use('/api', apiRouter);
     this.app.use('*', notFoundRouter);
   }
