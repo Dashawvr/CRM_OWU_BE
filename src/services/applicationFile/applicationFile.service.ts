@@ -11,20 +11,18 @@ class ApplicationFileService {
 
   async bulkCreate(application_id: number, {files}: FileArray): Promise<IApplicationFile[]> {
     const filesToSave: IApplicationFile[] = [];
-    const path = join(`${process.cwd()}/static/application/${application_id}/documents`);
+    const path = `application/${application_id}/documents`;
 
-    if (!Array.isArray(files)) {
-      files = [files];
-    }
+    const data = Array.isArray(files) ? files : [files];
 
-    files.forEach(file => {
+    data.forEach(file => {
       const extension = file.name.split('.').pop();
       const generatedName = `${v1()}.${extension}`;
 
       filesToSave.push({
         document_type: file.mimetype,
         name: file.name,
-        path: join(`${path}/${generatedName}`),
+        path: `${path}/${generatedName}`,
         application_id
       });
 
@@ -34,7 +32,7 @@ class ApplicationFileService {
     const savedFiles = await ApplicationFile.bulkCreate(filesToSave);
 
     if (savedFiles) {
-      await filesMv(path, files);
+      await filesMv(join(process.cwd(), 'static', path), files);
     }
 
     return savedFiles;
@@ -47,13 +45,13 @@ class ApplicationFileService {
     });
 
     if (countOfDeletedFiles) {
-      unlinkSync(path);
+      unlinkSync(join(process.cwd(), 'static', path));
     }
 
-    const files = readdirSync(join(`${process.cwd()}/static/application/${application_id}/documents`));
+    const files = readdirSync(join(process.cwd(), 'static', 'application', `${application_id}`, 'documents'));
 
     if (!files.length) {
-      rmdirSync(join(`${process.cwd()}/static/application/${application_id}`), {recursive: true});
+      rmdirSync(join(process.cwd(), 'static', 'application', `${application_id}`), {recursive: true});
     }
 
     return countOfDeletedFiles;

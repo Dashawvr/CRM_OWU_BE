@@ -29,7 +29,7 @@ class App {
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
-    this.app.use(express.static(resolve(process.cwd(), '../', 'public')));
+    this.app.use('/public', express.static(resolve(process.cwd(), 'static')));
 
     initDBAssociations();
     this.mountRoutes();
@@ -43,7 +43,7 @@ class App {
     this.app.use('*', notFoundRouter);
   }
 
-  private logErrors(err: any, req: Request, res: Response, next: NextFunction): void {
+  private logErrors = (err: any, req: Request, res: Response, next: NextFunction): void => {
     logger.error({
       method: req.method,
       url: req.path,
@@ -52,9 +52,9 @@ class App {
       massage: err.message
     });
     next(err);
-  }
+  };
 
-  private customErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
+  private customErrorHandler = (err: any, req: Request, res: Response, next: NextFunction): void => {
     if (err.parent) {
       err.message = err.parent.sqlMessage;
     }
@@ -65,7 +65,7 @@ class App {
         message: err.message || errors.SERVER_UNKNOWN_ERROR.message,
         code: err.code || errors.SERVER_UNKNOWN_ERROR.code
       });
-  }
+  };
 }
 
 export const app = new App().app;

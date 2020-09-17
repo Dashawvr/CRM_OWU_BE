@@ -18,7 +18,7 @@ class ClientService {
   }
 
   delete(id: number): Promise<number> {
-    const path = join(`${process.cwd()}/static/client/${id}`);
+    const path = join(process.cwd(), 'static', 'client', `${id}`);
 
     const countOfDeletedClients = Client.destroy({
       where: {id}

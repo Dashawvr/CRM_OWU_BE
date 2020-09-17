@@ -12,13 +12,11 @@ export const checkIsFilesValid = (req: Request, res: Response, next: NextFunctio
       return next();
     }
 
-    let {files} = req.files as FileArray;
+    const {files} = req.files as FileArray;
 
-    if (!Array.isArray(files)) {
-      files = [files];
-    }
+    const data = Array.isArray(files) ? files : [files];
 
-    files.forEach(({mimetype, size, name}) => {
+    data.forEach(({mimetype, size, name}) => {
 
       if (!fileOptions.DOCUMENT_MIMETYPES.includes(mimetype)) {
         return next(new ErrorHandler(
