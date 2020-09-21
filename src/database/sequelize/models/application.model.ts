@@ -1,6 +1,16 @@
-import {DataTypes, Model, ModelAttributes} from 'sequelize';
+import {
+  DataTypes,
+  HasManyAddAssociationsMixin,
+  HasManySetAssociationsMixin,
+  Model,
+  ModelAttributes
+} from 'sequelize';
 
-import {DBModelFieldInit} from '../models';
+import {
+  DBModelFieldInit,
+  Discount,
+  Source
+} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -14,12 +24,14 @@ export interface IApplicationModel {
   updateAt?: Date;
 }
 
-export interface IApplication {
+export interface IApplication extends Application {
   id: number;
   price: number;
   leftToPay: number;
   practice: boolean;
   laptop: boolean;
+  sources?: Array<number>;
+  discounts?: Array<number>;
   city_id?: number;
   client_id?: number;
   course_id?: number;
@@ -58,6 +70,11 @@ export class Application extends Model {
   leftToPay!: number;
   practice!: boolean;
   laptop!: boolean;
+
+  public addSources!: HasManyAddAssociationsMixin<Source, number>
+  public setSources!: HasManySetAssociationsMixin<Source, number>
+  public addDiscounts!: HasManyAddAssociationsMixin<Discount, number>
+  public setDiscounts!: HasManySetAssociationsMixin<Discount, number>
 }
 
 Application.init(modelAttributes as ModelAttributes, {

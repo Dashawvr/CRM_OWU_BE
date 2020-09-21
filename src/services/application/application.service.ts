@@ -7,28 +7,58 @@ import {ApplicationOptionBuilder} from '../../helpers';
 
 class ApplicationService {
 
-  create(application: IApplication): Promise<IApplication> {
-    return Application.create(application);
+  async create(application: IApplication): Promise<IApplication> {
+    const {
+      sources,
+      discounts,
+      ...createFields
+    } = application;
+
+    const savedApplication = await Application.create(createFields);
+
+    if (sources) {
+      await savedApplication.addSources(sources);
+    }
+
+    if (discounts) {
+      await savedApplication.addDiscounts(discounts);
+    }
+
+    return savedApplication;
   }
 
-  update(id: number, updateFields: IApplicationUpdateFields): Promise<[number, IApplication[]]> {
-    return Application.update(updateFields, {
-      where: {id}
-    });
+  async update(application: IApplication, updateFields: IApplicationUpdateFields): Promise<IApplication> {
+    const {
+      sources,
+      discounts,
+      ...fields
+    } = updateFields;
+
+    await application.update(fields);
+
+    if (sources) {
+      await application.setSources(sources);
+    }
+
+    if (discounts) {
+      await application.setDiscounts(discounts);
+    }
+
+    return application;
   }
 
   delete(id: number): Promise<number> {
     const path = join(process.cwd(), 'static', 'application', `${id}`);
 
-    const numberOfDeletedClients = Application.destroy({
+    const countOfDeletedClients = Application.destroy({
       where: {id}
     });
 
-    if (numberOfDeletedClients) {
+    if (countOfDeletedClients) {
       rmdirSync(path, {recursive: true});
     }
 
-    return numberOfDeletedClients;
+    return countOfDeletedClients;
   }
 
   getAll(params: IApplicationParams): Promise<IApplicationResponse> {

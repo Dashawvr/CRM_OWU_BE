@@ -27,9 +27,9 @@ class ApplicationController {
 
   async update(req: IApplicationRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.application as IApplication;
+      const application = req.application as IApplication;
 
-      await applicationService.update(id, req.body as IApplicationUpdateFields);
+      await applicationService.update(application, req.body as IApplicationUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

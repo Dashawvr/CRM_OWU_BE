@@ -23,7 +23,7 @@ export const config = {
   DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql',
 
   SEQUELIZE_SYNC_OPTIONS: {
-    alter: true
+    alter: false
   }
 };
 
