@@ -8,6 +8,7 @@ export const createGroupValidator = Joi.object({
   startDate: Joi.string().isoDate().required(),
   endDate: Joi.string().isoDate().required(),
   startTime: Joi.string().regex(timeRegExp).trim().required(),
+  clients: Joi.array().items(Joi.number().integer().positive()),
   course_id: Joi.number().integer().positive().required(),
   city_id: Joi.number().integer().positive().required()
 });

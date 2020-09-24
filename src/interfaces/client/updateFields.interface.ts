@@ -5,6 +5,7 @@ export interface IClientUpdateFields {
   age?: number;
   email?: string;
   phone?: string;
+  groups?: Array<number>;
   status_id?: number;
   city_id?: number;
   group_id?: number;

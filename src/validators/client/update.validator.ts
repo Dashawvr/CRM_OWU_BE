@@ -11,9 +11,8 @@ export const updateClientValidator = Joi.object({
   surname: Joi.string().regex(onlyLettersRegExp).min(3).max(50).trim(),
   patronymic: Joi.string().regex(onlyLettersRegExp).min(3).max(50).trim(),
   age: Joi.number().integer().positive().min(5).max(100),
-  email: Joi.string().regex(emailRegExp).trim().required(),
+  email: Joi.string().regex(emailRegExp).trim(),
   phone: Joi.string().regex(onlyNumbersRegExp).max(10).trim(),
-  status_id: Joi.number().integer().positive().required(),
-  city_id: Joi.number().integer().positive(),
-  group_id: Joi.number().integer().positive()
+  groups: Joi.array().items(Joi.number().integer().positive()),
+  status_id: Joi.number().integer().positive()
 });

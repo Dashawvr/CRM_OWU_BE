@@ -27,9 +27,9 @@ class ClientController {
 
   async update(req: IClientRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.client as IClient;
+      const client = req.client as IClient;
 
-      await clientService.update(id, req.body as IClientUpdateFields);
+      await clientService.update(client, req.body as IClientUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

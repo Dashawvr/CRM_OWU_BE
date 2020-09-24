@@ -4,14 +4,32 @@ import {UserOptionBuilder} from '../../helpers';
 
 class UserService {
 
-  create(user: IUser): Promise<IUser> {
-    return User.create(user);
+  async create(user: IUser): Promise<IUser> {
+    const {
+      cities,
+      ...createFields
+    } = user;
+
+    const savedUser = await User.create(createFields);
+
+    if (cities) {
+      await savedUser.addCities(cities);
+    }
+
+    return savedUser;
   }
 
-  update(id: number, updateFields: IUserUpdateFields): Promise<[number, IUser[]]> {
-    return User.update(updateFields, {
-      where: {id}
-    });
+  async update(user: IUser, updateFields: IUserUpdateFields): Promise<void> {
+    const {
+      cities,
+      ...fields
+    } = updateFields;
+
+    await user.update(fields);
+
+    if (cities) {
+      await user.setCities(cities);
+    }
   }
 
   delete(id: number): Promise<number> {

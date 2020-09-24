@@ -4,14 +4,32 @@ import {GroupOptionBuilder} from '../../helpers';
 
 class GroupService {
 
-  create(group: IGroup): Promise<IGroup> {
-    return Group.create(group);
+  async create(group: IGroup): Promise<IGroup> {
+    const {
+      clients,
+      ...createFields
+    } = group;
+
+    const savedGroup = await Group.create(createFields);
+
+    if (clients) {
+      await savedGroup.addClients(clients);
+    }
+
+    return savedGroup;
   }
 
-  update(id: number, updateFields: IGroupUpdateFields): Promise<[number, IGroup[]]> {
-    return Group.update(updateFields, {
-      where: {id}
-    });
+  async update(group: IGroup, updateFields: IGroupUpdateFields): Promise<void> {
+    const {
+      clients,
+      ...fields
+    } = updateFields;
+
+    await group.update(fields);
+
+    if (clients) {
+      await group.setClients(clients);
+    }
   }
 
   delete(id: number): Promise<number> {

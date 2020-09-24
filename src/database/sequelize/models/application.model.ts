@@ -25,11 +25,6 @@ export interface IApplicationModel {
 }
 
 export interface IApplication extends Application {
-  id: number;
-  price: number;
-  leftToPay: number;
-  practice: boolean;
-  laptop: boolean;
   sources?: Array<number>;
   discounts?: Array<number>;
   city_id?: number;
@@ -71,10 +66,10 @@ export class Application extends Model {
   practice!: boolean;
   laptop!: boolean;
 
-  public addSources!: HasManyAddAssociationsMixin<Source, number>
-  public setSources!: HasManySetAssociationsMixin<Source, number>
-  public addDiscounts!: HasManyAddAssociationsMixin<Discount, number>
-  public setDiscounts!: HasManySetAssociationsMixin<Discount, number>
+  addSources!: HasManyAddAssociationsMixin<Source, number>
+  setSources!: HasManySetAssociationsMixin<Source, number>
+  addDiscounts!: HasManyAddAssociationsMixin<Discount, number>
+  setDiscounts!: HasManySetAssociationsMixin<Discount, number>
 }
 
 Application.init(modelAttributes as ModelAttributes, {

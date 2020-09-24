@@ -13,5 +13,6 @@ export const createClientValidator = Joi.object({
   age: Joi.number().integer().positive().min(5).max(100),
   email: Joi.string().regex(emailRegExp).trim().required(),
   phone: Joi.string().regex(onlyNumbersRegExp).max(10).trim().required(),
+  groups: Joi.array().items(Joi.number().integer().positive()),
   status_id: Joi.number().integer().positive().required()
 });

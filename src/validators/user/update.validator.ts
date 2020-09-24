@@ -11,5 +11,6 @@ export const updateUserValidator = Joi.object({
     UserRole.ROLE_SUPER_ADMIN,
     UserRole.ROLE_ADMIN,
     UserRole.ROLE_MANAGER
-  ).trim()
+  ).trim(),
+  cities: Joi.array().items(Joi.number().integer().positive())
 });

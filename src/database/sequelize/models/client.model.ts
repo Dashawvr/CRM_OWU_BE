@@ -1,6 +1,12 @@
-import {DataTypes, Model, ModelAttributes} from 'sequelize';
+import {
+  DataTypes,
+  HasManyAddAssociationsMixin,
+  HasManySetAssociationsMixin,
+  Model,
+  ModelAttributes
+} from 'sequelize';
 
-import {DBModelFieldInit} from '../models';
+import {DBModelFieldInit, Group} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -16,14 +22,8 @@ export interface IClientModel {
   updateAt?: Date;
 }
 
-export interface IClient {
-  id: number;
-  name: string;
-  surname: string;
-  patronymic: string;
-  age: number;
-  email: string;
-  phone: string;
+export interface IClient extends Client {
+  groups?: Array<number>;
   status_id?: number;
   city_id?: number;
   group_id?: number;
@@ -71,6 +71,9 @@ export class Client extends Model {
   age!: number;
   email!: string;
   phone!: string;
+
+  addGroups!: HasManyAddAssociationsMixin<Group, number>
+  setGroups!: HasManySetAssociationsMixin<Group, number>
 }
 
 Client.init(modelAttributes as ModelAttributes, {

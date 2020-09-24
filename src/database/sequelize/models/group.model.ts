@@ -1,6 +1,12 @@
-import {DataTypes, Model, ModelAttributes} from 'sequelize';
+import {
+  DataTypes,
+  HasManyAddAssociationsMixin,
+  HasManySetAssociationsMixin,
+  Model,
+  ModelAttributes
+} from 'sequelize';
 
-import {DBModelFieldInit} from '../models';
+import {Client, DBModelFieldInit} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -15,13 +21,8 @@ export interface IGroupModel {
   updateAt?: Date;
 }
 
-export interface IGroup {
-  id: number;
-  name: string;
-  practice: number;
-  startDate: Date;
-  endDate: Date;
-  startTime: Date;
+export interface IGroup extends Group {
+  clients?: Array<number>;
   course_id?: number;
   city_id?: number;
   createdAt?: Date;
@@ -64,6 +65,9 @@ export class Group extends Model {
   startDate!: Date;
   endDate!: Date;
   startTime!: Date;
+
+  addClients!: HasManyAddAssociationsMixin<Client, number>
+  setClients!: HasManySetAssociationsMixin<Client, number>
 }
 
 Group.init(modelAttributes as ModelAttributes, {

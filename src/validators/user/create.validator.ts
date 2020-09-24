@@ -11,5 +11,6 @@ export const createUserValidator = Joi.object({
     UserRole.ROLE_SUPER_ADMIN,
     UserRole.ROLE_ADMIN,
     UserRole.ROLE_MANAGER
-  ).trim().required()
+  ).trim().required(),
+  cities: Joi.array().items(Joi.number().integer().positive())
 });

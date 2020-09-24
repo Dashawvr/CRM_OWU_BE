@@ -6,4 +6,5 @@ export interface IUserUpdateFields {
   name?: string;
   surname?: string;
   role?: UserRole;
+  cities?: Array<number>;
 }

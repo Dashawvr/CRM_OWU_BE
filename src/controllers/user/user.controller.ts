@@ -20,9 +20,9 @@ class UserController {
 
   async update(req: IUserRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.user as IUser;
+      const user = req.user as IUser;
 
-      await userService.update(id, req.body as IUserUpdateFields);
+      await userService.update(user, req.body as IUserUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

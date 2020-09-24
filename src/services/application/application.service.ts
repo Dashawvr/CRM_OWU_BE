@@ -27,7 +27,7 @@ class ApplicationService {
     return savedApplication;
   }
 
-  async update(application: IApplication, updateFields: IApplicationUpdateFields): Promise<IApplication> {
+  async update(application: IApplication, updateFields: IApplicationUpdateFields): Promise<void> {
     const {
       sources,
       discounts,
@@ -43,8 +43,6 @@ class ApplicationService {
     if (discounts) {
       await application.setDiscounts(discounts);
     }
-
-    return application;
   }
 
   delete(id: number): Promise<number> {

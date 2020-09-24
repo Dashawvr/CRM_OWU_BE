@@ -4,6 +4,7 @@ export interface IGroupUpdateFields {
   startDate: Date;
   endDate: Date;
   startTime: Date;
+  clients?: Array<number>;
   course_id?: number;
   city_id?: number;
 }

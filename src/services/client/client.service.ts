@@ -7,14 +7,32 @@ import {ClientOptionBuilder} from '../../helpers';
 
 class ClientService {
 
-  create(client: IClient): Promise<IClient> {
-    return Client.create(client);
+  async create(client: IClient): Promise<IClient> {
+    const {
+      groups,
+      ...createFields
+    } = client;
+
+    const savedClient = await Client.create(createFields);
+
+    if (groups) {
+      await savedClient.addGroups(groups);
+    }
+
+    return savedClient;
   }
 
-  update(id: number, updateFields: IClientUpdateFields): Promise<[number, IClient[]]> {
-    return Client.update(updateFields, {
-      where: {id}
-    });
+  async update(client: IClient, updateFields: IClientUpdateFields): Promise<void> {
+    const {
+      groups,
+      ...fields
+    } = updateFields;
+
+    await client.update(fields);
+
+    if (groups) {
+      await client.setGroups(groups);
+    }
   }
 
   delete(id: number): Promise<number> {

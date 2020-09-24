@@ -1,6 +1,12 @@
-import {DataTypes, Model, ModelAttributes} from 'sequelize';
+import {
+  DataTypes,
+  HasManyAddAssociationsMixin,
+  HasManySetAssociationsMixin,
+  Model,
+  ModelAttributes
+} from 'sequelize';
 
-import {DBModelFieldInit} from '../models';
+import {City, DBModelFieldInit} from '../models';
 import {UserRole} from '../../../constants';
 import {DatabaseModel} from '../constants';
 import {HASH_PASSWORD_SYNC} from '../../../helpers';
@@ -17,13 +23,8 @@ export interface IUserModel {
   updateAt?: Date;
 }
 
-export interface IUser {
-  id: number
-  login: string
-  password: string
-  name: string
-  surname: string
-  role: UserRole
+export interface IUser extends User {
+  cities?: Array<number>;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -73,6 +74,9 @@ export class User extends Model {
   password!: string;
   role!: UserRole;
   surname!: string;
+
+  addCities!: HasManyAddAssociationsMixin<City, number>
+  setCities!: HasManySetAssociationsMixin<City, number>
 }
 
 User.init(modelAttributes as ModelAttributes, {

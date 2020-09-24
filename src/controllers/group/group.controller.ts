@@ -20,9 +20,9 @@ class GroupController {
 
   async update(req: IGroupRequestExtended, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {id} = req.group as IGroup;
+      const group = req.group as IGroup;
 
-      await groupService.update(id, req.body as IGroupUpdateFields);
+      await groupService.update(group, req.body as IGroupUpdateFields);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 
