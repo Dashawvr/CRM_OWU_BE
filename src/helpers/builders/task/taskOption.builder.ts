@@ -1,18 +1,8 @@
 import {Op} from 'sequelize';
 
-import {IOptions} from '../../interfaces';
+import {OptionBuilder} from '../options';
 
-export class TaskOptionBuilder {
-  private readonly _options: IOptions;
-
-  constructor() {
-    this._options = {
-      where: {},
-      limit: 25,
-      offset: 0,
-      order: [['createdAt', 'DESC']]
-    };
-  }
+export class TaskOptionBuilder extends OptionBuilder {
 
   title(title: string | undefined): TaskOptionBuilder {
     if (title) {
@@ -84,33 +74,5 @@ export class TaskOptionBuilder {
     }
 
     return this;
-  }
-
-  offset(pageIndex: number | undefined, pageSize: number | undefined): TaskOptionBuilder {
-    if (pageIndex && pageSize) {
-      this._options.offset = +pageIndex * +pageSize;
-    }
-
-    return this;
-  }
-
-  limit(pageSize: number | undefined): TaskOptionBuilder {
-    if (pageSize) {
-      this._options.limit = +pageSize;
-    }
-
-    return this;
-  }
-
-  order(field: string | undefined, order: string | undefined): TaskOptionBuilder {
-    if (field && order) {
-      this._options.order = [[field, order]];
-    }
-
-    return this;
-  }
-
-  build(): IOptions {
-    return this._options;
   }
 }

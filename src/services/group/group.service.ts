@@ -70,7 +70,7 @@ class GroupService {
       .endDateFromTo(endDateFrom, endDateTo)
       .startTimeFrom(startTimeFrom)
       .startTimeTo(startTimeTo)
-      .startDateFromTo(startTimeFrom, startTimeTo)
+      .startTimeFromTo(startTimeFrom, startTimeTo)
       .course_id(course_id)
       .city_id(city_id)
       .offset(pageIndex, pageSize)

@@ -1,18 +1,8 @@
 import {Op} from 'sequelize';
 
-import {IOptions} from '../../interfaces';
+import {OptionBuilder} from '../options';
 
-export class CourseOptionBuilder {
-  private readonly _options: IOptions;
-
-  constructor() {
-    this._options = {
-      where: {},
-      limit: 25,
-      offset: 0,
-      order: [['createdAt', 'DESC']]
-    };
-  }
+export class CourseOptionBuilder extends OptionBuilder {
 
   name(name: string | undefined): CourseOptionBuilder {
     if (name) {
@@ -55,33 +45,5 @@ export class CourseOptionBuilder {
     }
 
     return this;
-  }
-
-  offset(pageIndex: number | undefined, pageSize: number | undefined): CourseOptionBuilder {
-    if (pageIndex && pageSize) {
-      this._options.offset = +pageIndex * +pageSize;
-    }
-
-    return this;
-  }
-
-  limit(pageSize: number | undefined): CourseOptionBuilder {
-    if (pageSize) {
-      this._options.limit = +pageSize;
-    }
-
-    return this;
-  }
-
-  order(field: string | undefined, order: string | undefined): CourseOptionBuilder {
-    if (field && order) {
-      this._options.order = [[field, order]];
-    }
-
-    return this;
-  }
-
-  build(): IOptions {
-    return this._options;
   }
 }

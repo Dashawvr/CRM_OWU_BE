@@ -27,7 +27,6 @@ class PaymentTypeService {
   getAll(params: ITypeParams): Promise<ITypeResponse<IPaymentType>> {
     const {
       name,
-      color,
       description,
       pageIndex,
       pageSize,
@@ -37,7 +36,6 @@ class PaymentTypeService {
 
     const options = new PaymentTypeOptionBuilder()
       .name(name)
-      .color(color)
       .description(description)
       .offset(pageIndex, pageSize)
       .limit(pageSize)
