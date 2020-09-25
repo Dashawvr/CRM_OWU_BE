@@ -1,3 +1,6 @@
+import {rmdirSync} from 'fs';
+import {join} from 'path';
+
 import {IPaymentParams, IPaymentResponse, IPaymentUpdateFields} from '../../interfaces';
 import {IPayment, Payment} from '../../database';
 import {PaymentOptionBuilder} from '../../helpers';
@@ -14,10 +17,18 @@ class PaymentService {
     });
   }
 
-  delete(id: number): Promise<number> {
-    return Payment.destroy({
+  async delete(id: number): Promise<number> {
+    const path = join(process.cwd(), 'static', 'payment', `${id}`);
+
+    const countOfDeletedPayments = await Payment.destroy({
       where: {id}
     });
+
+    if (countOfDeletedPayments) {
+      rmdirSync(path, {recursive: true});
+    }
+
+    return countOfDeletedPayments;
   }
 
   getAll(params: IPaymentParams): Promise<IPaymentResponse> {

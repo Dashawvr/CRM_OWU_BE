@@ -35,10 +35,10 @@ class ClientService {
     }
   }
 
-  delete(id: number): Promise<number> {
+  async delete(id: number): Promise<number> {
     const path = join(process.cwd(), 'static', 'client', `${id}`);
 
-    const countOfDeletedClients = Client.destroy({
+    const countOfDeletedClients = await Client.destroy({
       where: {id}
     });
 

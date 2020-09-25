@@ -45,18 +45,18 @@ class ApplicationService {
     }
   }
 
-  delete(id: number): Promise<number> {
+  async delete(id: number): Promise<number> {
     const path = join(process.cwd(), 'static', 'application', `${id}`);
 
-    const countOfDeletedClients = Application.destroy({
+    const countOfDeletedApplications = await Application.destroy({
       where: {id}
     });
 
-    if (countOfDeletedClients) {
+    if (countOfDeletedApplications) {
       rmdirSync(path, {recursive: true});
     }
 
-    return countOfDeletedClients;
+    return countOfDeletedApplications;
   }
 
   getAll(params: IApplicationParams): Promise<IApplicationResponse> {

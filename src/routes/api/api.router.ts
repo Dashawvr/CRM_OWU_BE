@@ -12,6 +12,7 @@ import {
   courseRouter,
   discountRouter,
   groupRouter,
+  paymentFileRouter,
   paymentRouter,
   paymentStatusRouter,
   paymentTypeRouter,
@@ -40,6 +41,7 @@ router.use('/discounts', discountRouter);
 router.use('/payments', paymentRouter);
 router.use('/paymentStatuses', paymentStatusRouter);
 router.use('/paymentTypes', paymentTypeRouter);
+router.use('/paymentFiles', paymentFileRouter);
 router.use('/sources', sourceRouter);
 
 export const apiRouter = router;

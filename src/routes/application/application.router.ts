@@ -7,6 +7,7 @@ import {
   checkIsClientExists,
   checkIsCourseExists,
   checkIsCreateApplicationValid,
+  checkIsFilesValid,
   checkIsUpdateApplicationValid
 } from '../../middlewares';
 import {applicationController} from '../../controllers';
@@ -18,6 +19,7 @@ router.use(checkAccessToken);
 router.get('/', applicationController.getAll);
 router.post('/',
   checkIsCreateApplicationValid,
+  checkIsFilesValid,
   checkIsClientExists,
   checkIsCityExists,
   checkIsCourseExists,

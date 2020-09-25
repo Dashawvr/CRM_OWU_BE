@@ -2,19 +2,19 @@ import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
 import {IFileParams, IFileRequestExtended} from '../../interfaces';
-import {IApplicationFile} from '../../database';
+import {IPaymentFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {applicationFileService} from '../../services';
+import {paymentFileService} from '../../services';
 
-class ApplicationFileController {
+class PaymentFileController {
 
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const {application_id} = req.body;
+      const {payment_id} = req.body;
       const files = req.files as FileArray;
 
       if (files) {
-        await applicationFileService.bulkCreate(+application_id, files);
+        await paymentFileService.bulkCreate(+payment_id, files);
       }
 
       res.sendStatus(ResponseStatusCodes.CREATED);
@@ -24,9 +24,9 @@ class ApplicationFileController {
     }
   }
 
-  async delete(req: IFileRequestExtended<IApplicationFile>, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: IFileRequestExtended<IPaymentFile>, res: Response, next: NextFunction): Promise<void> {
     try {
-      await applicationFileService.delete(req.file as IApplicationFile);
+      await paymentFileService.delete(req.file as IPaymentFile);
 
       res.sendStatus(ResponseStatusCodes.NO_CONTENT);
 
@@ -37,7 +37,7 @@ class ApplicationFileController {
 
   async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const files = await applicationFileService.getAll(req.query as IFileParams);
+      const files = await paymentFileService.getAll(req.query as IFileParams);
 
       res.json({
         data: files
@@ -48,9 +48,9 @@ class ApplicationFileController {
     }
   }
 
-  getById(req: IFileRequestExtended<IApplicationFile>, res: Response, next: NextFunction): void {
+  getById(req: IFileRequestExtended<IPaymentFile>, res: Response, next: NextFunction): void {
     try {
-      const file = req.file as IApplicationFile;
+      const file = req.file as IPaymentFile;
 
       res.json({
         data: file
@@ -62,4 +62,4 @@ class ApplicationFileController {
   }
 }
 
-export const applicationFileController = new ApplicationFileController();
+export const paymentFileController = new PaymentFileController();

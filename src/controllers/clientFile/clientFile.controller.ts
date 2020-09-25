@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IClientFileParams, IFileRequestExtended} from '../../interfaces';
+import {IFileParams, IFileRequestExtended} from '../../interfaces';
 import {IClientFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {clientFileService} from '../../services';
@@ -37,7 +37,7 @@ class ClientFileController {
 
   async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const files = await clientFileService.getAll(req.query as IClientFileParams);
+      const files = await clientFileService.getAll(req.query as IFileParams);
 
       res.json({
         data: files

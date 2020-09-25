@@ -14,11 +14,11 @@ export interface IPaymentFileModel {
 }
 
 export interface IPaymentFile {
-  id: number;
+  id?: number;
   name: string;
   path: string;
   document_type: string;
-  payment_id?: string;
+  payment_id?: number;
   createdAt?: Date;
   updateAt?: Date;
 }
@@ -44,6 +44,11 @@ const modelAttributes: DBModelFieldInit<IPaymentFileModel> = {
 };
 
 export class PaymentFile extends Model {
+  id!: number;
+  name!: string;
+  path!: string;
+  document_type!: string;
+  payment_id?: number;
 }
 
 PaymentFile.init(modelAttributes as ModelAttributes, {

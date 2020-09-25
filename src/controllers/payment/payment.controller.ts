@@ -1,15 +1,22 @@
 import {NextFunction, Request, Response} from 'express';
+import {FileArray} from 'express-fileupload';
 
 import {IPaymentParams, IPaymentRequestExtended, IPaymentUpdateFields} from '../../interfaces';
 import {IPayment} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {paymentService} from '../../services';
+import {paymentFileService, paymentService} from '../../services';
 
 class PaymentController {
 
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await paymentService.create(req.body as IPayment);
+      const files = req.files as FileArray;
+
+      const {id} = await paymentService.create(req.body as IPayment);
+
+      if (files) {
+        await paymentFileService.bulkCreate(id, files);
+      }
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

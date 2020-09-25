@@ -4,14 +4,14 @@ import {join} from 'path';
 import {v1} from 'uuid';
 
 import {IFileParams, IFileResponse} from '../../interfaces';
-import {ApplicationFileOptionBuilder, filesMv} from '../../helpers';
-import {ApplicationFile, IApplicationFile} from '../../database';
+import {filesMv, PaymentFileOptionBuilder} from '../../helpers';
+import {IPaymentFile, PaymentFile} from '../../database';
 
-class ApplicationFileService {
+class PaymentFileService {
 
-  async bulkCreate(application_id: number, {files}: FileArray): Promise<IApplicationFile[]> {
-    const filesToSave: IApplicationFile[] = [];
-    const path = `application/${application_id}/documents`;
+  async bulkCreate(payment_id: number, {files}: FileArray): Promise<IPaymentFile[]> {
+    const filesToSave: IPaymentFile[] = [];
+    const path = `payment/${payment_id}/documents`;
 
     const data = Array.isArray(files) ? files : [files];
 
@@ -23,13 +23,13 @@ class ApplicationFileService {
         document_type: file.mimetype,
         name: file.name,
         path: `${path}/${generatedName}`,
-        application_id
+        payment_id
       });
 
       file.name = generatedName;
     });
 
-    const savedFiles = await ApplicationFile.bulkCreate(filesToSave);
+    const savedFiles = await PaymentFile.bulkCreate(filesToSave);
 
     if (savedFiles) {
       await filesMv(join(process.cwd(), 'static', path), files);
@@ -38,9 +38,9 @@ class ApplicationFileService {
     return savedFiles;
   }
 
-  async delete({id, path, application_id}: IApplicationFile): Promise<number> {
+  async delete({id, path, payment_id}: IPaymentFile): Promise<number> {
 
-    const countOfDeletedFiles = await ApplicationFile.destroy({
+    const countOfDeletedFiles = await PaymentFile.destroy({
       where: {id}
     });
 
@@ -48,45 +48,45 @@ class ApplicationFileService {
       unlinkSync(join(process.cwd(), 'static', path));
     }
 
-    const files = readdirSync(join(process.cwd(), 'static', 'application', `${application_id}`, 'documents'));
+    const files = readdirSync(join(process.cwd(), 'static', 'payment', `${payment_id}`, 'documents'));
 
     if (!files.length) {
-      rmdirSync(join(process.cwd(), 'static', 'application', `${application_id}`), {recursive: true});
+      rmdirSync(join(process.cwd(), 'static', 'payment', `${payment_id}`), {recursive: true});
     }
 
     return countOfDeletedFiles;
   }
 
-  getAll(params: IFileParams): Promise<IFileResponse<IApplicationFile>> {
+  getAll(params: IFileParams): Promise<IFileResponse<IPaymentFile>> {
     const {
       name,
       path,
       document_type,
-      application_id,
+      payment_id,
       pageIndex,
       pageSize,
       order,
       sort
     } = params;
 
-    const options = new ApplicationFileOptionBuilder()
+    const options = new PaymentFileOptionBuilder()
       .name(name)
       .path(path)
       .document_type(document_type)
-      .application_id(application_id)
+      .payment_id(payment_id)
       .offset(pageIndex, pageSize)
       .limit(pageSize)
       .order(sort, order)
       .build();
 
-    return ApplicationFile.findAndCountAll(options);
+    return PaymentFile.findAndCountAll(options);
   }
 
-  getById(id: number): Promise<IApplicationFile | null> {
-    return ApplicationFile.findOne({
+  getById(id: number): Promise<IPaymentFile | null> {
+    return PaymentFile.findOne({
       where: {id}
     });
   }
 }
 
-export const applicationFileService = new ApplicationFileService();
+export const paymentFileService = new PaymentFileService();

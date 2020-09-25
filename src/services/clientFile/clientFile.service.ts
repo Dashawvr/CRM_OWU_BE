@@ -3,7 +3,7 @@ import {readdirSync, rmdirSync, unlinkSync} from 'fs';
 import {join} from 'path';
 import {v1} from 'uuid';
 
-import {IClientFileParams, IClientFileResponse} from '../../interfaces';
+import {IFileParams, IFileResponse} from '../../interfaces';
 import {ClientFileOptionBuilder, filesMv} from '../../helpers';
 import {ClientFile, IClientFile} from '../../database';
 
@@ -57,7 +57,7 @@ class ClientFileService {
     return countOfDeletedFiles;
   }
 
-  getAll(params: IClientFileParams): Promise<IClientFileResponse> {
+  getAll(params: IFileParams): Promise<IFileResponse<IClientFile>> {
     const {
       name,
       path,

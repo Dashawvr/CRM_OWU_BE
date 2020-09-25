@@ -4,6 +4,7 @@ import {
   checkAccessToken,
   checkIsApplicationExists,
   checkIsCreatePaymentValid,
+  checkIsFilesValid,
   checkIsPaymentExists,
   checkIsPaymentStatusExists,
   checkIsPaymentTypeExists,
@@ -18,6 +19,7 @@ router.use(checkAccessToken);
 router.get('/', paymentController.getAll);
 router.post('/',
   checkIsCreatePaymentValid,
+  checkIsFilesValid,
   checkIsPaymentTypeExists,
   checkIsPaymentStatusExists,
   checkIsApplicationExists,
