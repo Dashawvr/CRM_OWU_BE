@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IFileParams, IFileRequestExtended} from '../../interfaces';
-import {IPaymentFile} from '../../database';
+import {IFileParams, IFileRequestExtended, IPaymentRequestExtended} from '../../interfaces';
+import {IPayment, IPaymentFile} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
 import {paymentFileService} from '../../services';
 
@@ -16,6 +16,17 @@ class PaymentFileController {
       if (files) {
         await paymentFileService.bulkCreate(+payment_id, files);
       }
+
+      res.sendStatus(ResponseStatusCodes.CREATED);
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async createExcel(req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> {
+    try {
+      await paymentFileService.generateExcelFile(req.payment as IPayment);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

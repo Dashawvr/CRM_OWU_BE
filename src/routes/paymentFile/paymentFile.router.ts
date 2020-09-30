@@ -15,6 +15,8 @@ router.use(checkAccessToken);
 router.get('/', paymentFileController.getAll);
 router.post('/', checkIsPaymentExists, checkIsFilesValid, paymentFileController.create);
 
+router.get('/:payment_id/excel', checkIsPaymentExists, paymentFileController.createExcel);
+
 router.use('/:file_id', checkIsPaymentFileExists);
 
 router.get('/:file_id', paymentFileController.getById);

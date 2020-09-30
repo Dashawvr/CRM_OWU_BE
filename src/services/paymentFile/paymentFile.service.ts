@@ -1,11 +1,19 @@
 import {FileArray} from 'express-fileupload';
-import {readdirSync, rmdirSync, unlinkSync} from 'fs';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmdirSync,
+  unlinkSync
+} from 'fs';
 import {join} from 'path';
 import {v1} from 'uuid';
 
 import {IFileParams, IFileResponse} from '../../interfaces';
 import {filesMv, PaymentFileOptionBuilder} from '../../helpers';
-import {IPaymentFile, PaymentFile} from '../../database';
+import {IPayment, IPaymentFile, PaymentFile} from '../../database';
+import {paymentTemplate} from '../../templates';
+import {sequelize} from '../../configs';
 
 class PaymentFileService {
 
@@ -86,6 +94,38 @@ class PaymentFileService {
     return PaymentFile.findOne({
       where: {id}
     });
+  }
+
+  async generateExcelFile({id}: IPayment): Promise<void> {
+    const transaction = await sequelize.transaction();
+    try {
+      const fileName = `${v1()}.xlsx`;
+      const mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+      const filePath = `payment/${id}/documents/${fileName}`;
+      const folderPath = join(process.cwd(), 'static', 'payment', `${id}`, 'documents');
+
+      const workbook = paymentTemplate.excel();
+
+      await PaymentFile.create({
+        path: filePath,
+        name: fileName,
+        document_type: mimeType,
+        payment_id: id
+      }, {transaction});
+
+      await transaction.commit();
+
+      if (!existsSync(folderPath)) {
+        mkdirSync(folderPath, {recursive: true});
+      }
+
+      await workbook.xlsx.writeFile(join(process.cwd(), 'static', filePath));
+
+    } catch (error) {
+      await transaction.rollback();
+    }
+
   }
 }
 

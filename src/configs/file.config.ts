@@ -19,6 +19,7 @@ export const fileOptions = {
     'video/mp4',
     'audio/webm',
     'audio/mpeg',
-    'application/x-7z-compressed'
+    'application/x-7z-compressed',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   ]
 };
