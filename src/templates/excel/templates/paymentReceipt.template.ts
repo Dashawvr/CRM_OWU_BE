@@ -1,7 +1,11 @@
 import * as Excel from 'exceljs';
 import * as dateFormat from 'dateformat';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import * as writtenNumber from 'written-number';
 
 import {
+  alightCenterBolt,
   alightCenterNormal,
   alightRightBolt,
   bolt,
@@ -10,9 +14,10 @@ import {
   borderNormal,
   normal
 } from '../fonts';
+import {IPayment} from '../../../database';
 
 class PaymentTemplate {
-  excel(): Excel.Workbook {
+  excel({amount, application}: IPayment): Excel.Workbook {
     const workbook = new Excel.Workbook();
 
     const worksheet = workbook.addWorksheet('Payment', {
@@ -43,7 +48,7 @@ class PaymentTemplate {
     worksheet.mergeCells('G21:I21');
     worksheet.mergeCells('G22:I22');
 
-    worksheet.getColumn('B').width = 12;
+    worksheet.getColumn('B').width = 16;
     worksheet.getColumn('C').width = 25;
     worksheet.getColumn('D').width = 8;
     worksheet.getColumn('E').width = 17;
@@ -68,7 +73,7 @@ class PaymentTemplate {
     worksheet.getCell('A8').value = 'Одержувач послуг:';
     worksheet.getCell('A8').style = bolt;
 
-    worksheet.getCell('C8').value = 'Микола Баргилевич';
+    worksheet.getCell('C8').value = `${application?.client?.name} ${application?.client?.surname}`;
     worksheet.getCell('C8').style = normal;
 
     worksheet.getCell('A11').value = 'Квитанція №';
@@ -107,9 +112,9 @@ class PaymentTemplate {
     worksheet.getCell('A15').style = borderBolt;
 
     worksheet.getCell('B14').value = 'За отримання інформаційно - консультаційних послуг з курсу';
-    worksheet.getCell('B14').style = bolt;
+    worksheet.getCell('B14').style = alightCenterBolt;
 
-    worksheet.getCell('B15').value = 'Java Complex';
+    worksheet.getCell('B15').value = `${application?.course?.name}`;
     worksheet.getCell('B15').style = borderBottomBolt;
     worksheet.getCell('C15').style = borderBottomBolt;
     worksheet.getCell('D15').style = borderBottomBolt;
@@ -120,11 +125,11 @@ class PaymentTemplate {
     worksheet.getCell('G14').style = borderNormal;
     worksheet.getCell('G15').style = borderNormal;
 
-    worksheet.getCell('H14').value = '3900';
+    worksheet.getCell('H14').value = `${amount}`;
     worksheet.getCell('H14').style = borderNormal;
     worksheet.getCell('H15').style = borderNormal;
 
-    worksheet.getCell('I14').value = '3900';
+    worksheet.getCell('I14').value = `${amount}`;
     worksheet.getCell('I14').style = borderNormal;
     worksheet.getCell('I15').style = borderNormal;
 
@@ -132,13 +137,13 @@ class PaymentTemplate {
     worksheet.getCell('G16').style = borderBolt;
     worksheet.getCell('H16').style = borderBolt;
 
-    worksheet.getCell('I16').value = '3900';
+    worksheet.getCell('I16').value = `${amount}`;
     worksheet.getCell('I16').style = borderNormal;
 
     worksheet.getCell('A18').value = 'Сума прописом:';
     worksheet.getCell('A18').style = bolt;
 
-    worksheet.getCell('A19').value = 'три тисячі дев\'ятсот грн';
+    worksheet.getCell('A19').value = `${writtenNumber(amount, {lang: 'uk'})} грн.`;
     worksheet.getCell('A19').style = normal;
 
     worksheet.getCell('D21').value = 'ФОП  Журавльов С. С.';

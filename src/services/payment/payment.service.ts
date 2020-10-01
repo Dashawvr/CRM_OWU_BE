@@ -1,3 +1,4 @@
+import {Includeable} from 'sequelize';
 import {rmdirSync} from 'fs';
 import {join} from 'path';
 
@@ -66,9 +67,10 @@ class PaymentService {
     return Payment.findAndCountAll(options);
   }
 
-  getById(id: number): Promise<IPayment | null> {
+  getById(id: number, include?: Includeable | Includeable[]): Promise<IPayment | null> {
     return Payment.findOne({
-      where: {id}
+      where: {id},
+      include
     });
   }
 }

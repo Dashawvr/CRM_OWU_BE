@@ -96,22 +96,22 @@ class PaymentFileService {
     });
   }
 
-  async generateExcelFile({id}: IPayment): Promise<void> {
+  async generateExcelFile(payment: IPayment): Promise<void> {
     const transaction = await sequelize.transaction();
     try {
       const fileName = `${v1()}.xlsx`;
       const mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
-      const filePath = `payment/${id}/documents/${fileName}`;
-      const folderPath = join(process.cwd(), 'static', 'payment', `${id}`, 'documents');
+      const filePath = `payment/${payment.id}/documents/${fileName}`;
+      const folderPath = join(process.cwd(), 'static', 'payment', `${payment.id}`, 'documents');
 
-      const workbook = paymentTemplate.excel();
+      const workbook = paymentTemplate.excel(payment);
 
       await PaymentFile.create({
         path: filePath,
         name: fileName,
         document_type: mimeType,
-        payment_id: id
+        payment_id: payment.id
       }, {transaction});
 
       await transaction.commit();

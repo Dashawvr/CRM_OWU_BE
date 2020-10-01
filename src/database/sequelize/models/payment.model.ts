@@ -1,6 +1,6 @@
 import {DataTypes, Model, ModelAttributes} from 'sequelize';
 
-import {DBModelFieldInit} from '../models';
+import {DBModelFieldInit, IApplication} from '../models';
 import {DatabaseModel} from '../constants';
 import {sequelize} from '../../../configs';
 
@@ -18,6 +18,7 @@ export interface IPayment {
   number: number;
   date: Date;
   amount: number;
+  application?: IApplication;
   application_id?: number;
   status_id?: number;
   type_id?: number;

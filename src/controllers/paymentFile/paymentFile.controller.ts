@@ -1,10 +1,16 @@
 import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
-import {IFileParams, IFileRequestExtended, IPaymentRequestExtended} from '../../interfaces';
-import {IPayment, IPaymentFile} from '../../database';
+import {IFileParams, IFileRequestExtended} from '../../interfaces';
+import {
+  Application,
+  Client,
+  Course,
+  IPayment,
+  IPaymentFile
+} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {paymentFileService} from '../../services';
+import {paymentFileService, paymentService} from '../../services';
 
 class PaymentFileController {
 
@@ -24,9 +30,22 @@ class PaymentFileController {
     }
   }
 
-  async createExcel(req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> {
+  async createExcel(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await paymentFileService.generateExcelFile(req.payment as IPayment);
+      const {payment_id} = req.params;
+
+      const payment = await paymentService.getById(
+        +payment_id,
+        {
+          model: Application,
+          include: [
+            {model: Client},
+            {model: Course}
+          ]
+        }
+      ) as IPayment;
+
+      await paymentFileService.generateExcelFile(payment);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

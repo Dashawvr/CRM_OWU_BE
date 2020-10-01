@@ -9,6 +9,8 @@ import {
 import {
   DBModelFieldInit,
   Discount,
+  IClient,
+  ICourse,
   Source
 } from '../models';
 import {DatabaseModel} from '../constants';
@@ -25,6 +27,8 @@ export interface IApplicationModel {
 }
 
 export interface IApplication extends Application {
+  client?: IClient;
+  course?: ICourse;
   sources?: Array<number>;
   discounts?: Array<number>;
   city_id?: number;

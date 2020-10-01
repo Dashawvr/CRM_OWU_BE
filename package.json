@@ -26,7 +26,8 @@
     "winston": "^3.3.3",
     "uuid": "^8.3.0",
     "exceljs": "^4.1.1",
-    "dateformat": "^3.0.3"
+    "dateformat": "^3.0.3",
+    "written-number": "^0.9.1"
   },
   "devDependencies": {
     "@types/node": "^14.0.27",

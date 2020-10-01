@@ -7,7 +7,8 @@ import {ErrorHandler, errors} from '../../errors';
 import {paymentService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsPaymentExists = async (req: IPaymentRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsPaymentExists = async (req: IPaymentRequestExtended, res: Response, next: NextFunction):
+  Promise<void> => {
   try {
     const {payment_id} = req.params;
 
