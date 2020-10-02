@@ -1,12 +1,12 @@
 import * as http from 'http';
 
 import {app} from './app';
-import {config, sequelize} from './configs';
+import {config, sequelize, syncOptions} from './configs';
 import {logger} from './loggers';
 
 const server = http.createServer(app);
 
-sequelize.sync(config.SEQUELIZE_SYNC_OPTIONS)
+sequelize.sync(syncOptions)
   .then(() => server.listen(config.PORT, () => console.log(`(☞ﾟヮﾟ)☞ Server ready at http://localhost:${config.PORT}/ ☜(ﾟヮﾟ☜)`)))
   .catch(error => {
     logger.error(error);

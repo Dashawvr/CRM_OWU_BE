@@ -10,3 +10,7 @@ export const sequelize = new Sequelize(
     host: config.DATABASE_HOST
   }
 );
+
+export const syncOptions = {
+  alter: false
+};

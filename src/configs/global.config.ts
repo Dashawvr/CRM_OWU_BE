@@ -20,10 +20,6 @@ export const config = {
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'root',
   DATABASE_NAME: process.env.DATABASE_NAME || 'crm',
   DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
-  DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql',
-
-  SEQUELIZE_SYNC_OPTIONS: {
-    alter: false
-  }
+  DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql'
 };
 
