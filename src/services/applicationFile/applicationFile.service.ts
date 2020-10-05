@@ -1,11 +1,30 @@
 import {FileArray} from 'express-fileupload';
-import {readdirSync, rmdirSync, unlinkSync} from 'fs';
+import {
+  createWriteStream,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmdirSync,
+  unlinkSync
+} from 'fs';
 import {join} from 'path';
 import {v1} from 'uuid';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as vfsFonts from 'pdfmake/build/vfs_fonts';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
 import {IFileParams, IFileResponse} from '../../interfaces';
+import {
+  ApplicationFile,
+  IApplication,
+  IApplicationFile
+} from '../../database';
 import {ApplicationFileOptionBuilder, filesMv} from '../../helpers';
-import {ApplicationFile, IApplicationFile} from '../../database';
+import {applicationContractTemplate} from '../../templates';
+import {sequelize} from '../../configs';
 
 class ApplicationFileService {
 
@@ -86,6 +105,43 @@ class ApplicationFileService {
     return ApplicationFile.findOne({
       where: {id}
     });
+  }
+
+  async generatePDFFile(application: IApplication): Promise<void> {
+    const transaction = await sequelize.transaction();
+    try {
+      const fileName = `${v1()}.pdf`;
+      const mimeType = 'application/pdf';
+
+      const filePath = `application/${application.id}/documents/${fileName}`;
+      const folderPath = join(process.cwd(), 'static', 'application', `${application.id}`, 'documents');
+
+      const pdfDefinition = applicationContractTemplate.pdf(application);
+
+      await ApplicationFile.create({
+        path: filePath,
+        name: fileName,
+        document_type: mimeType,
+        application_id: application.id
+      }, {transaction});
+
+      await transaction.commit();
+
+      if (!existsSync(folderPath)) {
+        mkdirSync(folderPath, {recursive: true});
+      }
+
+      const pdfDocument = pdfMake.createPdf(pdfDefinition);
+
+      const stream = pdfDocument.getStream();
+
+      await stream.pipe(createWriteStream(join(process.cwd(), 'static', filePath)));
+      await stream.end();
+
+    } catch (error) {
+      await transaction.rollback();
+    }
+
   }
 }
 

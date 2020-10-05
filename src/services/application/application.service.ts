@@ -4,6 +4,7 @@ import {join} from 'path';
 import {IApplicationParams, IApplicationResponse, IApplicationUpdateFields} from '../../interfaces';
 import {Application, IApplication} from '../../database';
 import {ApplicationOptionBuilder} from '../../helpers';
+import {Includeable} from 'sequelize';
 
 class ApplicationService {
 
@@ -98,9 +99,10 @@ class ApplicationService {
     return Application.findAndCountAll(options);
   }
 
-  getById(id: number): Promise<IApplication | null> {
+  getById(id: number, include?: Includeable | Includeable[]): Promise<IApplication | null> {
     return Application.findOne({
-      where: {id}
+      where: {id},
+      include
     });
   }
 }

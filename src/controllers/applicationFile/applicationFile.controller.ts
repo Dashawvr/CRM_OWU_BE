@@ -2,9 +2,15 @@ import {NextFunction, Request, Response} from 'express';
 import {FileArray} from 'express-fileupload';
 
 import {IFileParams, IFileRequestExtended} from '../../interfaces';
-import {IApplicationFile} from '../../database';
+import {
+  City,
+  Client,
+  Course,
+  IApplication,
+  IApplicationFile
+} from '../../database';
 import {ResponseStatusCodes} from '../../constants';
-import {applicationFileService} from '../../services';
+import {applicationFileService, applicationService} from '../../services';
 
 class ApplicationFileController {
 
@@ -16,6 +22,28 @@ class ApplicationFileController {
       if (files) {
         await applicationFileService.bulkCreate(+application_id, files);
       }
+
+      res.sendStatus(ResponseStatusCodes.CREATED);
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async createPDF(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const {application_id} = req.params;
+
+      const application = await applicationService.getById(
+        +application_id,
+        [
+          {model: Client},
+          {model: Course},
+          {model: City}
+        ]
+      ) as IApplication;
+
+      await applicationFileService.generatePDFFile(application);
 
       res.sendStatus(ResponseStatusCodes.CREATED);
 

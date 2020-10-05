@@ -7,7 +7,8 @@ import {ErrorHandler, errors} from '../../errors';
 import {applicationService} from '../../services';
 import {idValidator} from '../../validators';
 
-export const checkIsApplicationExists = async (req: IApplicationRequestExtended, res: Response, next: NextFunction): Promise<void> => {
+export const checkIsApplicationExists = async (req: IApplicationRequestExtended, res: Response, next: NextFunction):
+  Promise<void> => {
   try {
     const {application_id} = req.body.application_id ? req.body : req.params;
 

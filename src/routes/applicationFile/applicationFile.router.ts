@@ -15,6 +15,8 @@ router.use(checkAccessToken);
 router.get('/', applicationFileController.getAll);
 router.post('/', checkIsApplicationExists, checkIsFilesValid, applicationFileController.create);
 
+router.get('/:application_id/pdf', checkIsApplicationExists, applicationFileController.createPDF);
+
 router.use('/:file_id', checkIsApplicationFileExists);
 
 router.get('/:file_id', applicationFileController.getById);

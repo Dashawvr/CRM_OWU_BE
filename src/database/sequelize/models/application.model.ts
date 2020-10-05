@@ -9,6 +9,7 @@ import {
 import {
   DBModelFieldInit,
   Discount,
+  ICity,
   IClient,
   ICourse,
   Source
@@ -29,6 +30,7 @@ export interface IApplicationModel {
 export interface IApplication extends Application {
   client?: IClient;
   course?: ICourse;
+  city?: ICity;
   sources?: Array<number>;
   discounts?: Array<number>;
   city_id?: number;

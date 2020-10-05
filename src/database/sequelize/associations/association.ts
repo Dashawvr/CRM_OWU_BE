@@ -26,6 +26,7 @@ export const initDBAssociations = (): void => {
   Application.hasMany(Payment, {foreignKey: 'application_id', onDelete: 'cascade'});
   Application.belongsTo(Client, {foreignKey: 'client_id'});
   Application.belongsTo(Course, {foreignKey: 'course_id'});
+  Application.belongsTo(City, {foreignKey: 'city_id'});
   Application.belongsToMany(Source, {through: 'application_source', foreignKey: 'application_id'});
   Application.belongsToMany(Discount, {through: 'application_discount', foreignKey: 'application_id'});
 
