@@ -1,6 +1,11 @@
 import {NextFunction, Request, Response} from 'express';
 
-import {IUserParams, IUserRequestExtended, IUserUpdateFields} from '../../interfaces';
+import {
+  IAuthRequestExtended,
+  IUserParams,
+  IUserRequestExtended,
+  IUserUpdateFields
+} from '../../interfaces';
 import {IUser} from '../../database';
 import {userService} from '../../services';
 import {ResponseStatusCodes} from '../../constants';
@@ -63,6 +68,27 @@ class UserController {
 
       res.json({
         data: user
+      });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  getAuthCredentials(req: IAuthRequestExtended, res: Response, next: NextFunction): void {
+    try {
+      const {
+        name,
+        surname,
+        role
+      } = req.authUser as IUser;
+
+      res.json({
+        data: {
+          name,
+          surname,
+          role
+        }
       });
 
     } catch (error) {

@@ -15,6 +15,9 @@ import {userController} from '../../controllers';
 const router = Router();
 
 router.use(checkAccessToken);
+
+router.get('/authCredentials', userController.getAuthCredentials);
+
 router.use(checkIsSuperAdminOrAdmin);
 
 router.get('/', userController.getAll);
