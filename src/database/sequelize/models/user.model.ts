@@ -14,7 +14,7 @@ import {sequelize} from '../../../configs';
 
 export interface IUserModel {
   id: number
-  login: string
+  email: string
   password: string
   name: string
   surname: string
@@ -35,7 +35,7 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
     primaryKey: true,
     autoIncrement: true
   },
-  login: {
+  email: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false

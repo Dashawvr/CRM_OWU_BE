@@ -1,9 +1,9 @@
 import * as Joi from 'Joi';
 
-import {onlyLettersRegExp, UserRole} from '../../constants';
+import {emailRegExp, onlyLettersRegExp, UserRole} from '../../constants';
 
 export const createUserValidator = Joi.object({
-  login: Joi.string().min(5).max(255).alphanum().trim().required(),
+  email: Joi.string().regex(emailRegExp).trim().required(),
   password: Joi.string().min(8).trim().required(),
   name: Joi.string().regex(onlyLettersRegExp).min(3).max(50).trim().required(),
   surname: Joi.string().regex(onlyLettersRegExp).min(3).max(50).trim().required(),

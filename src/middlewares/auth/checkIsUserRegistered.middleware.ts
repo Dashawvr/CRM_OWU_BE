@@ -4,15 +4,15 @@ import {IUserRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
 import {userService} from '../../services';
-import {loginValidator} from '../../validators';
+import {emailValidator} from '../../validators';
 
 export const checkIsUserRegistered = async (req: IUserRequestExtended, res: Response, next: NextFunction): Promise<any> => {
   try {
-    const {login} = req.body;
+    const {email} = req.body;
 
-    const isLoginValid = loginValidator.validate(login);
+    const isEmailValid = emailValidator.validate(email);
 
-    if (isLoginValid.error) {
+    if (isEmailValid.error) {
       return next(new ErrorHandler(
         ResponseStatusCodes.BAD_REQUEST,
         errors.BAD_REQUEST_WRONG_PARAMS.message,
@@ -20,7 +20,7 @@ export const checkIsUserRegistered = async (req: IUserRequestExtended, res: Resp
       ));
     }
 
-    const user = await userService.getByLogin(login);
+    const user = await userService.getByEmail(email);
 
     if (!user) {
       return next(

@@ -61,9 +61,9 @@ class UserService {
     return User.findAndCountAll(options);
   }
 
-  getByLogin(login: string): Promise<IUser | null> {
+  getByEmail(email: string): Promise<IUser | null> {
     return User.findOne({
-      where: {login}
+      where: {email}
     });
   }
 

@@ -1,7 +1,7 @@
 import {UserRole} from '../../constants/enums';
 
 export interface IUserUpdateFields {
-  login?: string;
+  email?: string;
   password?: string;
   name?: string;
   surname?: string;
