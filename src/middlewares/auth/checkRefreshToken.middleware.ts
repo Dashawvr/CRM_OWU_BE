@@ -5,7 +5,7 @@ import * as jwt from 'jsonwebtoken';
 import {IAuthRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
-import {userService} from '../../services';
+import {authService, userService} from '../../services';
 import {config} from '../../configs';
 
 export const checkRefreshToken = async (req: IAuthRequestExtended, res: Response, next: NextFunction): Promise<any> => {
@@ -16,8 +16,10 @@ export const checkRefreshToken = async (req: IAuthRequestExtended, res: Response
       return next(new ErrorHandler(ResponseStatusCodes.BAD_REQUEST, 'No token'));
     }
 
-    jwt.verify(refresh_token, config.JWT_REFRESH_SECRET, (err: VerifyErrors | null) => {
+    jwt.verify(refresh_token, config.JWT_REFRESH_SECRET, async (err: VerifyErrors | null) => {
       if (err) {
+        await authService.deleteAuthTokenByRefreshToken(refresh_token);
+
         return next(new ErrorHandler(ResponseStatusCodes.FORBIDDEN, 'Bad_tokens'));
       }
     });

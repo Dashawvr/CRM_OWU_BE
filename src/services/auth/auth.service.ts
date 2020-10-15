@@ -13,6 +13,13 @@ class AuthService {
 
   }
 
+  deleteAuthTokenByRefreshToken(refresh_token: string): Promise<number> {
+    return OAuthToken.destroy({
+      where: {refresh_token}
+    });
+
+  }
+
   updateAuthTokenByUserId(user_id: number, tokens: IOAuthToken): Promise<[number, IOAuthToken[]]> {
     return OAuthToken.update(tokens, {
       where: {user_id}
