@@ -17,3 +17,4 @@ export * from './paymentStatus';
 export * from './paymentType';
 export * from './paymentFile';
 export * from './source';
+export * from './email';
