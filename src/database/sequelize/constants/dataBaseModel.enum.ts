@@ -1,6 +1,7 @@
 export enum DatabaseModel {
   USER_MODEL_NAME = 'user',
   OAUTH_TOKEN_MODEL_NAME = 'oauth_token',
+  RESET_TOKEN_MODEL_NAME = 'reset_token',
   TASK_MODEL_NAME = 'task',
   TASK_STATUS_MODEL_NAME = 'task_status',
   ERROR_MODEL_NAME = 'error',

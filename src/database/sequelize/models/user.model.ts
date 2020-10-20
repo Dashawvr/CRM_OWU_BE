@@ -69,7 +69,7 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
 
 export class User extends Model {
   id!: number;
-  login!: string;
+  email!: string;
   name!: string;
   password!: string;
   role!: UserRole;

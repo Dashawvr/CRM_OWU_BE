@@ -1,5 +1,6 @@
 export * from './dbStructure.model';
 export * from './oAuthToken.model';
+export * from './resetToken.model';
 export * from './task.model';
 export * from './comment.model';
 export * from './clientFile.model';

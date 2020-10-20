@@ -1,25 +1,52 @@
-import * as nodeMailer from 'nodemailer';
+import * as mailer from 'nodemailer';
+import * as EmailTemplates from 'email-templates';
 import Mail from 'nodemailer/lib/mailer';
 
-import {IEmailParams} from '../../interfaces';
-import {config, transportOption} from '../../configs';
+import {IUser} from '../../database';
+import {htmlTemplates} from '../../templates';
+import {config, emailTemplatesConfig, sequelize, transportOption} from '../../configs';
+import {EmailActionEnum, UserAction} from '../../constants';
+import {tokenizer} from '../../helpers';
+import {authService} from '../auth';
 
 class EmailService {
   private transporter: Mail;
+  private emailTemplates: EmailTemplates;
 
   constructor() {
-    this.transporter = nodeMailer.createTransport(transportOption);
+    this.transporter = mailer.createTransport(transportOption);
+    this.emailTemplates = new EmailTemplates(emailTemplatesConfig);
   }
 
-  async forgotPassword({to, subject, url}: IEmailParams): Promise<void> {
-    await this.transporter.sendMail({
-      from: `Okten CRM <${config.EMAIL_USER}>`,
-      to,
-      subject,
-      html: `<h1>Welcome to Okten Web UniversITy System </h1>
-             <h3>Please, visit on this link :</h3>
-        <a href="${url}">Press here</a>`
-    });
+  async forgotPassword({id, email}: IUser): Promise<void> {
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        subject,
+        from,
+        templateFileName
+      } = htmlTemplates[EmailActionEnum.FORGOT_PASSWORD];
+
+      const reset_token = tokenizer(UserAction.FORGOT_PASSWORD);
+
+      const resetUrl = `${config.FRONTEND_URL}/auth/forgot-password`;
+      const resetPasswordUrl = `${resetUrl}/${reset_token}`;
+
+      await authService.createResetToken({reset_token, user_id: id}, transaction);
+
+      const html = await this.emailTemplates.render(templateFileName, {resetPasswordUrl, resetUrl});
+
+      await this.transporter.sendMail({
+        from,
+        to: email,
+        subject,
+        html
+      });
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+    }
   }
 }
 

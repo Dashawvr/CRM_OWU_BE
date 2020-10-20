@@ -14,6 +14,7 @@ import {
   PaymentFile,
   PaymentStatus,
   PaymentType,
+  ResetToken,
   Source,
   Task,
   TaskStatus,
@@ -72,6 +73,7 @@ export const initDBAssociations = (): void => {
 
   //User
   User.hasMany(OAuthToken, {foreignKey: 'user_id', onDelete: 'cascade'});
+  User.hasMany(ResetToken, {foreignKey: 'user_id', onDelete: 'cascade'});
   User.hasMany(Task, {foreignKey: 'user_id'});
   User.hasMany(Comment, {foreignKey: 'user_id', onDelete: 'cascade'});
   User.belongsToMany(City, {through: 'user_city', foreignKey: 'user_id'});

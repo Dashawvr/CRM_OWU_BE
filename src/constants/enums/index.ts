@@ -3,3 +3,4 @@ export * from './responseStatus';
 export * from './winston';
 export * from './user';
 export * from './file';
+export * from './email';

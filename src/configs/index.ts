@@ -5,3 +5,4 @@ export * from './cors.config';
 export * from './winston.config';
 export * from './rateLimit.config';
 export * from './nodemailer.config';
+export * from './email.templates.config';
