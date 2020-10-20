@@ -1,8 +1,8 @@
 import {NextFunction, Response} from 'express';
 
-import {IAuthRequestExtended} from '../../interfaces';
+import {IAuthRequestExtended, IUserUpdateFields} from '../../interfaces';
 import {IUser} from '../../database';
-import {authService, emailService} from '../../services';
+import {authService, emailService, userService} from '../../services';
 import {UserAction} from '../../constants';
 import {tokenizer} from '../../helpers';
 
@@ -64,6 +64,20 @@ class AuthController {
       await emailService.forgotPassword(req.user as IUser);
 
       res.end();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async resetPassword(req: IAuthRequestExtended, res: Response, next: NextFunction) {
+    try {
+      const user = req.user as IUser;
+      const updateFields = req.body as IUserUpdateFields;
+
+      await userService.update(user, updateFields);
+
+      res.end();
+
     } catch (error) {
       next(error);
     }

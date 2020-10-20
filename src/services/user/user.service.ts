@@ -1,5 +1,5 @@
 import {IUserParams, IUserResponse, IUserUpdateFields} from '../../interfaces';
-import {IUser, OAuthToken, User} from '../../database';
+import {IUser, OAuthToken, ResetToken, User} from '../../database';
 import {UserOptionBuilder} from '../../helpers';
 
 class UserService {
@@ -92,6 +92,18 @@ class UserService {
         required: true,
         where: {
           refresh_token
+        }
+      }
+    });
+  }
+
+  getByResetToken(reset_token: string): Promise<IUser | null> {
+    return User.findOne({
+      include: {
+        model: ResetToken,
+        required: true,
+        where: {
+          reset_token
         }
       }
     });
