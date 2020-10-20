@@ -71,10 +71,15 @@ class AuthController {
 
   async resetPassword(req: IAuthRequestExtended, res: Response, next: NextFunction) {
     try {
+      const reset_token = req.reset_token;
       const user = req.user as IUser;
       const updateFields = req.body as IUserUpdateFields;
 
       await userService.update(user, updateFields);
+
+      if (reset_token) {
+        await authService.deleteResetToken(reset_token);
+      }
 
       res.end();
 

@@ -4,7 +4,7 @@ import {verify, VerifyErrors} from 'jsonwebtoken';
 import {IAuthRequestExtended} from '../../interfaces';
 import {ResponseStatusCodes} from '../../constants';
 import {ErrorHandler, errors} from '../../errors';
-import {userService} from '../../services';
+import {authService, userService} from '../../services';
 import {config} from '../../configs';
 
 export const checkResetToken = async (req: IAuthRequestExtended, res: Response, next: NextFunction): Promise<any> => {
@@ -15,8 +15,10 @@ export const checkResetToken = async (req: IAuthRequestExtended, res: Response, 
       return next(new ErrorHandler(ResponseStatusCodes.BAD_REQUEST, 'No token'));
     }
 
-    verify(reset_token, config.JWT_EMAIL_FORGOT_PASSWORD, (err: VerifyErrors | null) => {
+    verify(reset_token, config.JWT_EMAIL_FORGOT_PASSWORD, async (err: VerifyErrors | null) => {
       if (err) {
+        await authService.deleteResetToken(reset_token);
+
         return next(new ErrorHandler(ResponseStatusCodes.UNAUTHORIZED, 'Invalid token'));
       }
     });

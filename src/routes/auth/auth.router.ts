@@ -4,6 +4,7 @@ import {
   checkAccessToken,
   checkIsPasswordCorrect,
   checkIsPasswordValid,
+  checkIsSuperAdminOrAdmin,
   checkIsUserRegistered,
   checkRefreshToken,
   checkResetToken
@@ -16,7 +17,7 @@ router.post('/', checkIsUserRegistered, checkIsPasswordCorrect, authController.l
 router.post('/logout', checkAccessToken, authController.logoutUser);
 router.post('/refresh', checkRefreshToken, authController.refreshToken);
 
-router.post('/forgotPassword', checkIsUserRegistered, authController.forgotPassword);
+router.post('/forgotPassword', checkIsUserRegistered, checkIsSuperAdminOrAdmin, authController.forgotPassword);
 router.post('/resetPassword/:reset_token', checkResetToken, checkIsPasswordValid, authController.resetPassword);
 
 export const authRouter = router;
