@@ -11,7 +11,7 @@ class TaskStatusController {
     try {
       await taskStatusService.create(req.body as ITaskStatus);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class TaskStatusController {
 
       await taskStatusService.update(id, req.body as IStatusUpdateFields);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class TaskStatusController {
 
       await taskStatusService.delete(id);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);

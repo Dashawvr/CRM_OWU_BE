@@ -23,7 +23,7 @@ class ApplicationFileController {
         await applicationFileService.bulkCreate(+application_id, files);
       }
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -45,7 +45,7 @@ class ApplicationFileController {
 
       await applicationFileService.generatePDFFile(application);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -56,7 +56,7 @@ class ApplicationFileController {
     try {
       await applicationFileService.delete(req.file as IApplicationFile);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);

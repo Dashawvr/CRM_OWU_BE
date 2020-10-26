@@ -11,7 +11,7 @@ class DiscountController {
     try {
       await discountService.create(req.body as IDiscount);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class DiscountController {
 
       await discountService.update(id, req.body as IDiscountUpdateFields);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class DiscountController {
 
       await discountService.delete(id);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);

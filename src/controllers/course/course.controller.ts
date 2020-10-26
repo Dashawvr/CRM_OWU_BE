@@ -11,7 +11,7 @@ class CourseController {
     try {
       await courseService.create(req.body as ICourse);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class CourseController {
 
       await courseService.update(id, req.body as ICourseUpdateFields);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class CourseController {
 
       await courseService.delete(id);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);

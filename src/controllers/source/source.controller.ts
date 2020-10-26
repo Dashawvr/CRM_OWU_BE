@@ -11,7 +11,7 @@ class SourceController {
     try {
       await sourceService.create(req.body as ISource);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class SourceController {
 
       await sourceService.update(id, req.body as ISourceUpdateFields);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class SourceController {
 
       await sourceService.delete(id);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);

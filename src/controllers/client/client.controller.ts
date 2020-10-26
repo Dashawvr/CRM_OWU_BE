@@ -18,7 +18,7 @@ class ClientController {
         await clientFileService.bulkCreate(id, files);
       }
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -31,7 +31,7 @@ class ClientController {
 
       await clientService.update(client, req.body as IClientUpdateFields);
 
-      res.sendStatus(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED);
 
     } catch (error) {
       next(error);
@@ -44,7 +44,7 @@ class ClientController {
 
       await clientService.delete(id);
 
-      res.sendStatus(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT);
 
     } catch (error) {
       next(error);
