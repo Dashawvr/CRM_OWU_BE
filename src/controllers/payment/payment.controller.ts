@@ -18,7 +18,7 @@ class PaymentController {
         await paymentFileService.bulkCreate(id, files);
       }
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -31,7 +31,7 @@ class PaymentController {
 
       await paymentService.update(id, req.body as IPaymentUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -44,7 +44,7 @@ class PaymentController {
 
       await paymentService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

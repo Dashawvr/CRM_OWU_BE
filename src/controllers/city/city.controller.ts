@@ -11,7 +11,7 @@ class CityController {
     try {
       await cityService.create(req.body as ICity);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class CityController {
 
       await cityService.update(id, req.body as ICityUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class CityController {
 
       await cityService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

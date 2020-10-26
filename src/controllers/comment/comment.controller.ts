@@ -11,7 +11,7 @@ class CommentController {
     try {
       await commentService.create(req.body as IComment);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class CommentController {
 
       await commentService.update(id, req.body as ICommentUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class CommentController {
 
       await commentService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

@@ -11,7 +11,7 @@ class PaymentTypeController {
     try {
       await paymentTypeService.create(req.body as IPaymentType);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class PaymentTypeController {
 
       await paymentTypeService.update(id, req.body as ITypeUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class PaymentTypeController {
 
       await paymentTypeService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

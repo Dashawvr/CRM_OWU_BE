@@ -11,7 +11,7 @@ class PaymentStatusController {
     try {
       await paymentStatusService.create(req.body as IPaymentStatus);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ class PaymentStatusController {
 
       await paymentStatusService.update(id, req.body as IStatusUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ class PaymentStatusController {
 
       await paymentStatusService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

@@ -17,7 +17,7 @@ class ClientFileController {
         await clientFileService.bulkCreate(+client_id, files);
       }
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -28,7 +28,7 @@ class ClientFileController {
     try {
       await clientFileService.delete(req.file as IClientFile);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

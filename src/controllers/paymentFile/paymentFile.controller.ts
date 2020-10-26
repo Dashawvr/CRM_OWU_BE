@@ -23,7 +23,7 @@ class PaymentFileController {
         await paymentFileService.bulkCreate(+payment_id, files);
       }
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -47,7 +47,7 @@ class PaymentFileController {
 
       await paymentFileService.generateExcelFile(payment);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -58,7 +58,7 @@ class PaymentFileController {
     try {
       await paymentFileService.delete(req.file as IPaymentFile);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);

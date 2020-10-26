@@ -18,7 +18,7 @@ class ApplicationController {
         await applicationFileService.bulkCreate(id, files);
       }
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -31,7 +31,7 @@ class ApplicationController {
 
       await applicationService.update(application, req.body as IApplicationUpdateFields);
 
-      res.status(ResponseStatusCodes.CREATED);
+      res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (error) {
       next(error);
@@ -44,7 +44,7 @@ class ApplicationController {
 
       await applicationService.delete(id);
 
-      res.status(ResponseStatusCodes.NO_CONTENT);
+      res.status(ResponseStatusCodes.NO_CONTENT).end();
 
     } catch (error) {
       next(error);
